@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Structured Inline Song Editor with Above-Lyric Chords</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Marcellus&display=swap');
+
+        body {
+            background-color: #1a1612;
+            font-family: 'Marcellus', serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+            color: #f2e3c6;
+        }
+
+        h2 {
+            margin-top: 0;
+            font-family: 'Marcellus', serif;
+            color: #e2cca8;
+        }
+
+        .editor-container {
+            width: 100%;
+            max-width: 950px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .meta-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            font-size: 0.85rem;
+            color: #c8b18a;
+        }
+
+        .input-group input {
+            background: #241911;
+            border: 1px solid #a48455;
+            padding: 8px;
+            color: #f2e3c6;
+            font-family: 'Marcellus', serif;
+            border-radius: 3px;
+        }
+
+        .toolbar-panel {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(164, 132, 85, 0.1);
+            padding: 10px 15px;
+            border: 1px solid #a48455;
+            border-radius: 4px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .color-palette {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .color-palette span {
+            font-size: 0.9rem;
+            color: #c8b18a;
+            font-weight: bold;
+        }
+
+        .color-btn {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            border: 2px solid #f2e3c6;
+            cursor: pointer;
+            transition: transform 0.15s;
+        }
+
+        .color-btn:hover {
+            transform: scale(1.15);
+        }
+
+        .color-btn.active {
+            box-shadow: 0 0 0 3px #e2cca8;
+        }
+
+        textarea {
+            width: 100%;
+            height: 380px;
+            background: #241911;
+            color: #f2e3c6;
+            border: 1px solid #a48455;
+            padding: 15px;
+            font-family: 'EB Garamond', serif !important;
+            font-size: 1.4rem;
+            line-height: 1.5;
+            letter-spacing: 0.3px;
+            border-radius: 4px;
+            resize: vertical;
+            white-space: pre;
+            tab-size: 4;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        .button-row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .editor-btn {
+            background: #e2cca8;
+            color: #241911;
+            border: 1px solid #a48455;
+            padding: 10px 20px;
+            font-family: 'Marcellus', serif;
+            font-size: 1.05rem;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .editor-btn:hover {
+            background-color: #cbb081;
+        }
+
+        .preview-label {
+            margin-top: 25px;
+            font-size: 1.1rem;
+            color: #c8b18a;
+            border-bottom: 1px solid #a48455;
+            padding-bottom: 5px;
+            width: 100%;
+            max-width: 950px;
+        }
+
+        .sheet-container {
+            position: relative;
+            width: 100%;
+            max-width: 950px;
+            background-color: #f2e3c6;
+            background-image: 
+                radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.35) 0%, transparent 70%),
+                radial-gradient(circle at 10% 10%, #d8be92 0%, transparent 40%),
+                radial-gradient(circle at 90% 85%, #cbb081 0%, transparent 45%),
+                radial-gradient(circle at 50% 100%, #be9e6c 0%, transparent 50%);
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.8), inset 0 0 80px rgba(80, 50, 20, 0.45);
+            border: 1px solid #a48455;
+            border-radius: 3px;
+            padding: 30px;
+            box-sizing: border-box;
+            color: #241911;
+            margin-top: 10px;
+            overflow-x: hidden;
+        }
+
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 25px;
+            font-family: 'Marcellus', serif;
+            border-bottom: 2px solid #5a4028;
+        }
+
+        .info-table th {
+            border-bottom: 1px solid #7a5c3e;
+            color: #4a321d;
+            padding: 5px 8px;
+            text-align: left;
+            font-size: 0.9em;
+        }
+
+        .info-table td {
+            padding: 6px 8px;
+            color: #241911;
+            font-weight: 600;
+            font-size: 1em;
+        }
+
+        .song-content {
+            font-family: 'EB Garamond', serif;
+            font-size: 1.4rem;
+            line-height: 1.6;
+            letter-spacing: 0.3px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .lyric-line-block {
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+            margin-bottom: 16px;
+        }
+
+        .token-pair {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: flex-start;
+            vertical-align: bottom;
+            white-space: pre;
+        }
+
+        .token-chord {
+            font-family: 'Caveat', cursive !important;
+            font-size: 1.5rem;
+            font-weight: 700;
+            cursor: pointer;
+            min-height: 1.8rem;
+            display: block;
+            line-height: 1.1;
+        }
+
+        .token-lyric {
+            font-family: 'EB Garamond', serif !important;
+            font-size: 1.4rem;
+            letter-spacing: 0.3px;
+            color: #000000;
+            display: block;
+        }
+
+        .inline-line {
+            font-family: 'EB Garamond', serif;
+            font-size: 1.4rem;
+            white-space: pre-wrap;
+            word-break: break-word;
+            width: 100%;
+            margin-bottom: 16px;
+        }
+
+        .inline-chord-tag {
+            font-family: 'Caveat', cursive !important;
+            font-size: 1.5rem;
+            font-weight: 700;
+            cursor: pointer;
+            padding: 0 1px;
+        }
+
+        .verse-space { height: 14px; }
+    </style>
+</head>
+<body>
+
+<div class="editor-container">
+    <h2>Structured Inline Song Editor with Above-Lyric Chords</h2>
+    
+    <div class="meta-row">
+        <div class="input-group">Τίτλος <input type="text" id="meta-title" value="Αποχαιρετισμός"></div>
+        <div class="input-group">Ρυθμός <input type="text" id="meta-rhythm" value="Ζεϊμπέκικος"></div>
+        <div class="input-group">Πρώτη Ερμηνεία <input type="text" id="meta-artist" value="Βίκυ Μοσχολιού"></div>
+        <div class="input-group">Συνθέτης <input type="text" id="meta-composer" value="Σταύρος Ξαρχάκος"></div>
+        <div class="input-group">Στιχουργός <input type="text" id="meta-lyricist" value="Νίκος Γκάτσος"></div>
+        <div class="input-group">Έτος <input type="text" id="meta-year" value="1966"></div>
+    </div>
+
+    <div class="toolbar-panel">
+        <div style="font-size: 0.85rem; color: #c8b18a;" id="file-indicator">
+            📂 No file loaded (Default export name: songData)
+        </div>
+        <div class="color-palette">
+            <span>Active Chord Color:</span>
+            <div class="color-btn active" style="background: #8b1e1e;" data-color="red" title="Red"></div>
+            <div class="color-btn" style="background: #1a6fb4;" data-color="blue" title="Blue"></div>
+            <div class="color-btn" style="background: #1b5e20;" data-color="green" title="Green"></div>
+            <div class="color-btn" style="background: #000000;" data-color="black" title="Black"></div>
+        </div>
+    </div>
+
+    <div>
+        <textarea id="raw-text-input">(Db:green)   (Ebm)   (Ab)   (Db)   (Fm)   (Bbm) [X2]
+
+Με τί καρδιά να σ' αποχαιρετήσω (Bbm:blue) (Ab), με τί καρδιά τραγούδι να σου πω (Ebm) [X2]</textarea>
+    </div>
+
+    <div class="button-row">
+        <input type="file" id="import-file" accept=".js" style="display: none;">
+        <button class="editor-btn" onclick="document.getElementById('import-file').click()">📂 Import JS</button>
+        <button class="editor-btn" id="export-btn">💾 Export JS</button>
+    </div>
+</div>
+
+<div class="preview-label">Live Sheet Preview</div>
+<div class="sheet-container">
+    <table class="info-table">
+        <thead>
+            <tr>
+                <th>Τίτλος</th>
+                <th>Ρυθμός</th>
+                <th>Πρώτη Ερμηνεία</th>
+                <th>Συνθέτης</th>
+                <th>Στιχουργός</th>
+                <th>Έτος</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong id="preview-title"></strong></td>
+                <td id="preview-rhythm"></td>
+                <td id="preview-artist"></td>
+                <td id="preview-composer"></td>
+                <td id="preview-lyricist"></td>
+                <td id="preview-year"></td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="song-content" id="song-content"></div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const rawInput = document.getElementById("raw-text-input");
+        const songContent = document.getElementById("song-content");
+        const exportBtn = document.getElementById("export-btn");
+        const importFile = document.getElementById("import-file");
+        const colorBtns = document.querySelectorAll(".color-btn");
+        const fileIndicator = document.getElementById("file-indicator");
+
+        let activeColor = "red";
+        let currentFilename = "song.js";
+        let currentVarName = "songData";
+
+        colorBtns.forEach(btn => {
+            btn.addEventListener("click", () => {
+                colorBtns.forEach(b => b.classList.remove("active"));
+                btn.classList.add("active");
+                activeColor = btn.dataset.color;
+            });
+        });
+
+        const metaFields = {
+            title: document.getElementById("meta-title"),
+            rhythm: document.getElementById("meta-rhythm"),
+            artist: document.getElementById("meta-artist"),
+            composer: document.getElementById("meta-composer"),
+            lyricist: document.getElementById("meta-lyricist"),
+            year: document.getElementById("meta-year")
+        };
+
+        function getColorHex(colorName) {
+            if (colorName === 'blue') return '#1a6fb4';
+            if (colorName === 'green') return '#1b5e20';
+            if (colorName === 'black') return '#000000';
+            return '#8b1e1e';
+        }
+
+        let chordColorOverrides = {};
+
+        songContent.addEventListener("click", (e) => {
+            const chordSpan = e.target.closest(".token-chord, .inline-chord-tag");
+            if (!chordSpan || !chordSpan.dataset.id) return;
+            
+            const chordId = chordSpan.dataset.id;
+            if (chordSpan.textContent.match(/^\[X\d+\]$/)) return;
+
+            chordColorOverrides[chordId] = activeColor;
+            updatePreview();
+        });
+
+        function parseTextToSongData() {
+            const stanzasText = rawInput.value.split(/\n\s*\n/);
+            const stanzas = [];
+
+            stanzasText.forEach((stanzaBlock, sIdx) => {
+                const rawLines = stanzaBlock.split("\n").map(l => l.replace(/\r$/, ''));
+                const lines = [];
+
+                rawLines.forEach((rawLine, lIdx) => {
+                    if (rawLine.trim() === "") return;
+                    lines.push({ rawInline: rawLine });
+                });
+
+                if (lines.length > 0) {
+                    stanzas.push({ lines });
+                }
+            });
+
+            return {
+                title: metaFields.title.value,
+                rhythm: metaFields.rhythm.value,
+                artist: metaFields.artist.value,
+                composer: metaFields.composer.value,
+                lyricist: metaFields.lyricist.value,
+                year: metaFields.year.value,
+                stanzas
+            };
+        }
+
+        function updatePreview() {
+            document.getElementById("preview-title").textContent = metaFields.title.value;
+            document.getElementById("preview-rhythm").textContent = metaFields.rhythm.value;
+            document.getElementById("preview-artist").textContent = metaFields.artist.value;
+            document.getElementById("preview-composer").textContent = metaFields.composer.value;
+            document.getElementById("preview-lyricist").textContent = metaFields.lyricist.value;
+            document.getElementById("preview-year").textContent = metaFields.year.value;
+
+            const songData = parseTextToSongData();
+            songContent.innerHTML = "";
+
+            let runningColor = "red";
+
+            songData.stanzas.forEach((stanza, sIdx) => {
+                stanza.lines.forEach((line, lIdx) => {
+                    const text = line.rawInline;
+                    const regex = /\(([^)]+)\)/g;
+                    let lastIndex = 0;
+                    let match;
+                    let chordCounter = 0;
+
+                    let hasLyrics = /[α-ωΑ-Ωa-zA-Z]/.test(text.replace(/\([^)]+\)/g, ""));
+
+                    if (!hasLyrics) {
+                        const lineDiv = document.createElement("div");
+                        lineDiv.className = "inline-line";
+
+                        while ((match = regex.exec(text)) !== null) {
+                            if (match.index > lastIndex) {
+                                lineDiv.appendChild(document.createTextNode(text.substring(lastIndex, match.index)));
+                            }
+
+                            let inner = match[1];
+                            let chordName = inner;
+                            let chordColor = runningColor;
+
+                            if (/^\[X\d+\]$/.test(chordName)) {
+                                chordColor = "black";
+                            } else if (inner.includes(":")) {
+                                const parts = inner.split(":");
+                                chordName = parts[0];
+                                chordColor = parts[1];
+                                runningColor = chordColor;
+                            }
+
+                            const chordKey = `${sIdx}-${lIdx}-${chordCounter}`;
+                            if (chordColorOverrides[chordKey] && !/^\[X\d+\]$/.test(chordName)) {
+                                chordColor = chordColorOverrides[chordKey];
+                                runningColor = chordColor;
+                            }
+
+                            const chordSpan = document.createElement("span");
+                            chordSpan.className = "inline-chord-tag";
+                            chordSpan.style.color = getColorHex(chordColor);
+                            chordSpan.textContent = chordName;
+                            chordSpan.dataset.id = chordKey;
+                            lineDiv.appendChild(chordSpan);
+
+                            lastIndex = regex.lastIndex;
+                            chordCounter++;
+                        }
+
+                        if (lastIndex < text.length) {
+                            lineDiv.appendChild(document.createTextNode(text.substring(lastIndex)));
+                        }
+                        songContent.appendChild(lineDiv);
+                    } else {
+                        const lineBlock = document.createElement("div");
+                        lineBlock.className = "lyric-line-block";
+
+                        let lyricChunks = [];
+                        let chordItems = [];
+
+                        while ((match = regex.exec(text)) !== null) {
+                            let precedingText = text.substring(lastIndex, match.index);
+                            let inner = match[1];
+                            let chordName = inner;
+                            let chordColor = runningColor;
+
+                            if (/^\[X\d+\]$/.test(chordName)) {
+                                chordColor = "black";
+                            } else if (inner.includes(":")) {
+                                const parts = inner.split(":");
+                                chordName = parts[0];
+                                chordColor = parts[1];
+                                runningColor = chordColor;
+                            }
+
+                            const chordKey = `${sIdx}-${lIdx}-${chordCounter}`;
+                            if (chordColorOverrides[chordKey] && !/^\[X\d+\]$/.test(chordName)) {
+                                chordColor = chordColorOverrides[chordKey];
+                                runningColor = chordColor;
+                            }
+
+                            chordItems.push({ name: chordName, color: chordColor, id: chordKey });
+                            lyricChunks.push(precedingText);
+
+                            lastIndex = regex.lastIndex;
+                            chordCounter++;
+                        }
+                        let trailingText = text.substring(lastIndex);
+                        lyricChunks.push(trailingText);
+
+                        if (chordItems.length > 0 && lastIndex > 0 && lyricChunks.length > chordItems.length) {
+                            const pairSpan = document.createElement("span");
+                            pairSpan.className = "token-pair";
+                            const chordSpan = document.createElement("span");
+                            chordSpan.className = "token-chord";
+                            const lyricSpan = document.createElement("span");
+                            lyricSpan.className = "token-lyric";
+                            lyricSpan.textContent = lyricChunks[0];
+                            pairSpan.appendChild(chordSpan);
+                            pairSpan.appendChild(lyricSpan);
+                            lineBlock.appendChild(pairSpan);
+
+                            for (let i = 0; i < chordItems.length; i++) {
+                                const pSpan = document.createElement("span");
+                                pSpan.className = "token-pair";
+                                const cSpan = document.createElement("span");
+                                cSpan.className = "token-chord";
+                                cSpan.style.color = getColorHex(chordItems[i].color);
+                                cSpan.textContent = chordItems[i].name;
+                                cSpan.dataset.id = chordItems[i].id;
+
+                                const lSpan = document.createElement("span");
+                                lSpan.className = "token-lyric";
+                                lSpan.textContent = lyricChunks[i + 1];
+
+                                pSpan.appendChild(cSpan);
+                                pSpan.appendChild(lSpan);
+                                lineBlock.appendChild(pSpan);
+                            }
+                        } else {
+                            for (let i = 0; i < chordItems.length; i++) {
+                                const pSpan = document.createElement("span");
+                                pSpan.className = "token-pair";
+                                const cSpan = document.createElement("span");
+                                cSpan.className = "token-chord";
+                                cSpan.style.color = getColorHex(chordItems[i].color);
+                                cSpan.textContent = chordItems[i].name;
+                                cSpan.dataset.id = chordItems[i].id;
+
+                                const lSpan = document.createElement("span");
+                                lSpan.className = "token-lyric";
+                                lSpan.textContent = lyricChunks[i] || "";
+
+                                pSpan.appendChild(cSpan);
+                                pSpan.appendChild(lSpan);
+                                lineBlock.appendChild(pSpan);
+                            }
+                            if (lyricChunks.length > chordItems.length && lyricChunks[chordItems.length]) {
+                                const pSpan = document.createElement("span");
+                                pSpan.className = "token-pair";
+                                const cSpan = document.createElement("span");
+                                cSpan.className = "token-chord";
+                                const lSpan = document.createElement("span");
+                                lSpan.className = "token-lyric";
+                                lSpan.textContent = lyricChunks[chordItems.length];
+                                pSpan.appendChild(cSpan);
+                                pSpan.appendChild(lSpan);
+                                lineBlock.appendChild(pSpan);
+                            }
+                        }
+                        songContent.appendChild(lineBlock);
+                    }
+                });
+
+                if (sIdx < songData.stanzas.length - 1) {
+                    const spaceDiv = document.createElement("div");
+                    spaceDiv.className = "verse-space";
+                    songContent.appendChild(spaceDiv);
+                }
+            });
+        }
+
+        rawInput.addEventListener("input", updatePreview);
+        Object.values(metaFields).forEach(el => el.addEventListener("input", updatePreview));
+
+        exportBtn.addEventListener("click", () => {
+            const songData = parseTextToSongData();
+            let lastExportColor = "red";
+
+            songData.stanzas.forEach((st, sIdx) => {
+                st.lines.forEach((ln, lIdx) => {
+                    let chordCounter = 0;
+                    ln.rawInline = ln.rawInline.replace(/\(([^)]+)\)/g, (match, inner) => {
+                        let cName = inner.includes(":") ? inner.split(":")[0] : inner;
+                        if (/^\[X\d+\]$/.test(cName)) {
+                            return `(${cName})`;
+                        }
+                        let cCol = inner.includes(":") ? inner.split(":")[1] : lastExportColor;
+                        const chordKey = `${sIdx}-${lIdx}-${chordCounter}`;
+                        if (chordColorOverrides[chordKey]) {
+                            cCol = chordColorOverrides[chordKey];
+                        }
+                        chordCounter++;
+                        lastExportColor = cCol;
+                        return cCol === 'red' ? `(${cName})` : `(${cName}:${cCol})`;
+                    });
+                });
+            });
+
+            const fileContent = `const ${currentVarName} = ${JSON.stringify(songData, null, 4)};`;
+            const blob = new Blob([fileContent], { type: "text/javascript;charset=utf-8" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = currentFilename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        });
+
+        importFile.addEventListener("change", (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+            currentFilename = file.name;
+
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                try {
+                    const scriptContent = event.target.result;
+                    
+                    // Extract variable name dynamically (e.g. const allOfMeData = ...)
+                    const varMatch = scriptContent.match(/const\s+([a-zA-Z0-9_$]+)\s*=\s*(\{[\s\S]*\});/);
+                    if (varMatch) {
+                        currentVarName = varMatch[1];
+                    }
+
+                    const extracted = eval(scriptContent + "; (typeof " + currentVarName + " !== 'undefined' ? " + currentVarName + " : (typeof songData !== 'undefined' ? songData : null));");
+                    
+                    let songObj = extracted;
+                    if (!songObj && varMatch) {
+                        songObj = eval('(' + varMatch[1] + ')');
+                    }
+
+                    if (songObj) {
+                        metaFields.title.value = songObj.title || "";
+                        metaFields.rhythm.value = songObj.rhythm || "";
+                        metaFields.artist.value = songObj.artist || "";
+                        metaFields.composer.value = songObj.composer || "";
+                        metaFields.lyricist.value = songObj.lyricist || "";
+                        metaFields.year.value = songObj.year || "";
+
+                        chordColorOverrides = {};
+                        let textContent = "";
+
+                        if (Array.isArray(songObj.stanzas)) {
+                            songObj.stanzas.forEach((st, sIdx) => {
+                                st.lines.forEach((ln, lIdx) => {
+                                    if (ln.rawInline) {
+                                        textContent += ln.rawInline + "\n";
+                                        let chordCounter = 0;
+                                        let regex = /\(([^)]+)\)/g;
+                                        let match;
+                                        while ((match = regex.exec(ln.rawInline)) !== null) {
+                                            let inner = match[1];
+                                            if (inner.includes(":")) {
+                                                const parts = inner.split(":");
+                                                if (!/^\[X\d+\]$/.test(parts[0])) {
+                                                    chordColorOverrides[`${sIdx}-${lIdx}-${chordCounter}`] = parts[1];
+                                                }
+                                            }
+                                            chordCounter++;
+                                        }
+                                    }
+                                });
+                                textContent += "\n";
+                            });
+                        }
+                        rawInput.value = textContent.trim();
+                        fileIndicator.textContent = `📂 Loaded: ${currentFilename} (${currentVarName})`;
+                        updatePreview();
+                    }
+                } catch (err) {
+                    alert("Error reading song JS file.");
+                }
+            };
+            reader.readAsText(file);
+        });
+
+        fileIndicator.textContent = `📂 Active file: ${currentFilename} (${currentVarName})`;
+        updatePreview();
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Song Sheet Viewer</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Marcellus&display=swap');
+
+        body {
+            background-color: #1a1612;
+            font-family: 'Marcellus', serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 15px 10px;
+            box-sizing: border-box;
+        }
+
+        /* Navbar & Multilevel Dropdown Container */
+        .navbar-container {
+            width: 100%;
+            max-width: 980px;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 1000;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            background-color: #e2cca8;
+            border: 1px solid #a48455;
+            border-radius: 4px;
+        }
+
+        /* Level 0: Top Tab Items */
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 12px 20px;
+            color: #241911;
+            font-weight: bold;
+            font-size: 1.05rem;
+            text-decoration: none;
+            cursor: pointer;
+            border-right: 1px solid #c8b18a;
+            transition: background 0.2s;
+        }
+
+        .nav-item.active > .nav-link,
+        .nav-item:hover > .nav-link {
+            background-color: #cbb081;
+        }
+
+        /* Flag Icon container styling for 3D sticker heart effect */
+        .flag-nav-link {
+            display: flex;
+            align-items: center;
+            padding: 6px 16px !important;
+        }
+
+        .flag-icon-container {
+            position: relative;
+            width: 32px;
+            height: 32px;
+            display: inline-block;
+        }
+
+        .flag-heart-svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+        }
+
+        /* Generic Submenu Styling (Levels 1, 2, 3) */
+        .submenu {
+            display: none;
+            position: absolute;
+            list-style: none;
+            margin: 0;
+            background-color: #f2e3c6;
+            border: 1px solid #a48455;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.5);
+            min-width: 280px;
+            z-index: 100;
+        }
+
+        /* Grid Layout for Greek Alphabet Menu (6 columns) */
+        .submenu.alphabet-grid {
+            display: none;
+            grid-template-columns: repeat(6, minmax(140px, 1fr));
+            gap: 6px;
+            padding: 10px;
+            min-width: 840px;
+            top: 100%;
+            left: 0;
+            z-index: 200;
+        }
+
+        /* Show Submenu when .active class is set via JS */
+        .nav-item.active > .submenu,
+        .submenu-item.active > .submenu {
+            display: block;
+        }
+
+        .nav-item.active > .submenu.alphabet-grid {
+            display: grid;
+        }
+
+        /* Strict Z-Index Layering */
+        .submenu-item {
+            position: relative;
+            border-bottom: 1px solid #d4be9a;
+            z-index: 100;
+        }
+
+        .submenu-item.active {
+            z-index: 500;
+        }
+
+        .submenu-item.active > .submenu {
+            z-index: 600;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+        }
+
+        .submenu-item:last-child {
+            border-bottom: none;
+        }
+
+        /* Position Level 2 & 3 Flyouts (Default: Open to the Right) */
+        .submenu .submenu {
+            top: 0;
+            left: 100%;
+            padding-left: 5px; 
+            margin-left: -5px;
+        }
+
+        /* Smart Class to Flip Flyout to the Left if Overflowing Screen */
+        .submenu .submenu.flip-left {
+            left: auto !important;
+            right: 100% !important;
+            padding-left: 0 !important;
+            padding-right: 5px !important;
+            margin-left: 0 !important;
+            margin-right: -5px !important;
+        }
+
+        .submenu-link {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 18px;
+            color: #241911;
+            text-decoration: none;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background 0.15s;
+            white-space: nowrap;
+        }
+
+        .submenu-item.active > .submenu-link,
+        .submenu-item:hover > .submenu-link {
+            background-color: #e2cca8;
+        }
+
+        /* Profile Collages in Sub-menus (Scaled up ~2x) */
+        .range-with-collage {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .menu-collage-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 28px);
+            grid-template-rows: repeat(2, 28px);
+            gap: 3px;
+            width: 59px;
+            height: 59px;
+            background: #d4be9a;
+            padding: 2px;
+            border-radius: 6px;
+            border: 1px solid #a48455;
+            box-shadow: inset 0 0 3px rgba(0,0,0,0.25);
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .menu-collage-img {
+            width: 28px;
+            height: 28px;
+            object-fit: cover;
+            border-radius: 2px;
+        }
+
+        .composer-with-avatar {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .composer-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1px solid #a48455;
+        }
+
+        .arrow {
+            font-size: 0.9rem;
+            margin-left: 10px;
+        }
+
+        /* Sheet Viewer Container */
+        .sheet-container {
+            position: relative;
+            width: 100%;
+            max-width: 980px;
+            background-color: #f2e3c6;
+            background-image: 
+                radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.35) 0%, transparent 70%),
+                radial-gradient(circle at 10% 10%, #d8be92 0%, transparent 40%),
+                radial-gradient(circle at 90% 85%, #cbb081 0%, transparent 45%),
+                radial-gradient(circle at 50% 100%, #be9e6c 0%, transparent 50%);
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.8), inset 0 0 100px rgba(80, 50, 20, 0.45);
+            border: 1px solid #a48455;
+            border-radius: 3px;
+            padding: 35px 30px;
+            box-sizing: border-box;
+            color: #241911;
+        }
+
+        .sheet-container::before {
+            content: "";
+            position: absolute;
+            top: 10px; left: 10px; right: 10px; bottom: 10px;
+            border: 1px solid rgba(90, 60, 30, 0.35);
+            pointer-events: none;
+        }
+
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 25px;
+            font-family: 'Marcellus', serif;
+            border-bottom: 2px solid #5a4028;
+        }
+
+        .info-table th {
+            border-bottom: 1px solid #7a5c3e;
+            color: #4a321d;
+            padding: 5px 8px;
+            text-align: left;
+            font-size: 0.9em;
+            letter-spacing: 0.5px;
+        }
+
+        .info-table td {
+            padding: 6px 8px;
+            color: #241911;
+            font-weight: 600;
+            font-size: 1em;
+        }
+
+        .song-content {
+            font-family: 'EB Garamond', serif;
+            font-size: 1.8rem;
+            line-height: 1.6;
+            letter-spacing: 0.3px;
+            overflow-x: hidden;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .lyric-line-block {
+            display: flex;
+            flex-wrap: nowrap;
+            width: max-content;
+            margin-bottom: 16px;
+            align-items: flex-end;
+        }
+
+        .token-pair {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: flex-start;
+            vertical-align: bottom;
+            white-space: pre;
+            min-width: 0;
+            padding-right: 0;
+        }
+
+        .token-pair.spacer-token {
+            min-width: 1ch;
+            pointer-events: none;
+        }
+
+        .token-chord, .instrumental-chord {
+            font-family: 'Caveat', cursive !important;
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: block;
+            line-height: 1.1;
+            min-height: 1.8rem;
+            white-space: nowrap;
+        }
+
+        .token-lyric {
+            font-family: 'EB Garamond', serif !important;
+            font-size: 1.8rem;
+            letter-spacing: 0.3px;
+            color: #000000;
+            display: block;
+            line-height: 1.2;
+            white-space: pre;
+        }
+
+        .instrumental-grid-block {
+            display: grid;
+            column-gap: 5ch;
+            row-gap: 8px;
+            margin-bottom: 16px;
+            width: fit-content;
+        }
+
+        .verse-space {
+            height: 14px;
+        }
+
+        @media (max-width: 750px) {
+            .sheet-container { padding: 20px 15px; }
+            .info-table th, .info-table td { font-size: 0.7em; padding: 3px; }
+            .submenu .submenu { position: static; box-shadow: none; padding-left: 0; margin-left: 0; }
+            .submenu.alphabet-grid {
+                grid-template-columns: repeat(3, 1fr);
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="navbar-container">
+    <ul class="nav-menu" id="multilevel-nav-menu">
+        <!-- Populated dynamically from songs-db.js -->
+    </ul>
+</div>
+
+<div class="sheet-container">
+    <table class="info-table">
+        <thead>
+            <tr>
+                <th>Τίτλος</th>
+                <th>Ρυθμός</th>
+                <th>Πρώτη Ερμηνεία</th>
+                <th>Συνθέτης</th>
+                <th>Στιχουργός</th>
+                <th>Έτος</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong id="meta-title"></strong></td>
+                <td id="meta-rhythm"></td>
+                <td id="meta-artist"></td>
+                <td id="meta-composer"></td>
+                <td id="meta-lyricist"></td>
+                <td id="meta-year"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="song-content" id="song-content"></div>
+</div>
+
+<script src="songs-db.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const navMenuEl = document.getElementById("multilevel-nav-menu");
+
+        function fitSong() {
+            const contentContainer = document.getElementById("song-content");
+            const sheetContainer = contentContainer.closest('.sheet-container');
+            
+            const containerStyle = window.getComputedStyle(sheetContainer);
+            const paddingX = parseFloat(containerStyle.paddingLeft) + parseFloat(containerStyle.paddingRight);
+            const availableWidth = (sheetContainer.clientWidth - paddingX) * 0.95;
+
+            contentContainer.style.fontSize = '1.8rem';
+            const elements = contentContainer.querySelectorAll('.lyric-line-block, .instrumental-grid-block');
+            if (elements.length === 0) return;
+
+            let maxWidth = 0;
+            elements.forEach(el => {
+                if (el.scrollWidth > maxWidth) maxWidth = el.scrollWidth;
+            });
+
+            if (maxWidth > 0) {
+                const currentSize = parseFloat(window.getComputedStyle(contentContainer).fontSize);
+                const targetSize = currentSize * (availableWidth / maxWidth);
+                
+                contentContainer.style.fontSize = targetSize + 'px';
+                
+                contentContainer.querySelectorAll('.token-chord, .instrumental-chord, .token-lyric').forEach(node => {
+                    node.style.fontSize = targetSize + 'px';
+                });
+            }
+        }
+
+        function parseInlineLineToTokens(rawString, colorState) {
+            const tokens = [];
+            const regex = /\(([^)]*)\)/g;
+            let lastIndex = 0;
+            let match;
+
+            const firstParen = rawString.indexOf('(');
+            if (firstParen > 0) {
+                tokens.push({
+                    chord: "",
+                    color: colorState.current,
+                    text: rawString.substring(0, firstParen)
+                });
+                lastIndex = firstParen;
+            } else if (firstParen === -1 && rawString.length > 0) {
+                return [{ chord: "", color: colorState.current, text: rawString }];
+            }
+
+            while ((match = regex.exec(rawString)) !== null) {
+                let tagContent = match[1].trim();
+                let chordName = tagContent;
+                let isSpacer = false;
+
+                if (tagContent === "_" || tagContent === "") {
+                    isSpacer = true;
+                    chordName = "";
+                } else if (tagContent.includes(':')) {
+                    const parts = tagContent.split(':');
+                    chordName = parts[0];
+                    colorState.current = parts[1];
+                }
+
+                let textStart = regex.lastIndex;
+                let nextParenIndex = rawString.indexOf('(', textStart);
+                let textEnd = nextParenIndex !== -1 ? nextParenIndex : rawString.length;
+                let textChunk = rawString.substring(textStart, textEnd);
+
+                const lyricText = (!textChunk) ? "" : textChunk;
+
+                tokens.push({
+                    chord: chordName,
+                    color: colorState.current,
+                    text: isSpacer ? "" : lyricText,
+                    isSpacer: isSpacer
+                });
+                lastIndex = textEnd;
+            }
+
+            return tokens;
+        }
+
+        function parseInstrumentalLine(rawString, colorState) {
+            const chords = [];
+            const regex = /\(([^)]+)\)/g;
+            let match;
+
+            while ((match = regex.exec(rawString)) !== null) {
+                let tagContent = match[1];
+                let chordName = tagContent;
+
+                if (tagContent.includes(':')) {
+                    const parts = tagContent.split(':');
+                    chordName = parts[0];
+                    colorState.current = parts[1];
+                }
+
+                chords.push({
+                    chord: chordName,
+                    color: colorState.current
+                });
+            }
+            return chords;
+        }
+
+        function getColorHex(colorName) {
+            if (colorName === 'blue') return '#0d47a1'; 
+            if (colorName === 'green') return '#1b5e20';
+            if (colorName === 'black') return '#000000';
+            return '#8b1e1e'; 
+        }
+
+        window.loadSongUI = function(value) {
+            const data = getSongData(value);
+            if (!data) return;
+
+            localStorage.setItem("activeSongValue", value);
+
+            document.getElementById("meta-title").textContent = data.title || "";
+            document.getElementById("meta-rhythm").textContent = data.rhythm || "";
+            document.getElementById("meta-artist").textContent = data.artist || "";
+            document.getElementById("meta-composer").textContent = data.composer || "";
+            document.getElementById("meta-lyricist").textContent = data.lyricist || "";
+            document.getElementById("meta-year").textContent = data.year || "";
+
+            const contentContainer = document.getElementById("song-content");
+            contentContainer.innerHTML = "";
+
+            const colorState = { current: "red" };
+
+            if (Array.isArray(data.stanzas)) {
+                data.stanzas.forEach((stanza, sIdx) => {
+                    if (Array.isArray(stanza.lines)) {
+                        const isInstrumentalStanza = stanza.lines.every(line => {
+                            let textToCheck = "";
+                            if (Array.isArray(line.tokens)) {
+                                textToCheck = line.tokens.map(t => t.text || "").join("").trim();
+                            } else if (typeof line.rawInline === "string") {
+                                const parsed = parseInlineLineToTokens(line.rawInline, { current: colorState.current });
+                                textToCheck = parsed.map(t => t.text || "").join("").trim();
+                            }
+                            return textToCheck === "";
+                        });
+
+                        if (isInstrumentalStanza && stanza.lines.length > 0) {
+                            const parsedRows = stanza.lines.map(line => {
+                                if (Array.isArray(line.tokens)) {
+                                    return line.tokens.filter(t => t.chord).map(t => ({ chord: t.chord, color: t.color || colorState.current }));
+                                } else {
+                                    return parseInstrumentalLine(line.rawInline, colorState);
+                                }
+                            });
+
+                            const maxCols = Math.max(...parsedRows.map(row => row.length), 1);
+                            const gridBlock = document.createElement("div");
+                            gridBlock.className = "instrumental-grid-block";
+                            gridBlock.style.gridTemplateColumns = `repeat(${maxCols}, auto)`;
+
+                            parsedRows.forEach(row => {
+                                for (let colIdx = 0; colIdx < maxCols; colIdx++) {
+                                    const chordSpan = document.createElement("span");
+                                    chordSpan.className = "instrumental-chord";
+                                    if (row[colIdx]) {
+                                        chordSpan.style.color = getColorHex(row[colIdx].color);
+                                        chordSpan.textContent = row[colIdx].chord;
+                                    } else {
+                                        chordSpan.textContent = "";
+                                    }
+                                    gridBlock.appendChild(chordSpan);
+                                }
+                            });
+
+                            contentContainer.appendChild(gridBlock);
+                        } else {
+                            stanza.lines.forEach((line) => {
+                                const lineBlock = document.createElement("div");
+                                lineBlock.className = "lyric-line-block";
+
+                                let tokens = line.tokens;
+                                if (typeof line.rawInline === "string") {
+                                    tokens = parseInlineLineToTokens(line.rawInline, colorState);
+                                }
+
+                                if (Array.isArray(tokens)) {
+                                    tokens.forEach((token) => {
+                                        const pairSpan = document.createElement("span");
+                                        pairSpan.className = "token-pair" + (token.isSpacer ? " spacer-token" : "");
+
+                                        const chordSpan = document.createElement("span");
+                                        chordSpan.className = "token-chord";
+                                        chordSpan.style.color = getColorHex(token.color || colorState.current);
+                                        chordSpan.textContent = token.chord || "";
+
+                                        const lyricSpan = document.createElement("span");
+                                        lyricSpan.className = "token-lyric";
+                                        lyricSpan.textContent = token.text || "";
+
+                                        pairSpan.appendChild(chordSpan);
+                                        pairSpan.appendChild(lyricSpan);
+                                        lineBlock.appendChild(pairSpan);
+                                    });
+                                }
+
+                                contentContainer.appendChild(lineBlock);
+                            });
+                        }
+                    }
+
+                    if (sIdx < data.stanzas.length - 1) {
+                        const spaceDiv = document.createElement("div");
+                        spaceDiv.className = "verse-space";
+                        contentContainer.appendChild(spaceDiv);
+                    }
+                });
+            }
+            fitSong();
+        }
+
+        window.addEventListener('resize', fitSong);
+
+        function buildMultilevelMenu() {
+            navMenuEl.innerHTML = "";
+
+            const greekRanges = [
+                { label: "Α - Β", filter: (cat) => /^[Α-ΒΆΒ]/i.test(cat) || /^Άκης Πάνου/i.test(cat) },
+                { label: "Γ - Δ", filter: (cat) => /^[Γ-Δ]/i.test(cat) && !/^Άκης Πάνου/i.test(cat) },
+                { label: "Ε - Ζ", filter: (cat) => /^[Ε-ΖΈ]/i.test(cat) },
+                { label: "Η - Θ", filter: (cat) => /^[Η-ΘΉ]/i.test(cat) },
+                { label: "Ι - Κ", filter: (cat) => /^[Ι-ΚΊ]/i.test(cat) },
+                { label: "Λ - Μ", filter: (cat) => /^[Λ-Μ]/i.test(cat) },
+                { label: "Ν - Ξ", filter: (cat) => /^[Ν-Ξ]/i.test(cat) },
+                { label: "Ο - Π", filter: (cat) => /^[Ο-ΠΌ]/i.test(cat) },
+                { label: "Ρ - Σ", filter: (cat) => /^[Ρ-Σ]/i.test(cat) },
+                { label: "Τ - Υ", filter: (cat) => /^[Τ-ΥΎ]/i.test(cat) },
+                { label: "Φ - Χ", filter: (cat) => /^[Φ-Χ]/i.test(cat) || /^Φοίβος/i.test(cat) },
+                { label: "Ψ - Ω", filter: (cat) => /^[Ψ-ΩΏ]/i.test(cat) },
+                { label: "A - Z", filter: (cat) => !/^[Α-ΩΆΈΉΊΌΎΏ]/i.test(cat) && !/^Φοίβος/i.test(cat) && !/^Άκης Πάνου/i.test(cat) }
+            ];
+
+            const greekHeartSvgHtml = `
+                <div class="flag-icon-container">
+                    <svg class="flag-heart-svg" viewBox="0 0 100 90" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <clipPath id="heart-clip-gr">
+                                <path d="M50 85 C50 85, 95 50, 95 27 C95 12, 80 2, 67 2 C56 2, 50 12, 50 12 C50 12, 44 2, 33 2 C20 2, 5 12, 5 27 C5 50, 50 85, 50 85 Z"/>
+                            </clipPath>
+                        </defs>
+                        <path d="M50 87 C50 87, 97 51, 97 27 C97 11, 81 0, 67 0 C55 0, 50 10, 50 10 C50 10, 45 0, 33 0 C19 0, 3 11, 3 27 C3 51, 50 87, 50 87 Z" fill="#ffffff" stroke="#dcdcdc" stroke-width="2"/>
+                        <g clip-path="url(#heart-clip-gr)">
+                            <rect width="100" height="90" fill="#0d5eaf"/>
+                            <rect y="10" width="100" height="10" fill="#ffffff"/>
+                            <rect y="30" width="100" height="10" fill="#ffffff"/>
+                            <rect y="50" width="100" height="10" fill="#ffffff"/>
+                            <rect y="70" width="100" height="10" fill="#ffffff"/>
+                            <rect width="40" height="40" fill="#0d5eaf"/>
+                            <rect x="15" width="10" height="40" fill="#ffffff"/>
+                            <rect y="15" width="40" height="10" fill="#ffffff"/>
+                        </g>
+                    </svg>
+                </div>
+            `;
+
+            const britishHeartSvgHtml = `
+                <div class="flag-icon-container">
+                    <svg class="flag-heart-svg" viewBox="0 0 100 90" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <clipPath id="heart-clip-uk">
+                                <path d="M50 85 C50 85, 95 50, 95 27 C95 12, 80 2, 67 2 C56 2, 50 12, 50 12 C50 12, 44 2, 33 2 C20 2, 5 12, 5 27 C5 50, 50 85, 50 85 Z"/>
+                            </clipPath>
+                        </defs>
+                        <path d="M50 87 C50 87, 97 51, 97 27 C97 11, 81 0, 67 0 C55 0, 50 10, 50 10 C50 10, 45 0, 33 0 C19 0, 3 11, 3 27 C3 51, 50 87, 50 87 Z" fill="#ffffff" stroke="#dcdcdc" stroke-width="2"/>
+                        <g clip-path="url(#heart-clip-uk)">
+                            <rect width="100" height="90" fill="#012169"/>
+                            <polygon points="0,0 15,0 100,75 100,90" fill="#ffffff"/>
+                            <polygon points="100,0 85,0 0,75 0,90" fill="#ffffff"/>
+                            <polygon points="0,0 6,0 100,68 100,76" fill="#c8102e"/>
+                            <polygon points="100,0 94,0 0,68 0,76" fill="#c8102e"/>
+                            <polygon points="0,90 8,90 100,18 100,10" fill="#c8102e"/>
+                            <polygon points="100,90 92,90 0,18 0,10" fill="#c8102e"/>
+                            <rect x="40" width="20" height="90" fill="#ffffff"/>
+                            <rect y="35" width="100" height="20" fill="#ffffff"/>
+                            <rect x="43" width="14" height="90" fill="#c8102e"/>
+                            <rect y="38" width="100" height="14" fill="#c8102e"/>
+                        </g>
+                    </svg>
+                </div>
+            `;
+
+            const topCategories = [
+                {
+                    title: greekHeartSvgHtml,
+                    isCustomHtml: true,
+                    isGrid: true,
+                    ranges: greekRanges,
+                    data: SONGS_DB.greek
+                },
+                {
+                    title: britishHeartSvgHtml,
+                    isCustomHtml: true,
+                    isGrid: false,
+                    ranges: [
+                        { label: "A - Z", filter: () => true }
+                    ],
+                    data: SONGS_DB.english
+                }
+            ];
+
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.navbar-container')) {
+                    document.querySelectorAll('.nav-item.active, .submenu-item.active').forEach(el => el.classList.remove('active'));
+                }
+            });
+
+            topCategories.forEach(topCat => {
+                const navItem = document.createElement("li");
+                navItem.className = "nav-item";
+
+                let hideTimeout = null;
+
+                navItem.addEventListener('mouseenter', () => {
+                    clearTimeout(hideTimeout);
+                    document.querySelectorAll('.nav-item').forEach(i => {
+                        if (i !== navItem) i.classList.remove('active');
+                    });
+                    navItem.classList.add('active');
+                });
+
+                navItem.addEventListener('mouseleave', () => {
+                    hideTimeout = setTimeout(() => {
+                        navItem.classList.remove('active');
+                    }, 350);
+                });
+
+                const navLink = document.createElement("a");
+                navLink.className = "nav-link" + (topCat.isCustomHtml ? " flag-nav-link" : "");
+                if (topCat.isCustomHtml) {
+                    navLink.innerHTML = topCat.title;
+                } else {
+                    navLink.textContent = topCat.title;
+                }
+                navItem.appendChild(navLink);
+
+                const level1Submenu = document.createElement("ul");
+                level1Submenu.className = "submenu" + (topCat.isGrid ? " alphabet-grid" : "");
+
+                topCat.ranges.forEach(range => {
+                    const matchingComposers = topCat.data.filter(group => range.filter(group.category));
+                    if (matchingComposers.length === 0) return;
+
+                    const level1Item = document.createElement("li");
+                    level1Item.className = "submenu-item";
+
+                    let rangeTimeout = null;
+                    level1Item.addEventListener('mouseenter', () => {
+                        clearTimeout(rangeTimeout);
+                        level1Submenu.querySelectorAll(':scope > .submenu-item').forEach(i => {
+                            if (i !== level1Item) i.classList.remove('active');
+                        });
+                        level1Item.classList.add('active');
+                        
+                        // Smart positioning check for Level 2
+                        const sub = level1Item.querySelector(':scope > .submenu');
+                        if (sub) {
+                            sub.classList.remove('flip-left');
+                            const rect = sub.getBoundingClientRect();
+                            if (rect.right > window.innerWidth - 10) {
+                                sub.classList.add('flip-left');
+                            }
+                        }
+                    });
+
+                    level1Item.addEventListener('mouseleave', () => {
+                        rangeTimeout = setTimeout(() => {
+                            level1Item.classList.remove('active');
+                        }, 350);
+                    });
+
+                    // Build collage images for this letter range
+                    const profileImgs = [];
+                    matchingComposers.forEach(group => {
+                        if (group.songs.length > 0 && group.songs[0].script) {
+                            const lastSlash = group.songs[0].script.lastIndexOf('/');
+                            if (lastSlash !== -1) {
+                                const folder = group.songs[0].script.substring(0, lastSlash + 1);
+                                profileImgs.push(folder + "Profile.jpeg");
+                            }
+                        }
+                    });
+
+                    // Take up to 4 images for 2x2 grid
+                    const collageImgs = profileImgs.slice(0, 4);
+                    let collageHtml = "";
+                    if (collageImgs.length > 0) {
+                        collageHtml = `<div class="menu-collage-grid">`;
+                        for (let c = 0; c < 4; c++) {
+                            const imgSrc = collageImgs[c % collageImgs.length];
+                            collageHtml += `<img src="${imgSrc}" class="menu-collage-img" onerror="this.style.opacity='0.2'">`;
+                        }
+                        collageHtml += `</div>`;
+                    }
+
+                    const level1Link = document.createElement("a");
+                    level1Link.className = "submenu-link";
+                    level1Link.innerHTML = `
+                        <div class="range-with-collage">
+                            ${collageHtml}
+                            <span>${range.label}</span>
+                        </div>
+                        <span class="arrow">»</span>
+                    `;
+                    level1Item.appendChild(level1Link);
+
+                    const level2Submenu = document.createElement("ul");
+                    level2Submenu.className = "submenu";
+
+                    matchingComposers.forEach(composerGroup => {
+                        const level2Item = document.createElement("li");
+                        level2Item.className = "submenu-item";
+
+                        let compTimeout = null;
+                        level2Item.addEventListener('mouseenter', () => {
+                            clearTimeout(compTimeout);
+                            level2Submenu.querySelectorAll(':scope > .submenu-item').forEach(i => {
+                                if (i !== level2Item) i.classList.remove('active');
+                            });
+                            level2Item.classList.add('active');
+
+                            // Smart positioning check for Level 3
+                            const sub = level2Item.querySelector(':scope > .submenu');
+                            if (sub) {
+                                sub.classList.remove('flip-left');
+                                const rect = sub.getBoundingClientRect();
+                                if (rect.right > window.innerWidth - 10) {
+                                    sub.classList.add('flip-left');
+                                }
+                            }
+                        });
+
+                        level2Item.addEventListener('mouseleave', () => {
+                            compTimeout = setTimeout(() => {
+                                level2Item.classList.remove('active');
+                            }, 350);
+                        });
+
+                        const level2Link = document.createElement("a");
+                        level2Link.className = "submenu-link";
+
+                        let folderPath = "Songs/Traditional/";
+                        if (composerGroup.songs.length > 0 && composerGroup.songs[0].script) {
+                            const lastSlash = composerGroup.songs[0].script.lastIndexOf('/');
+                            if (lastSlash !== -1) {
+                                folderPath = composerGroup.songs[0].script.substring(0, lastSlash + 1);
+                            }
+                        }
+                        const profileImgSrc = folderPath + "Profile.jpeg";
+
+                        level2Link.innerHTML = `
+                            <div class="composer-with-avatar">
+                                <img src="${profileImgSrc}" class="composer-avatar" alt="${composerGroup.category}" onerror="this.style.display='none'">
+                                <span>${composerGroup.category}</span>
+                            </div>
+                            <span class="arrow">»</span>
+                        `;
+
+                        level2Item.appendChild(level2Link);
+
+                        const level3Submenu = document.createElement("ul");
+                        level3Submenu.className = "submenu";
+
+                        composerGroup.songs.forEach(song => {
+                            const level3Item = document.createElement("li");
+                            level3Item.className = "submenu-item";
+
+                            let songTimeout = null;
+                            level3Item.addEventListener('mouseenter', () => {
+                                clearTimeout(songTimeout);
+                                level3Submenu.querySelectorAll(':scope > .submenu-item').forEach(i => {
+                                    if (i !== level3Item) i.classList.remove('active');
+                                });
+                                level3Item.classList.add('active');
+                            });
+
+                            level3Item.addEventListener('mouseleave', () => {
+                                songTimeout = setTimeout(() => {
+                                    level3Item.classList.remove('active');
+                                }, 350);
+                            });
+
+                            const level3Link = document.createElement("a");
+                            level3Link.className = "submenu-link";
+                            level3Link.textContent = song.label;
+                            level3Link.onclick = (e) => {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                
+                                level3Item.classList.add('active');
+                                window.loadSongUI(song.value);
+                            };
+
+                            level3Item.appendChild(level3Link);
+                            level3Submenu.appendChild(level3Item);
+                        });
+
+                        level2Item.appendChild(level3Submenu);
+                        level2Submenu.appendChild(level2Item);
+                    });
+
+                    level1Item.appendChild(level2Submenu);
+                    level1Submenu.appendChild(level1Item);
+                });
+
+                navItem.appendChild(level1Submenu);
+                navMenuEl.appendChild(navItem);
+            });
+        }
+
+        loadAllSongScripts().then(() => {
+            buildMultilevelMenu();
+            const lastSong = localStorage.getItem("activeSongValue") || "roza";
+            loadSongUI(lastSong);
+        });
+    });
+</script>
+
+</body>
+</html>
