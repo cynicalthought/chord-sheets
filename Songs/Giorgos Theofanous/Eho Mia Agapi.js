@@ -31,7 +31,7 @@ const ehoMiaAgapiData = {
         {
             "lines": [
                 { "rawInline": "(Bbm:red)Έχω μια α(Ab)γάπ(Gb)η, βλέμμα σ(Ab)κοτει(Bbm)νό, κι αν με τρο(Ab)μάζε(Ebm)ι εγώ την απει(Bbm)λώ" },
-                { "rawInline": "(Ebm)Κλείνω τα (Fm)μάτια, μα είναι πάντα εμπ(Ab)ρός μου (_) (Ab:green) (_) (Bbm) (_) (Ab) (_) (Bbm) " },
+                { "rawInline": "(Ebm)Κλείνω τα (Fm)μάτια, μα είναι (Gb)πάντα εμπ(Ab)ρός μ(Bbm)ου (_) (Ab:green) (_) (Bbm) (_) (Ab) (_) (Bbm) " },
                 { "rawInline": "(Bbm:red)Έχω μια α(Ab)γάπη,(Gb) φλόγα (Ab)δυνα(Bbm)τή, που με ζεστ(Ab)αίνει φίλη μ(Ebm)ου κα(Bbm)λή" },
                 { "rawInline": "(Ebm)Μα όταν λ(Fm)είπει, γίνετ(Gb)αι εχθ(Ab)ρός μ(Bbm)ου (_) (Ab:green) (_) (Bbm) (_) (Ab) (_) (Bbm) (_) (Gb) " }
             ]
