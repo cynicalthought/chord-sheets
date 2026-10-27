@@ -8,44 +8,44 @@ const toAdiexodoData = {
     "stanzas": [
         {
             "lines": [
-                { "rawInline": "(Gbm)   (Bm)   (E)   (A) [2Χ]" },
-                { "rawInline": "(Co)   (Db)   (Gbm)   (Db)   (Gbm)" }
+                { "rawInline": "(Gbm:green)   (Bm)   (E)   (A) ([X2]:black)" },
+                { "rawInline": "(Co:green)   (Db)   (Gbm)   (Db)   (Gbm)" }
             ]
         },
         {
             "lines": [
-                { "rawInline": "Πήραμε λάθος το στρατί (Gbm) και μη ρωτάς: “Πώς και γιατί;” (Bm)                      (Abo)           (Co)" },
-                { "rawInline": "Στο αδιέξοδο βρεθήκαμε (Gbm) αυτό (Co)         (Db)" },
-                { "rawInline": "Ίσως να έφταιξες εσύ (Gbm), ίσως να έφταιξα εγώ (Bm)                    (Abo)             (Co)" },
-                { "rawInline": "Ίσως της μοίρας μας να ήτανε γραφτό (Gbm)          (Co)  (Db)  (Gbm) (Db) (Gbm)" }
+                { "rawInline": "Πήραμε (Gbm:red)λάθος το στρα(Bm)τί και μη ρω(Abo)τάς: “Πώς και για(Co)τί;”" },
+                { "rawInline": "Στο αδ(Gbm)ιέξοδο βρεθήκα(Co)με αυ(Db)τό" },
+                { "rawInline": "Ίσως ν(Gbm)α έφταιξες ε(Bm)σύ, ίσως να(Abo) έφταιξα ε(Co)γώ" },
+                { "rawInline": "Ίσως της μ(Gbm)οίρας μας να(Co) ήτα(Db)νε γραφ(Gbm)τό (_)(Db:green) (_) (Gbm) " }
             ]
         },
         {
             "lines": [
-                { "rawInline": "Τώρα δε μένει άλλη λύση (Gbm), παρά μονάχα ο χωρι(Bm)σμός                                    (E)                                   (A)" },
-                { "rawInline": "Και κάποιο δάκρυ αν θα κυλήσει (Gbm) θα το στεγνώσει (Bm)ο καιρός                                    (E)                                   (A)" },
-                { "rawInline": "Θα το στεγνώσει ο καιρός (Co) (Db) (Gbm) (Db) (Gbm)" }
+                { "rawInline": "Τώρα δε (Gbm:blue)μένει άλλη (Bm)λύση, παρά μον(E)άχα ο χωρισμ(A)ός" },
+                { "rawInline": "Και κάποιο (Gbm)δάκρυ αν θα κυ(Bm)λήσει θα το στεγν(E)ώσει ο καιρ(A)ός" },
+                { "rawInline": "Θα το στεγ(Co)νώσει(Db) ο και(Gbm)ρός (_)(Db:green) (_) (Gbm) " }
             ]
         },
         {
             "lines": [
-                { "rawInline": "(Gbm)   (Bm)   (E)   (A) [2Χ]" },
-                { "rawInline": "(Co)   (Db)   (Gbm)   (Db)   (Gbm)" }
+                { "rawInline": "(Gbm:green)   (Bm)   (E)   (A) ([X2]:black)" },
+                { "rawInline": "(Co:green)   (Db)   (Gbm)   (Db)   (Gbm)" }
             ]
         },
         {
             "lines": [
-                { "rawInline": "Δεν το μπορείς, δεν το μπορώ (Gbm), να πάμε πίσω τον καιρό (Bm)                         (Abo)                 (Co)" },
-                { "rawInline": "Το ίδιο λάθος να μην κάνουμε (Gbm) ξανά (Co)         (Db)" },
-                { "rawInline": "Τώρα το βλέπουμε κι οι δυο (Gbm), απ' τ' αδιέξοδο (Bm)αυτό                                 (Abo)           (Co)" },
-                { "rawInline": "Ό,τι κι αν κάνουμε να βγούμε (Gbm) είν' αργά (Co) (Db) (Gbm) (Db) (Gbm)" }
+                { "rawInline": "Δεν το μπορ(Gbm:red)είς, δεν το μπο(Bm)ρώ, να πάμε (Abo)πίσω τον και(Co)ρό" },
+                { "rawInline": "Το ίδιο (Gbm)λάθος να μην (Co)κάνουμε ξα(Db)νά" },
+                { "rawInline": "Τώρα το β(Gbm)λέπουμε κι οι δ(Bm)υο, απ' τ' αδ(Abo)ιέξοδο αυ(Co)τό" },
+                { "rawInline": "Ό,τι κι αν (Gbm)κάνουμε να βγ(Co)ούμε (Db)είν' αρ(Gbm)γά (_)(Db:green) (_) (Gbm) " }
             ]
         },
         {
             "lines": [
-                { "rawInline": "Τώρα δε μένει άλλη λύση (Gbm), παρά μονάχα ο χωρι(Bm)σμός                                    (E)                                   (A)" },
-                { "rawInline": "Και κάποιο δάκρυ αν θα κυλήσει (Gbm) θα το στεγνώσει (Bm)ο καιρός                                    (E)                                   (A)" },
-                { "rawInline": "Θα το στεγνώσει ο καιρός (Co) (Db) (Gbm) (Db) (Gbm)" }
+                { "rawInline": "Τώρα δε (Gbm:blue)μένει άλλη (Bm)λύση, παρά μον(E)άχα ο χωρισμ(A)ός" },
+                { "rawInline": "Και κάποιο (Gbm)δάκρυ αν θα κυ(Bm)λήσει θα το στεγν(E)ώσει ο καιρ(A)ός" },
+                { "rawInline": "Θα το στεγ(Co)νώσει(Db) ο και(Gbm)ρός (_)(Db:green) (_) (Gbm) " }
             ]
         }
     ]
