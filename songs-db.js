@@ -239,16 +239,16 @@ const SONGS_DB = {
           dataKey: "ehoMiaAgapiData"
         },
         {
-          value: "miaKokkiniGrammi",
-          label: "Μια Κόκκινη Γραμμή - Νατάσα Θεοδωρίδου",
-          script: "Songs/Giorgos Theofanous/Mia Kokkini Grammi.js",
-          dataKey: "miaKokkiniGrammiData"
-        },
-        {
           value: "mirotate",
           label: "Μη Ρωτάτε - Πέγκυ Ζήνα",
           script: "Songs/Giorgos Theofanous/Mi Rotate.js",
           dataKey: "miRotateData"
+        },
+        {
+          value: "miaKokkiniGrammi",
+          label: "Μια Κόκκινη Γραμμή - Νατάσα Θεοδωρίδου",
+          script: "Songs/Giorgos Theofanous/Mia Kokkini Grammi.js",
+          dataKey: "miaKokkiniGrammiData"
         },
         {
           value: "rixe_nihta",
