@@ -8,38 +8,38 @@ const prinToXaramaData = {
     "stanzas": [
         {
             "lines": [
-                { "rawInline": "(C#m:green)   (Em)   (A)   (B)   (E)   (G#)   (C#m)" },
-                { "rawInline": "(C#m)   (Em)   (G#)   (C#m)   (G#)   (C#m)" }
+                { "rawInline": "(C#m:green)   (Em)   (A)    (B)     (E)    (G#)   (C#m)" },
+                { "rawInline": "(C#m)         (Em)   (G#)   (C#m)   (G#)   (C#m)" }
             ]
         },
         {
             "lines": [
-                { "rawInline": "(C#m)Πριν το χάραμα μονάχος εξεκίνησα (G#)       (C#m)     (G#)   (C#m) (B)(A)(F#m)     (C#m)" },
-                { "rawInline": "(F#m)Αχ, και στο πρώτο, μας το στέκι την αυγούλα γύρισα (G#)                          (C#m)              (G#)                             (C#m) [Χ2]" }
+                { "rawInline": "(C#m:red)Πριν το (G#)χάρ(C#m)αμα (G#)μονά(C#m)χος ε(B:green)ξε(A)κί(F#m:red)νησα(C#m) " },
+                { "rawInline": "(F#m:blue)Αχ, και στο π(G#)ρώτο, μας το σ(C#m)τέκι (G#)την αυγούλα γύρι(C#m)σα([X2]:black)" }
             ]
         },
         {
             "lines": [
-                { "rawInline": "(C#m:green)   (Em)   (A)   (B)   (E)   (G#)   (C#m)" },
-                { "rawInline": "(C#m)   (Em)   (G#)   (C#m)   (G#)   (C#m)" }
+                { "rawInline": "(C#m:green)   (Em)   (A)    (B)     (E)    (G#)   (C#m)" },
+                { "rawInline": "(C#m)         (Em)   (G#)   (C#m)   (G#)   (C#m)" }
             ]
         },
         {
             "lines": [
-                { "rawInline": "(C#m)Πριν ακόμα σβήσουν τ' άστρα εξεπόρτισα (G#)           (C#m)   (G#)     (C#m) (B)(A)(F#m)    (C#m)" },
-                { "rawInline": "(F#m)Αχ, να ξανά-βρω τα δυο χείλη, που ποτέ δεν χόρτασα (G#)                               (C#m)                 (G#)                                    (C#m) [Χ2]" }
+                { "rawInline": "(C#m:red)Πριν α(G#)κόμ(C#m)α σβ(G#)ήσουν τ' άστ(C#m)ρα εξ(B:green)επ(A)όρ(F#m:red)τισα (C#m) " },
+                { "rawInline": "(F#m:blue)Αχ, να ξα(G#)νά-βρω τα δυο χ(C#m)είλη,(G#) που ποτέ δεν χόρτα(C#m)σα([X2]:black)" }
             ]
         },
         {
             "lines": [
-                { "rawInline": "(C#m:green)   (Em)   (A)   (B)   (E)   (G#)   (C#m)" },
-                { "rawInline": "(C#m)   (Em)   (G#)   (C#m)   (G#)   (C#m)" }
+                { "rawInline": "(C#m:green)   (Em)   (A)    (B)     (E)    (G#)   (C#m)" },
+                { "rawInline": "(C#m)         (Em)   (G#)   (C#m)   (G#)   (C#m)" }
             ]
         },
         {
             "lines": [
-                { "rawInline": "(C#m)Αν και άλλη μ' είχε μπλέξει με καμώματα (G#)               (C#m)     (G#)  (C#m) (B)(A)(F#m)   (C#m)" },
-                { "rawInline": "(F#m)Αχ, σ' αγαπώ κι ήρθα κοντά σου πριν τα ξημερώματα (G#)                             (C#m)             (G#)                                    (C#m) [X2]" }
+                { "rawInline": "(C#m:red)Αν και(G#) άλλ(C#m)η μ' ε(G#)ίχε μπλέ(C#m)ξει μ(B:green)ε κ(A)αμ(F#m:red)ώματ(C#m)α" },
+                { "rawInline": "(F#m:blue)Αχ, σ' αγα(G#)πώ κι ήρθα κον(C#m)τά σου (G#)πριν τα ξημερώμα(C#m)τα([X2]:black)" }
             ]
         }
     ]
