@@ -9,7 +9,7 @@ const staIpogeiaEinaiITheaData = {
         {
             "lines": [
                 {
-                    "rawInline": "(C#m:green)   (G#m)   (D#)   (G#m) ([X2])"
+                    "rawInline": "(C#m:green)   (G#m)   (D#)   (G#m) ([X2]:black)"
                 }
             ]
         },
@@ -19,13 +19,13 @@ const staIpogeiaEinaiITheaData = {
                     "rawInline": "Σε (G#m:red)μια γωνιά κρυμ(C#m)μένα, με (G#m)μάτια τρομαγ(C#m)μένα"
                 },
                 {
-                    "rawInline": "Τα θέλω μου κοιτάνε σαν παιδ(F#)ιά"
+                    "rawInline": "Τα (F#)θέλω μου κοιτάνε σαν παιδι(B)ά (D#:green) "
                 },
                 {
-                    "rawInline": "Κι ας (G#m)ξέρουν τι έχουν (C#m)κάνει, ε(G#m)μένα δε μου φ(C#m)τάνει"
+                    "rawInline": "Κι ας (G#m:red)ξέρουν τι έχουν (C#m)κάνει, ε(G#m)μένα δε μου φ(C#m)τάνει"
                 },
                 {
-                    "rawInline": "Γι’ αυ(F#)τό τα τιμωρώ κάθε φορ(B)ά  (D#)"
+                    "rawInline": "Γι’ αυ(F#)τό τα τιμωρώ κάθε φορ(B)ά (D#:green) "
                 }
             ]
         },
@@ -41,7 +41,7 @@ const staIpogeiaEinaiITheaData = {
                     "rawInline": "Τα π(C#m)ράγματα τα όμορφα όσο τα (G#m)θέλεις χάνονται τυχαία"
                 },
                 {
-                    "rawInline": "Κι ας (D#)ψάχνεις σε πολυώροφα, στα υπόγεια είναι η (G#m)θέα"
+                    "rawInline": "Κι ας (D#)ψάχνεις σε πολυώροφα, στα υπόγεια είναι η θ(G#m)έα"
                 }
             ]
         },
@@ -58,13 +58,13 @@ const staIpogeiaEinaiITheaData = {
                     "rawInline": "Τ(G#m:red)α όνειρα μου μ(C#m)οιάζουν, φεγ(G#m)γάρια που αλ(C#m)λάζουν"
                 },
                 {
-                    "rawInline": "Τα φ(F#)τάνω κι όλο πάνε πιο μακρι(B)ά  (D#)"
+                    "rawInline": "Τα φ(F#)τάνω κι όλο πάνε πιο μακρι(B)ά (D#:green) "
                 },
                 {
-                    "rawInline": "Κ(G#m)ι όσα τα γυρ(C#m)εύω, τους (G#m)φόβους μου παλ(C#m)εύω"
+                    "rawInline": "Κ(G#m:red)ι όσα τα γυρ(C#m)εύω, τους (G#m)φόβους μου παλ(C#m)εύω"
                 },
                 {
-                    "rawInline": "Και (F#)πάω γι’ άλλα απ' την αρχή ξαν(B)ά  (D#)"
+                    "rawInline": "Και (F#)πάω γι’ άλλα απ' την αρχή ξαν(B)ά (D#:green) "
                 }
             ]
         },
@@ -80,7 +80,7 @@ const staIpogeiaEinaiITheaData = {
                     "rawInline": "Τα π(C#m)ράγματα τα όμορφα όσο τα (G#m)θέλεις χάνονται τυχαία"
                 },
                 {
-                    "rawInline": "Κι ας (D#)ψάχνεις σε πολυώροφα, στα υπόγεια είναι η (G#m)θέα [X2]"
+                    "rawInline": "Κι ας (D#)ψάχνεις σε πολυώροφα, στα υπόγεια είναι η θ(G#m)έα([X2]:black)"
                 }
             ]
         }
