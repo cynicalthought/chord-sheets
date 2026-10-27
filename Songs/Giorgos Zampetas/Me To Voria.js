@@ -9,54 +9,49 @@ const meToVoriaData = {
         {
             "lines": [
                 {
-                    "rawInline": "(E:green)   (B:green)   (E:green)"
+                    "rawInline": "(E:green)   (B)   (E)"
                 }
             ]
         },
         {
             "lines": [
                 {
-                    "rawInline": "Βοριάς είν' η αγάπη σ(F#m)ου κα(B)ι ποιος θα με γλιτ(E)ώσει                               "
+                    "rawInline": "Βορι(E:red)άς είν' η αγάπη σ(F#m)ου κα(B)ι ποιος θα με γλιτ(E)ώσει;" },
+                {
+                    "rawInline": "Νοτι(E:green)άς φυσάει στα χείλη σ(F#m:red)ου, ω (B)και τα 'χω πελαγώσε(E)ι                                   "
+                }
+            ]
+        },
+        {
+            "lines": [
+                {
+                    "rawInline": "(E:blue)Με αγα(F#m:blue)πάς, σ(B:blue)ε αγαπ(E:blue)ώ, στο μαύρο (F#m:blue)κύμα(A:blue) π(B:blue)άν(E:blue)ω"
                 },
                 {
-                    "rawInline": "Νοτιάς φυσάει στα χείλη σ(F#m)ου, ω (B)και τα 'χω πελαγώσε(E)ι                                   "
+                    "rawInline": "(E:green)Με το νοτ(F#m:blue)ιά, σ'(B) αναζητ(E)ώ, με το βορ(F#m:blue)ιά σε (A)χά(B)νω(E) "
                 }
             ]
         },
         {
             "lines": [
                 {
-                    "rawInline": "Με αγα(F#m:blue)πάς σ(B:blue)ε αγαπ(E:blue)ώ, στο μαύρο (F#m:blue)κύμα(A:blue) π(B:blue)άν(E:blue)ω"
-                },
-                {
-                    "rawInline": "Με το νοτιά (F#m:blue)σ' ανα(B:blue)ζητώ, με το βο(E:blue)ριά σε χάνω (F#m:blue) (A:blue) (B:blue) (E:blue)"
+                    "rawInline": "(E:green)   (B)   (E)"
                 }
             ]
         },
         {
             "lines": [
                 {
-                    "rawInline": "(E:green)   (B:green)   (E:green)"
+                    "rawInline": "Στην πρ(E:red)ύμνη σου 'δωσα φι(F#m)λί, στ(B)ην πλώρη την ψυχή μο(E)υ"},
+                {
+                    "rawInline": "Την πλ(E:green)ώρη πήρες κι έφυ(F#m:red)γες, ω(B) κι έχασα τη ζωή μο(E)υ"
                 }
             ]
         },
         {
             "lines": [
                 {
-                    "rawInline": "Στην πρύμνη σου 'δωσα φιλί, στην πλώρη την ψυχή μου (F#m)       (B)                              (E)"
-                },
-                {
-                    "rawInline": "Την πλώρη πήρες κι έφυγες, ω κι έχασα τη ζωή μου (F#m)   (B)                       (E)"
-                }
-            ]
-        },
-        {
-            "lines": [
-                {
-                    "rawInline": "Με αγαπάς (F#m:blue)σε αγα(B:blue)πώ, στο μαύ(E:blue)ρο κύμα πάνω"
-                },
-                {
-                    "rawInline": "Με το νοτιά (F#m:blue)σ' ανα(B:blue)ζητώ, με το βο(E:blue)ριά σε χάνω (F#m:blue) (A:blue) (B:blue) (E:blue)"
+                    "rawInline": "(E:blue)Με αγα(F#m:blue)πάς..."
                 }
             ]
         }
