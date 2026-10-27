@@ -39,7 +39,7 @@ const prinToXaramaData = {
         {
             "lines": [
                 { "rawInline": "(C#m:red)Αν και(G#) άλλ(C#m)η μ' ε(G#)ίχε μπλέ(C#m)ξει μ(B:green)ε κ(A)αμ(F#m:red)ώματ(C#m)α" },
-                { "rawInline": "(F#m:blue)Αχ, σ' αγα(G#)πώ κι ήρθα κον(C#m)τά σου (G#)πριν τα ξημερώμα(C#m)τα([X2]:black)" }
+                { "rawInline": "(F#m:blue)Αχ, σ' αγα(G#)πώ κι ήρθα κον(C#m)τά σο(G#)υ πριν τα ξημερώμα(C#m)τα([X2]:black)" }
             ]
         }
     ]
