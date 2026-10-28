@@ -8,13 +8,13 @@ const paraponemenaLogiaData = {
     "stanzas": [
         {
             "lines": [
-                { "rawInline": "(F#m:green)     (E)     (A)     (C#)     (F#m)" }
+                { "rawInline": "(F#m:green)     (E)     (A)     (C#)     (F#m) ([X2]:black)" }
             ]
         },
         {
             "lines": [
                 { "rawInline": "(F#m:red)Στης ανάγκης τ(E)α θρα(F#m)νία και στης φ(Bm)τώχειας τ(E)ο σ(Bm)χολε(F#m)ιό" },
-                { "rawInline": "(F#m:green)Μάθ(E:red)αμ(F#m)ε την κοινων(E)ία(D:green) κ(C#m:red)αι τον π(D:red)όνο (C#m)τον παλ(F#m)ιό" }
+                { "rawInline": "(F#m:green)Μάθ(E:red)αμ(F#m)ε την κοινων(E)ία(D:green) κ(C#m:red)αι τον π(D:red)όνο (C#)τον παλ(F#m)ιό" }
             ]
         },
         {
@@ -25,7 +25,7 @@ const paraponemenaLogiaData = {
         },
         {
             "lines": [
-                { "rawInline": "(F#m:green)     (E)     (A)     (C#)     (F#m)" }
+                { "rawInline": "(F#m:green)     (E)     (A)     (C#)     (F#m) ([X2]:black)" }
             ]
         },
         {
