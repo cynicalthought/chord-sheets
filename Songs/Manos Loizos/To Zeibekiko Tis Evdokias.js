@@ -8,17 +8,21 @@ const toZeibekikoTisEvdokiasData = {
     "stanzas": [
         {
             "lines": [
-                { "rawInline": "(Dm:green)     ([X2]:black)" }
-            ]
-        },
-        {
-            "lines": [
-                { "rawInline": "(Dm:red)     (C)     (Dm)     ([X2]:black)" }
-            ]
-        },
-        {
-            "lines": [
+                { "rawInline": "(Dm:green) ([X2]:black) (Dm:red) ([X2]:black)" },
+                { "rawInline": "(Dm:green) (C)          (Dm)     ([X2]:black)" },
                 { "rawInline": "(Gm:blue)     (Dm)     (C)     (Dm)     ([X2]:black)" }
+            ]
+        },
+        {
+            "lines": [
+                { "rawInline": "(Dm:green) ([X2]:black) (Dm:red) ([X2]:black)" },
+                { "rawInline": "(Dm:green) (C)          (Dm)     ([X2]:black)" },
+                { "rawInline": "(Gm:blue)     (Dm)     (C)     (Dm)     ([X2]:black)" }
+            ]
+        },
+        {
+            "lines": [
+                { "rawInline": "(Dm:green)          ([X2]:black)" }
             ]
         }
     ]
