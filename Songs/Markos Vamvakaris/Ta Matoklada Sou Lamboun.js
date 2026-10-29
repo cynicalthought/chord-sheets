@@ -1,5 +1,6 @@
 const taMatokladaSouLambounData = {
     "title": "Τα Ματόκλαδά Σου Λάμπουν",
+    "timeSignature": "9/8",
     "rhythm": "Καμηλιέρικος",
     "artist": "Γρηγόρης Μπιθικώτσης",
     "composer": "Μάρκος Βαμβακάρης",
