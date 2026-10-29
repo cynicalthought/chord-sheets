@@ -1,6 +1,7 @@
 const dianikterevoData = {
     "title": "Διανυκτερεύω",
-    "rhythm": "4/4",
+    "timeSignature": "4/4",
+    "rhythm": "Ρούμπα",
     "artist": "Γιώργος Μαζωνάκης",
     "composer": "Γιώργος Σαμπάνης",
     "lyricist": "Ελεάνα Βραχάλη",

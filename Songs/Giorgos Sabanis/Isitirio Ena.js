@@ -1,6 +1,7 @@
 const isitirioEnaData = {
     "title": "Εισιτήριο Ένα",
-    "rhythm": "4/4",
+    "timeSignature": "4/4",
+    "rhythm": "Ρούμπα",
     "artist": "Νίκος Οικονομόπουλος",
     "composer": "Γιώργος Σαμπάνης",
     "lyricist": "Νίκος Μωραΐτης",
@@ -43,7 +44,7 @@ const isitirioEnaData = {
         },
         {
             "lines": [
-                { "rawInline": "(F#m:blue)Αν ρωτήσουνε πού μένω πες τους μια διεύθυνση ([X2]:black)" }
+                { "rawInline": "(F#m:blue)Αν ρωτήσουνε πού μένω πες τους μια διεύθυνση([X2]:black)" }
             ]
         }
     ]

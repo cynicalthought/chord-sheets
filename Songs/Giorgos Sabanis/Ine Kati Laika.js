@@ -1,6 +1,7 @@
 const ineKatiLaikaData = {
     "title": "Είναι Κάτι Λαϊκά",
-    "rhythm": "6/8",
+    "timeSignature": "6/8",
+    "rhythm": "",
     "artist": "Νίκος Οικονομόπουλος",
     "composer": "Γιώργος Σαμπάνης",
     "lyricist": "Ελένη Γιαννατσούλια",

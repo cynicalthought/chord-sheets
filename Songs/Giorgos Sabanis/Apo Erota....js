@@ -1,6 +1,7 @@
 const apoErotaData = {
     "title": "Από Έρωτα...",
-    "rhythm": "4/4",
+    "timeSignature": "4/4",
+    "rhythm": "",
     "artist": "Νίκος Οικονομόπουλος",
     "composer": "Γιώργος Σαμπάνης",
     "lyricist": "Ελένη Γιαννατσούλια",

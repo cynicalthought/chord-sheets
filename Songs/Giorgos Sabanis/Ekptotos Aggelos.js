@@ -1,6 +1,7 @@
 const ekptotosAggelosData = {
     "title": "Έκπτωτος Άγγελος",
-    "rhythm": "Ζεϊμπέκικος",
+    "timeSignature": "9/8",
+    "rhythm": "Ζεϊμπέκικος (Μοντέρνος)",
     "artist": "Νίκος Οικονομόπουλος",
     "composer": "Γιώργος Σαμπάνης",
     "lyricist": "Νίκος Γρίτσης",

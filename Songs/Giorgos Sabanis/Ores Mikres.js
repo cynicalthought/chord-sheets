@@ -1,6 +1,7 @@
 const OresMikresData = {
     "title": "Ώρες Μικρές",
-    "rhythm": "Ζεϊμπέκικος",
+    "timeSignature": "9/8",
+    "rhythm": "Ζεϊμπέκικος (Μοντέρνος)",
     "artist": "Γιώργος Μαζωνάκης",
     "composer": "Γιώργος Σαμπάνης",
     "lyricist": "Ελένη Γιαννατσούλια",
@@ -31,7 +32,7 @@ const OresMikresData = {
         },
         {
             "lines": [
-                { "rawInline": "(Bbm:green)   (Fm)   (Eb)   (Ab)   (Eb)   (Fm)" },
+                { "rawInline": "(Bbm:green)    (Fm)   (Eb)   (Ab)   (Eb)   (Fm)" },
                 { "rawInline": "(Bbm)   (Fm)   (Eb)   (Db)   (Eb)   (Fm)" }
             ]
         },

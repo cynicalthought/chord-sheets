@@ -1,6 +1,7 @@
 const hartopolemosData = {
     "title": "Χαρτοπόλεμος",
-    "rhythm": "Ζεϊμπέκικος",
+    "timeSignature": "9/8",
+    "rhythm": "Ζεϊμπέκικος (Μοντέρνος)",
     "artist": "Νατάσα Θεοδωρίδου",
     "composer": "Γιώργος Σαμπάνης",
     "lyricist": "Ελένη Γιαννατσούλια",
