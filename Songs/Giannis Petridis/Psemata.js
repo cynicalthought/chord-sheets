@@ -1,6 +1,7 @@
 const psemataData = {
     "title": "Ψέματα",
-    "rhythm": "4/4",
+    "timeSignature": "4/4",
+    "rhythm": "",
     "artist": "Κωνσταντίνος Αργυρός",
     "composer": "Γιάννης Πετρίδης",
     "lyricist": "Γιάννης Πετρίδης; Νίκος Δούρος; Νίκος Καλογεράς",
