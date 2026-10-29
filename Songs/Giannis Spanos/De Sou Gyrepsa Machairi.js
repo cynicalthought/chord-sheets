@@ -1,6 +1,7 @@
 const deSouGyrepsaMachairiData = {
     "title": "Δε Σου Γύρεψα Μαχαίρι",
-    "rhythm": "Ζεϊμπέκικος",
+    "timeSignature": "2/4",
+    "rhythm": "Χασάπικος",
     "artist": "Γιάννης Πουλόπουλος",
     "composer": "Γιάννης Σπανός",
     "lyricist": "Άκος Δασκαλόπουλος",
