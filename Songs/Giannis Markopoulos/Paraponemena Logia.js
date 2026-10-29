@@ -1,6 +1,7 @@
 const paraponemenaLogiaData = {
     "title": "Παραπονεμένα Λόγια",
-    "rhythm": "Ζεϊμπέκικος",
+    "timeSignature": "9/8",
+    "rhythm": "Ζεϊμπέκικος (Μοντέρνος)",
     "artist": "Γιώργος Νταλάρας",
     "composer": "Γιάννης Μαρκόπουλος",
     "lyricist": "Μάνος Ελευθερίου",

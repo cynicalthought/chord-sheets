@@ -1,6 +1,7 @@
 const malamateniaLogiaData = {
     "title": "Μαλαματένια Λόγια",
-    "rhythm": "4/4",
+    "timeSignature": "4/4",
+    "rhythm": "",
     "artist": "Λάκης Χαλκιάς; Τάνια Τσανακλίδου; Χαράλαμπος Γαργανουράκης",
     "composer": "Γιάννης Μαρκόπουλος",
     "lyricist": "Μάνος Ελευθερίου",
