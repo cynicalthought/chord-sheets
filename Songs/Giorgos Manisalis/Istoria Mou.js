@@ -1,5 +1,6 @@
 const istoriaMouData = {
     "title": "Ιστορία Μου",
+    "timeSignature": "2/4",
     "rhythm": "Χασάπικος",
     "artist": "Ρίτα Σακελλαρίου; Μάριος Κώστογλου",
     "composer": "Γιώργος Μανισαλής",
