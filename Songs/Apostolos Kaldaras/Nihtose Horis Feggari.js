@@ -1,6 +1,7 @@
 const nihtoseHorisFeggariData = {
     "title": "Νύχτωσε Χωρίς Φεγγάρι",
-    "rhythm": "Ζεϊμπέκικος",
+    "timeSignature": "9/8",
+    "rhythm": "Ζεϊμπέκικος (Μοντέρνος)",
     "artist": "Στέλλα Χασκίλ",
     "composer": "Απόστολος Καλδάρας",
     "lyricist": "Απόστολος Καλδάρας",

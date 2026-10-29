@@ -1,6 +1,7 @@
 const apopseTheloNaPioData = {
     "title": "Απόψε Θέλω Να Πιω",
-    "rhythm": "Ζεϊμπέκικος",
+    "timeSignature": "9/8",
+    "rhythm": "Ζεϊμπέκικος (Μοντέρνος)",
     "artist": "Χάρις Αλεξίου",
     "composer": "Αντώνης Βαρδής",
     "lyricist": "Σοφία Αργυροπούλου",
@@ -9,7 +10,7 @@ const apopseTheloNaPioData = {
         {
             "lines": [
                 { "rawInline": "(D#m:green)     (A#m)     (B)     (D#m)" },
-                { "rawInline": "(D#m)     (A#m)     (B)     (C#)    (D#m)" }
+                { "rawInline": "(D#m)           (A#m)     (B)     (C#)    (D#m)" }
             ]
         },
         {

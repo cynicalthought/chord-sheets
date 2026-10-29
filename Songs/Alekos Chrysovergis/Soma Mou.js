@@ -1,6 +1,7 @@
 const somaMouData = {
     "title": "Σώμα Μου",
-    "rhythm": "Ζεϊμπέκικος",
+    "timeSignature": "9/8",
+    "rhythm": "Ζεϊμπέκικος (Μοντέρνος)",
     "artist": "Νότης Σφακιανάκης",
     "composer": "Αλέκος Χρυσοβέργης",
     "lyricist": "Σπύρος Γιατράς",

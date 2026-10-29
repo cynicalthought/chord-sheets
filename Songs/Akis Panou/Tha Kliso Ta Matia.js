@@ -1,5 +1,6 @@
 const thaKleisoTaMatiaData = {
     "title": "Θα Κλείσω Τα Μάτια",
+    "timeSignature": "2/4",
     "rhythm": "Χασάπικος",
     "artist": "Γρηγόρης Μπιθικώτσης; Χαρούλα Λαμπράκη",
     "composer": "Άκης Πάνου",

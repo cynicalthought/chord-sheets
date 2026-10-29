@@ -1,6 +1,7 @@
 const oAetosData = {
     "title": "Ο Αετός",
-    "rhythm": "Ζεϊμπέκικος",
+    "timeSignature": "9/8",
+    "rhythm": "Ζεϊμπέκικος (Μοντέρνος)",
     "artist": "Νότης Σφακιανάκης",
     "composer": "Αλέκος Χρυσοβέργης; Ειρήνη Χρυσοβέργη",
     "lyricist": "Σπύρος Γιατράς",
@@ -8,10 +9,8 @@ const oAetosData = {
     "stanzas": [
         {
             "lines": [
-                { "rawInline": "(G#m:green)          (D#m)                         (E)    (F#)   (B)" },
-                { "rawInline": "(C#m)       (G#m)       (D#m)       (E)     (F#)   (G#m)" },
-                { "rawInline": "(G#m)          (D#m)                         (E)    (F#)   (B)" },
-                { "rawInline": "(C#m)       (G#m)       (D#)         (E)      (F#)   (G#m)" }
+                { "rawInline": "(G#m:green)          (D#m)       (E)        (F#)    (B)" },
+                { "rawInline": "(C#m)                (G#m)       (D#)       (E)     (F#)   (G#m) ([X2]:black)" }
             ]
         },
         {

@@ -1,6 +1,7 @@
 const dioPsemmataData = {
     "title": "Δυο Ψέματα",
-    "rhythm": "4/4",
+    "timeSignature": "4/4",
+    "rhythm": "",
     "artist": "Αντώνης Ρέμος",
     "composer": "Αντώνης Βαρδής",
     "lyricist": "Βασίλης Γιαννόπουλος",
