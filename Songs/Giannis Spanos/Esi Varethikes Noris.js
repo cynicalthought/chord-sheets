@@ -1,6 +1,7 @@
 const esiVarethikesNorisData = {
     "title": "Εσύ Βαρέθηκες Νωρίς",
-    "rhythm": "Ζεϊμπέκικος",
+    "timeSignature": "9/8",
+    "rhythm": "Ζεϊμπέκικος (Μοντέρνος)",
     "artist": "Δημήτρης Μητροπάνος",
     "composer": "Γιάννης Σπανός",
     "lyricist": "Φίλιππος Γράψας",
