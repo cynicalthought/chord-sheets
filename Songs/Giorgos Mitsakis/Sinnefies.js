@@ -1,6 +1,7 @@
 const sinnefiesData = {
     "title": "Συννεφιές",
-    "rhythm": "Ζεϊμπέκικος",
+    "timeSignature": "9/8",
+    "rhythm": "Ζεϊμπέκικος (Μοντέρνος)",
     "artist": "Λίτσα Διαμάντη",
     "composer": "Γιώργος Μητσάκης",
     "lyricist": "Γιώργος Μητσάκης",

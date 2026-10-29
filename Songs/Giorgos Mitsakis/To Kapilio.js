@@ -1,6 +1,7 @@
 const toKapilioData = {
     "title": "Το Καπηλειό",
-    "rhythm": "Χασάπικος",
+    "timeSignature": "9/8",
+    "rhythm": "Ζεϊμπέκικος (Μοντέρνος)",
     "artist": "Γιώργος Μητσάκης; Ιωάννα Γεωργακοπούλου",
     "composer": "Γιώργος Μητσάκης",
     "lyricist": "Γιώργος Μητσάκης",
@@ -24,7 +25,7 @@ const toKapilioData = {
         },
         {
             "lines": [
-                { "rawInline": "(Eb:red)Κι ένας α(Ab)πέντα(Bb7)ρος μπεκ(Eb)ρής, έξω απ’ το (Ab)ταβερ(Bb7)νάκι(Eb) " },
+                { "rawInline": "(Eb:red)Κι ένας α(Ab)πέντα(Bb7)ρος μπεκ(Eb)ρής, έξω απ’ το (Ab)ταβερ(Bb7)νάκι (Eb) " },
                 { "rawInline": "(Fm:blue)Συλλογισμένος (C7)κάθεται(Fm), στο χαμη(Cm)λό, στο χαμηλ(G)ό πορτά(Cm)κι([X2]:black)" }
             ]
         },
@@ -35,7 +36,7 @@ const toKapilioData = {
         },
         {
             "lines": [
-                { "rawInline": "(Eb:red)Θέλει να μπ(Ab)ει κι αυ(Bb7)τός εκ(Eb)εί, να κάτσει κ(Ab)αι να (Bb7)πίν(Eb)ει" },
+                { "rawInline": "(Eb:red)Θέλει να μπ(Ab)ει κι αυ(Bb7)τός εκ(Eb)εί, να κάτσει κ(Ab)αι να (Bb7)πίνει(Eb) " },
                 { "rawInline": "(Fm:blue)Μα είναι φτωχό το (C7)καπηλε(Fm)ιό και βερε(Cm)σέ, και βερεσ(G)έ δε δίν(Cm)ει([X2]:black)" }
             ]
         }
