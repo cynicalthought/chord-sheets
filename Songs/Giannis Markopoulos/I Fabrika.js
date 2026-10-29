@@ -1,6 +1,7 @@
 const iFabrikaData = {
     "title": "Η Φάμπρικα",
-    "rhythm": "Ζεϊμπέκικος",
+    "timeSignature": "9/8",
+    "rhythm": "Ζεϊμπέκικος (Μοντέρνος)",
     "artist": "Λάκης Χαλκιάς",
     "composer": "Γιάννης Μαρκόπουλος",
     "lyricist": "Γιώργος Σκούρτης",
