@@ -1,6 +1,7 @@
 const iStellaISmirniaData = {
     "title": "Η Στέλλα Η Σμυρνιά",
-    "rhythm": "Ζεϊμπέκικος",
+    "timeSignature": "9/8",
+    "rhythm": "Ζεϊμπέκικος (Μοντέρνος)",
     "artist": "Νότης Σφακιανάκης",
     "composer": "Γιώργος Μουκίδης",
     "lyricist": "Γιώργος Μουκίδης",
@@ -24,15 +25,15 @@ const iStellaISmirniaData = {
                 { "rawInline": "(Ebm:red)Καβάλησες τη μουσι(Fm)κή και πέρασες τη (Bbm)θάλασσα" },
                 { "rawInline": "(Ebm)Ύστερα μέσα σε μι’ αυ(Fm)λή, κατέβηκες αρ(Bbm)γά" },
                 { "rawInline": "(Fm)Ο γέρος σου σε μιά γωνιά, σε φώναζε αν(Ebm)τάρτισσα" },
-                { "rawInline": "(Fm)Κι η μάνα σου έλεγε: «πο(Ab)τέ, μην ξανα(Fm)φύγεις π(Bbm)ια!»" }
+                { "rawInline": "(Fm)Κι η μάνα σου έλεγε: “Πο(Ab)τέ, μην ξανα(Fm)φύγεις π(Bbm)ια!”" }
             ]
         },
         {
             "lines": [
                 { "rawInline": "(Bbm:blue)Θα σε περνάνε για τρε(Ab)λή, που θες να πας στο Αϊβα(Ebm)λί" },
                 { "rawInline": "(Ebm:green)Ρεμπέτι(Ab:blue)κα να τραγου(Bbm)δήσεις" },
-                { "rawInline": "(Bbm:green)Θα σού κολλήσουν ρετσιν(Ab:blue)ιά, θα λένε η Στέλλα η Σμυρν(Db)ιά(_)(Ebm) " },
-                { "rawInline": "(Ebm:green)Απ' το χα(Ab:blue)σίσι έχει κολ(Bbm)λήσει" }
+                { "rawInline": "(Bbm:green)Θα σού κολλήσουν ρετσιν(Ab:blue)ιά, θα λένε: “Η Στέλλα η Σμυρν(Db)ιά!”(_)(Ebm) " },
+                { "rawInline": "(Ebm:green)“Απ' το χα(Ab:blue)σίσι έχει κολ(Bbm)λήσει!”" }
             ]
         },
         {
@@ -48,15 +49,15 @@ const iStellaISmirniaData = {
                 { "rawInline": "(Ebm:red)Τα έβαλες με το Θ(Fm)εό για το ντουνιά τον(Bbm) άπονο" },
                 { "rawInline": "(Ebm)Που κάνανε τη γειτον(Fm)ιά, καμμένο μαγα(Bbm)ζί" },
                 { "rawInline": "(Fm)Στο ένα χέρι τον τζουρά, στα μάτια το πα(Ebm)ράπονο" },
-                { "rawInline": "(Fm)Ν’ αναρωτιέσαι πια: «καν(Ab)είς, να ζ(Fm)ει ή να μη ζ(Bbm)ει;»" }
+                { "rawInline": "(Fm)Ν’ αναρωτιέσαι πια: “Καν(Ab)είς, να ζ(Fm)ει ή να μη ζ(Bbm)ει;”" }
             ]
         },
         {
             "lines": [
                 { "rawInline": "(Bbm:blue)Θα σε περνάνε για τρε(Ab)λή, που θες να πας στο Αϊβα(Ebm)λί" },
                 { "rawInline": "(Ebm:green)Ρεμπέτι(Ab:blue)κα να τραγου(Bbm)δήσεις" },
-                { "rawInline": "(Bbm:green)Θα σού κολλήσουν ρετσιν(Ab:blue)ιά, θα λένε η Στέλλα η Σμυρν(Db)ιά(_)(Ebm) " },
-                { "rawInline": "(Ebm:green)Απ' το χα(Ab:blue)σίσι έχει κολ(Bbm)λήσει" }
+                { "rawInline": "(Bbm:green)Θα σού κολλήσουν ρετσιν(Ab:blue)ιά, θα λένε: “Η Στέλλα η Σμυρν(Db)ιά!”(_)(Ebm) " },
+                { "rawInline": "(Ebm:green)“Απ' το χα(Ab:blue)σίσι έχει κολ(Bbm)λήσει!”" }
             ]
         }
     ]
