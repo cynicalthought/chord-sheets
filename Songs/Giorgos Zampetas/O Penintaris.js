@@ -1,6 +1,7 @@
 const oPenintarisData = {
     "title": "Ο Πενηντάρης",
-    "rhythm": "Χασάπικος",
+    "timeSignature": "9/8",
+    "rhythm": "Καρσιλαμάς",
     "artist": "Γιώργος Ζαμπέτας",
     "composer": "Γιώργος Ζαμπέτας",
     "lyricist": "Ναπολέων Ελευθερίου",

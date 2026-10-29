@@ -1,5 +1,6 @@
 const taDilinaData = {
     "title": "Τα Δειλινά",
+    "timeSignature": "2/4",
     "rhythm": "Χασάπικος",
     "artist": "Βίκυ Μοσχολιού",
     "composer": "Γιώργος Ζαμπέτας",
