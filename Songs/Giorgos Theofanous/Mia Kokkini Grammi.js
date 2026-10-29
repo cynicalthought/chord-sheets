@@ -1,5 +1,6 @@
 const miaKokkiniGrammiData = {
     "title": "Μια Κόκκινη Γραμμή",
+    "timeSignature": "2/4",
     "rhythm": "Χασάπικος",
     "artist": "Νατάσα Θεοδωρίδου",
     "composer": "Γιώργος Θεοφάνους",

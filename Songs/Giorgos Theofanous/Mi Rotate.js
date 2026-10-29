@@ -1,6 +1,7 @@
 const miRotateData = {
     "title": "Μη Ρωτάτε",
-    "rhythm": "Ζεϊμπέκικος",
+    "timeSignature": "9/8",
+    "rhythm": "Ζεϊμπέκικος (Μοντέρνος)",
     "artist": "Πέγκυ Ζήνα",
     "composer": "Γιώργος Θεοφάνους",
     "lyricist": "Γιώργος Θεοφάνους",

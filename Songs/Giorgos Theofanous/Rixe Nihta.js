@@ -1,6 +1,7 @@
 const rixeNihtaData = {
     "title": "Ρίξε Νύχτα",
-    "rhythm": "Ζεϊμπέκικος",
+    "timeSignature": "9/8",
+    "rhythm": "Ζεϊμπέκικος (Μοντέρνος)",
     "artist": "Νατάσα Θεοδωρίδου",
     "composer": "Γιώργος Θεοφάνους",
     "lyricist": "Νίκος Μωραΐτης",
@@ -9,7 +10,7 @@ const rixeNihtaData = {
         {
             "lines": [
                 { "rawInline": "(Em:green)   (B/D#)   (E/D)   (A/C#)" },
-                { "rawInline": "(F)   (Em)   (B)   (Em)" }
+                { "rawInline": "(F)          (Em)     (B)     (Em)" }
             ]
         },
         {
@@ -25,7 +26,7 @@ const rixeNihtaData = {
                 { "rawInline": "Ρίξε (Em:blue)νύχτα κι άλλη(B/D#) νύχτα να μη φ(E7)αίνομαι που κ(A/C#)λαίω" },
                 { "rawInline": "Να μην φ(Am)αίνομαι στο β(Em)ράδυ μου,(B) το τελευταίο" },
                 { "rawInline": "Ρίξε (Em:blue)νύχτα κι άλλη(B/D#) νύχτα να μη φ(E7)αίνομαι που κ(A/C#)λαίω" },
-                { "rawInline": "Κι όπως θ(F:blue)α μου λες ''αν(Em)τίο'', ''είμαι εντ(B)άξει'' να σου (Em)λέω ([X2]:black)" }
+                { "rawInline": "Κι όπως θ(F:blue)α μου λες “αν(Em)τίο!”, “είμαι εντ(B)άξει!” να σου (Em)λέω ([X2]:black)" }
             ]
         },
         {
@@ -47,7 +48,7 @@ const rixeNihtaData = {
                 { "rawInline": "Ρίξε (Em:blue)νύχτα κι άλλη(B/D#) νύχτα να μη φ(E7)αίνομαι που κ(A/C#)λαίω" },
                 { "rawInline": "Να μην φ(Am)αίνομαι στο β(Em)ράδυ μου,(B) το τελευταίο" },
                 { "rawInline": "Ρίξε (Em:blue)νύχτα κι άλλη(B/D#) νύχτα να μη φ(E7)αίνομαι που κ(A/C#)λαίω" },
-                { "rawInline": "Κι όπως θ(F:blue)α μου λες ''αν(Em)τίο'', ''είμαι εντ(B)άξει'' να σου (Em)λέω ([X2]:black)" }
+                { "rawInline": "Κι όπως θ(F:blue)α μου λες “αν(Em)τίο!”, “είμαι εντ(B)άξει!” να σου (Em)λέω ([X2]:black)" }
             ]
         },
         {

@@ -1,6 +1,7 @@
 const staIpogeiaEinaiITheaData = {
     "title": "Στα Υπόγεια Είναι Η Θέα",
-    "rhythm": "Ζεϊμπέκικος",
+    "timeSignature": "9/8",
+    "rhythm": "Ζεϊμπέκικος (Μοντέρνος)",
     "artist": "Πασχάλης Τερζής",
     "composer": "Γιώργος Θεοφάνους",
     "lyricist": "Γιώργος Θεοφάνους",

@@ -1,6 +1,7 @@
 const ehoMiaAgapiData = {
     "title": "Έχω Μια Αγάπη",
-    "rhythm": "Ζεϊμπέκικος",
+    "timeSignature": "4/4",
+    "rhythm": "",
     "artist": "Πασχάλης Τερζής",
     "composer": "Γιώργος Θεοφάνους",
     "lyricist": "Γιώργος Θεοφάνους",
