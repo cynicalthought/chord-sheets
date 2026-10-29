@@ -1,6 +1,7 @@
 const trenoData = {
     "title": "Τρένο",
-    "rhythm": "Ζεϊμπέκικος",
+    "timeSignature": "9/8",
+    "rhythm": "Ζεϊμπέκικος (Μοντέρνος)",
     "artist": "Άννα Βίσση",
     "composer": "Βαγγέλης Βασιλείου",
     "lyricist": "Σόφη Παππά",

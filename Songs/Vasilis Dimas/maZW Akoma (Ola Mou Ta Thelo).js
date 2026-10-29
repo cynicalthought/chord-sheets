@@ -1,6 +1,7 @@
 const maZWAkomaOlaMouTaTheloData = {
     "title": "Μα Ζω Ακόμα (Όλα Μου Τα Θέλω)",
-    "rhythm": "4/4",
+    "timeSignature": "4/4",
+    "rhythm": "",
     "artist": "Γιώργος Μαζωνάκης",
     "composer": "Βασίλης Δήμας",
     "lyricist": "Βασίλης Δήμας",

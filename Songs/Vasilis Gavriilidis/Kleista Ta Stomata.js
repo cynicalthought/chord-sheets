@@ -1,6 +1,7 @@
 const kleistaTaStomataData = {
     "title": "Κλειστά Τα Στόματα",
-    "rhythm": "Ζεϊμπέκικος",
+    "timeSignature": "8/8",
+    "rhythm": "Ζεϊμπέκικος (Μοντέρνος)",
     "artist": "Αντώνης Ρέμος",
     "composer": "Βασίλης Γαβριηλίδης",
     "lyricist": "Νίκος Μωραΐτης",
