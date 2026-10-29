@@ -1,6 +1,7 @@
 const giaremGiaremData = {
     "title": "Γιαρέμ-Γιαρέμ",
-    "rhythm": "4/4",
+    "timeSignature": "4/4",
+    "rhythm": "",
     "artist": "Χριστιάνα",
     "composer": "Γιώργος Χατζηνάσιος",
     "lyricist": "Νίκος Γκάτσος",

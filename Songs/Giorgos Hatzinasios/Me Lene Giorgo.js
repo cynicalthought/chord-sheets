@@ -1,6 +1,7 @@
 const meLeneGiorgoData = {
     "title": "Με Λένε Γιώργο",
-    "rhythm": "4/4",
+    "timeSignature": "4/4",
+    "rhythm": "",
     "artist": "Μανώλης Μητσιάς",
     "composer": "Γιώργος Χατζηνάσιος",
     "lyricist": "Γιώργος Κανελλόπουλος",

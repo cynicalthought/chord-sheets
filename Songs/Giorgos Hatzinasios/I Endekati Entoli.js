@@ -1,5 +1,6 @@
 const iEndekatiEntoliData = {
     "title": "Η Ενδεκάτη Εντολή",
+    "timeSignature": "2/4",
     "rhythm": "Χασάπικος",
     "artist": "Νάνα Μούσχουρη",
     "composer": "Γιώργος Χατζηνάσιος",
