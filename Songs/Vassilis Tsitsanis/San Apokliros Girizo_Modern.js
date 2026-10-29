@@ -2,7 +2,7 @@ const sanApoklirosGirizo_ModernData = {
     "title": "Σαν Απόκληρος Γυρίζω (Μοντέρνο)",
     "timeSignature": "9/8",
     "rhythm": "Ζεϊμπέκικος (Μοντέρνος)",
-    "artist": "Στέλιος Καζαντζίδης",
+    "artist": "Σωτηρία Μπέλλου",
     "composer": "Βασίλης Τσιτσάνης",
     "lyricist": "Βασίλης Τσιτσάνης",
     "year": "1969",
