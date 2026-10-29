@@ -19,7 +19,6 @@
             box-sizing: border-box;
         }
 
-        /* Navbar & Multilevel Dropdown Container */
         .navbar-container {
             width: 100%;
             max-width: 980px;
@@ -38,7 +37,6 @@
             border-radius: 4px;
         }
 
-        /* Level 0: Top Tab Items */
         .nav-item {
             position: relative;
         }
@@ -60,7 +58,6 @@
             background-color: #cbb081;
         }
 
-        /* Flag Icon container styling for 3D sticker heart effect */
         .flag-nav-link {
             display: flex;
             align-items: center;
@@ -80,7 +77,6 @@
             filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
         }
 
-        /* Generic Submenu Styling (Levels 1, 2, 3) */
         .submenu {
             display: none;
             position: absolute;
@@ -93,7 +89,6 @@
             z-index: 100;
         }
 
-        /* Grid Layout for Greek Alphabet Menu (6 columns) */
         .submenu.alphabet-grid {
             display: none;
             grid-template-columns: repeat(6, minmax(140px, 1fr));
@@ -105,7 +100,6 @@
             z-index: 200;
         }
 
-        /* Show Submenu when .active class is set via JS */
         .nav-item.active > .submenu,
         .submenu-item.active > .submenu {
             display: block;
@@ -115,7 +109,6 @@
             display: grid;
         }
 
-        /* Strict Z-Index Layering */
         .submenu-item {
             position: relative;
             border-bottom: 1px solid #d4be9a;
@@ -135,7 +128,6 @@
             border-bottom: none;
         }
 
-        /* Position Level 2 & 3 Flyouts (Default: Open to the Right) */
         .submenu .submenu {
             top: 0;
             left: 100%;
@@ -143,7 +135,6 @@
             margin-left: -5px;
         }
 
-        /* Smart Class to Flip Flyout to the Left if Overflowing Screen */
         .submenu .submenu.flip-left {
             left: auto !important;
             right: 100% !important;
@@ -171,7 +162,6 @@
             background-color: #e2cca8;
         }
 
-        /* Profile Collages in Sub-menus (Scaled up ~2x) */
         .range-with-collage {
             display: flex;
             align-items: center;
@@ -220,7 +210,6 @@
             margin-left: 10px;
         }
 
-        /* Sheet Viewer Container */
         .sheet-container {
             position: relative;
             width: 100%;
@@ -351,7 +340,6 @@
 
 <div class="navbar-container">
     <ul class="nav-menu" id="multilevel-nav-menu">
-        <!-- Populated dynamically from songs-db.js -->
     </ul>
 </div>
 
@@ -360,6 +348,7 @@
         <thead>
             <tr>
                 <th>Τίτλος</th>
+                <th>Χρόνος</th>
                 <th>Ρυθμός</th>
                 <th>Πρώτη Ερμηνεία</th>
                 <th>Συνθέτης</th>
@@ -370,6 +359,7 @@
         <tbody>
             <tr>
                 <td><strong id="meta-title"></strong></td>
+                <td id="meta-timesig"></td>
                 <td id="meta-rhythm"></td>
                 <td id="meta-artist"></td>
                 <td id="meta-composer"></td>
@@ -505,6 +495,7 @@
             localStorage.setItem("activeSongValue", value);
 
             document.getElementById("meta-title").textContent = data.title || "";
+            document.getElementById("meta-timesig").textContent = data.timeSignature || "";
             document.getElementById("meta-rhythm").textContent = data.rhythm || "";
             document.getElementById("meta-artist").textContent = data.artist || "";
             document.getElementById("meta-composer").textContent = data.composer || "";
@@ -746,7 +737,6 @@
                         });
                         level1Item.classList.add('active');
                         
-                        // Smart positioning check for Level 2
                         const sub = level1Item.querySelector(':scope > .submenu');
                         if (sub) {
                             sub.classList.remove('flip-left');
@@ -763,7 +753,6 @@
                         }, 350);
                     });
 
-                    // Build collage images for this letter range
                     const profileImgs = [];
                     matchingComposers.forEach(group => {
                         if (group.songs.length > 0 && group.songs[0].script) {
@@ -775,7 +764,6 @@
                         }
                     });
 
-                    // Take up to 4 images for 2x2 grid
                     const collageImgs = profileImgs.slice(0, 4);
                     let collageHtml = "";
                     if (collageImgs.length > 0) {
@@ -813,7 +801,6 @@
                             });
                             level2Item.classList.add('active');
 
-                            // Smart positioning check for Level 3
                             const sub = level2Item.querySelector(':scope > .submenu');
                             if (sub) {
                                 sub.classList.remove('flip-left');

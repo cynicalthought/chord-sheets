@@ -119,10 +119,16 @@ const SONGS_DB = {
       category: "Βασίλης Τσιτσάνης",
       songs: [
         {
-          value: "san_apokliros_girizo",
-          label: "Σαν Απόκληρος Γυρίζω - Σωτηρία Μπέλλου",
-          script: "Songs/Vassilis Tsitsanis/San Apokliros Girizo.js",
-          dataKey: "sanApoklirosGirizoData"
+          value: "sanApoklirosGirizo_Classic",
+          label: "Σαν Απόκληρος Γυρίζω (Κλασικό) - Σωτηρία Μπέλλου",
+          script: "Songs/Vassilis Tsitsanis/San Apokliros Girizo_Classic.js",
+          dataKey: "sanApoklirosGirizo_ClassicData"
+        },
+        {
+          value: "sanApoklirosGirizo_Modern",
+          label: "Σαν Απόκληρος Γυρίζω (Μοντέρνο) - Σωτηρία Μπέλλου",
+          script: "Songs/Vassilis Tsitsanis/San Apokliros Girizo_Modern.js",
+          dataKey: "sanApoklirosGirizo_ModernData"
         },
         {
           value: "sinnefiasmeni_kiriaki",
@@ -169,6 +175,17 @@ const SONGS_DB = {
           label: "Πριν Το Χάραμα - Οδυσσέας Μοσχονάς",
           script: "Songs/Giannis Papaioannou/Prin To Harama.js",
           dataKey: "prinToXaramaData"
+        }
+      ]
+    },
+    {
+      category: "Γιάννης Πάριος",
+      songs: [
+        {
+          value: "pouNaSaiTora",
+          label: "Πού Να 'σαι Τώρα; - Γιάννης Πάριος",
+          script: "Songs/Giannis Parios/Pou Na_ Sai Tora.js",
+          dataKey: "pouNaSaiToraData"
         }
       ]
     },
@@ -399,29 +416,6 @@ const SONGS_DB = {
           label: "Πουτάνα Στην Ψυχή - Νίκος Οικονομόπουλος",
           script: "Songs/Dimitris Paraskevopoulos/Poutana Stin Psihi.js",
           dataKey: "poutanaStinPsihiData"
-        }
-      ]
-    },
-    {
-      category: "Διονύσης Σαββόπουλος",
-      songs: [
-        {
-          value: "as_kratisoun_oi_horoi",
-          label: "Ας Κρατήσουν Οι Χοροί - Διονύσης Σαββόπουλος",
-          script: "Songs/Dionysis Savvopoulos/As Kratisoun Oi Horoi.js",
-          dataKey: "asKratisounOiHoroiData"
-        },
-        {
-          value: "zeibekiko",
-          label: "Ζεϊμπέκικο - Διονύσης Σαββόπουλος",
-          script: "Songs/Dionysis Savvopoulos/Zeibekiko.js",
-          dataKey: "zeibekikoData"
-        },
-        {
-          value: "tiEpaixaStoLavrio",
-          label: "Τι Έπαιξα Στο Λαύριο - Διονύσης Σαββόπουλος",
-          script: "Songs/Dionysis Savvopoulos/Ti Epaixa Sto Lavrio.js",
-          dataKey: "tiEpaixaStoLavrioData"
         }
       ]
     },
