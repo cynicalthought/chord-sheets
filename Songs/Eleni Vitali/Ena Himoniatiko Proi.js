@@ -1,6 +1,7 @@
 const enaHimoniatikoProiData = {
     "title": "Ένα Χειμωνιάτικο Πρωί",
-    "rhythm": "4/4",
+    "timeSignature": "4/4",
+    "rhythm": "",
     "artist": "Ελένη Βιτάλη",
     "composer": "Ελένη Βιτάλη",
     "lyricist": "Ελένη Βιτάλη",
