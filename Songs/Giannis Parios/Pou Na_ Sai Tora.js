@@ -1,6 +1,7 @@
 const pouNaSaiToraData = {
     "title": "Πού Να 'σαι Τώρα;",
-    "rhythm": "Ζεϊμπέκικος",
+    "timeSignature": "9/8",
+    "rhythm": "Ζεϊμπέκικος (Μοντέρνος)",
     "artist": "Γιάννης Πάριος",
     "composer": "Γιάννης Πάριος",
     "lyricist": "Γιάννης Πάριος",
