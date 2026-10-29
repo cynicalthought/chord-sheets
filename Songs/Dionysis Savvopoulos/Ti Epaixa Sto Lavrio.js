@@ -1,6 +1,7 @@
 const tiEpaixaStoLavrioData = {
     "title": "Τι Έπαιξα Στο Λαύριο",
-    "rhythm": "4/4",
+    "timeSignature": "4/4",
+    "rhythm": "",
     "artist": "Διονύσης Σαββόπουλος",
     "composer": "Διονύσης Σαββόπουλος",
     "lyricist": "Διονύσης Σαββόπουλος",
