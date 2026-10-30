@@ -1,6 +1,7 @@
 const toZeibekikoTisEvdokiasData = {
     "title": "Το Ζεϊμπέκικο Της Ευδοκίας",
-    "rhythm": "Ζεϊμπέκικος",
+    "timeSignature": "9/8",
+    "rhythm": "Ζεϊμπέκικος (Κλασικός και Μοντέρνος)",
     "artist": "Ορχηστρικό",
     "composer": "Μάνος Λοΐζος",
     "lyricist": "N/A",

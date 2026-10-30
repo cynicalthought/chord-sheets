@@ -1,6 +1,7 @@
 const deThaXanagapisoData = {
     "title": "Δεν Θα Ξαναγαπήσω",
-    "rhythm": "Ζεϊμπέκικος",
+    "timeSignature": "9/8",
+    "rhythm": "Ζεϊμπέκικος (Μοντέρνος)",
     "artist": "Στέλιος Καζαντζίδης",
     "composer": "Μάνος Λοΐζος",
     "lyricist": "Λευτέρης Παπαδόπουλος",
@@ -8,37 +9,37 @@ const deThaXanagapisoData = {
     "stanzas": [
         {
             "lines": [
-                { "rawInline": "(Fm:green)   (Db)   (Ab)   (C)   (Fm)" },
-                { "rawInline": "(Fm:green)   (Bbm)   (C)   (Fm)   (C)   (Fm)" }
+                { "rawInline": "(Fm:green)   (Db)     (Ab)   (C)    (Fm)" },
+                { "rawInline": "(Fm)         (Bbm)    (C)    (Fm)   (C)   (Fm)" }
             ]
         },
         {
             "lines": [
-                { "rawInline": "(Ab)Το μερτικό μου απ' τη χαρά (Eb), μου το 'χουν πάρει άλλοι (Ab)                                  (Db)                     (Eb)        (Ab)" },
-                { "rawInline": "(Ab)Γιατί ‘χα χέρια καθαρά (Eb) και μιά καρδιά μεγάλη (Db) (Ab)                             (Cm) (Eb) (Ab) [X2]" }
+                { "rawInline": "(Ab:red)Το μερτι(Eb)κό μου απ' τη χα(Ab)ρά, μου (Db)το 'χουν πάρει(Eb) άλλ(Ab)οι" },
+                { "rawInline": "(Ab:green)Γιατί ‘χα (Eb:red)χέρια καθα(Db)ρά κ(Ab)αι μιά καρδ(Cm)ιά με(Eb)γάλ(Ab)η([X2]:black)" }
             ]
         },
         {
             "lines": [
-                { "rawInline": "(C:blue)Θεέ μου, τη δεύτερη φορά (Fm) που θα 'ρθω για να ζήσω (Bbm)                               (Db) (C)" },
-                { "rawInline": "(Bbm)Όσο η καρδιά κι αν λαχταρά (Db) (Bbm) (C) (Bbm) (C), δεν θα ξαναγαπήσω (Fm)" }
+                { "rawInline": "Θ(C:blue)εέ μου, τη δεύτερη φο(Fm)ρά που (Bbm)θα 'ρθω για να (Db)ζήσ(C)ω" },
+                { "rawInline": "(Bbm)Όσο η καρδ(Db)ιά κι αν (Bbm)λαχταρ(C)ά, (Bbm)δεν θα ξαν(C)αγαπή(Fm)σω" }
             ]
         },
         {
             "lines": [
-                { "rawInline": "(Fm:green)   (Db)   (Ab)   (C)   (Fm)" },
-                { "rawInline": "(Fm:green)   (Bbm)   (C)   (Fm)   (C)   (Fm)" }
+                { "rawInline": "(Fm:green)   (Db)    (Ab)   (C)    (Fm)" },
+                { "rawInline": "(Fm:green)   (Bbm)   (C)    (Fm)   (C)   (Fm)" }
             ]
         },
         {
             "lines": [
-                { "rawInline": "(Ab)Σαν θαλασσόδαρτο σκαρί (Eb), σαν βράχος ρημαγμένος (Ab)                                    (Db)                     (Eb)        (Ab)" },
-                { "rawInline": "(Ab)Ήρθα σαν ξένος στη ζωή (Eb) και ξαναφεύγω ξένος (Db) (Ab)                             (Cm) (Eb) (Ab) [X2]" }
+                { "rawInline": "(Ab:red)Σαν θαλασ(Eb)σόδαρτο σκα(Ab)ρί, σαν β(Db)ράχος ρημαγ(Eb)μέ(Ab)νος" },
+                { "rawInline": "(Ab:green)Ήρθα σαν (Eb:red)ξένος στη ζ(Db)ωή κ(Ab)αι ξαναφ(Cm)εύγω (Eb)ξέν(Ab)ος([X2]:black)" }
             ]
         },
         {
             "lines": [
-                { "rawInline": "(C:blue)Θεέ μου τη δεύτερη φορά…" }
+                { "rawInline": "Θ(C:blue)εέ μου, τη δεύτερη φο(Fm)ρά..." }
             ]
         }
     ]
