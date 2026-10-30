@@ -1,6 +1,7 @@
 const rozaData = {
     "title": "Ρόζα",
-    "rhythm": "Ζεϊμπέκικος",
+    "timeSignature": "6/8 και 9/8",
+    "rhythm": "Ζεϊμπέκικος (Μοντέρνος)",
     "artist": "Δημήτρης Μητροπάνος",
     "composer": "Θάνος Μικρούτσικος",
     "lyricist": "Άλκης Αλκαίος",
@@ -8,7 +9,12 @@ const rozaData = {
     "stanzas": [
         {
             "lines": [
-                { "rawInline": "(Em)Τα χείλη μου ξερ(D)ά και διψασ(Em)μένα(Bm:green) (_) (C) (_) (D) (_)(Em) " },                               
+                { "rawInline": "([6/8]:black) (Em:green)" }
+            ]
+        },
+        {
+            "lines": [
+                { "rawInline": "([9/8]:black)Τα χε(Em:red)ίλη μου ξερ(D)ά και διψασ(Em)μένα(Bm:green) (_) (C) (_) (D) (_)(Em) " },                               
                 { "rawInline": "Γυρ(Em:red)εύουνε στην (D)άσφαλτο νερ(G)ό" },
                 { "rawInline": "(C)Περνάνε δίπλα μο(D)υ τα τροχ(C:green)οφ(B:red)όρ(Em:green)α" }, 
                 { "rawInline": "Κα(Am:red)ι ‘σύ μου λες μ(G)ας π(C)εριμ(D)ένει μπ(G)όρ(D)α  (G) " },
