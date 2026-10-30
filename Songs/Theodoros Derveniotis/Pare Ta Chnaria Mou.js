@@ -1,6 +1,7 @@
 const pareTaChnariaMouData = {
     "title": "Πάρε Τ’ Αχνάρια Μου",
-    "rhythm": "4/4",
+    "timeSignature": "4/4",
+    "rhythm": "",
     "artist": "Στέλιος Καζαντζίδης; Λίτσα Διαμαντή",
     "composer": "Θεόδωρος Δερβενιώτης",
     "lyricist": "Κώστας Βίρβος",
@@ -8,15 +9,15 @@ const pareTaChnariaMouData = {
     "stanzas": [
         {
             "lines": [
-                { "rawInline": "(Bbm:green)     (Ebm)     (Abm)     (Bbm)" },
-                { "rawInline": "(Gb)        (Abm)     (Db)        (Gb)" },
-                { "rawInline": "(F)            (Db)        (B)            (Bbm)" }
+                { "rawInline": "(Bbm:green)     (Ebm)       (Abm)          (Bbm)" },
+                { "rawInline": "(Gb)            (Abm)       (Db)           (Gb)" },
+                { "rawInline": "(F)             (Db)        (B)            (Bbm)" }
             ]
         },
         {
             "lines": [
-                { "rawInline": "(Bbm:red)Πάρε τ’ αχνάρια p’ άφη(Ebm)σαν, τα μαύρα (Db)δάκρυά (Abm)μου (Bbm)" },
-                { "rawInline": "(Gb)Κι έλα απόψε να με (Bbm)βρεις, εκεί στην ερη(Ebm)μιά (Db)μου (Abm) (Bbm)" }
+                { "rawInline": "Πάρε τ’ αχ(Bbm:red)νάρια π' άφησαν, τα μαύρα (Ebm)δάκρ(Db)υά μ(Abm)ου (_) (Bbm) " },
+                { "rawInline": "Κι έλα α(Gb)πόψε να με βρ(Bbm)εις, εκεί στην(Ebm) ερημ(Db)ιά μ(Abm)ου (_) (Bbm) " }
             ]
         },
         {
@@ -26,8 +27,8 @@ const pareTaChnariaMouData = {
         },
         {
             "lines": [
-                { "rawInline": "(Gb:red)Βήμα - βήμα, δάκρυ - (Db)δάκρυ, θα με βρεις σε (Ebm)κάποιαν άκρη (Db)" },
-                { "rawInline": "(Gb)Να κλαίω για σέν’ αγάπη (Bbm)μου, που τώρα ζεις μα(Ebm)κρι(Db)νά (Abm)μου (Bbm)" }
+                { "rawInline": "Βήμα - (Gb:red)βήμα, δάκρυ - (Db)δάκρυ, θα με βρ(Ebm)εις σε κάποιαν(Db) άκρη" },
+                { "rawInline": "Να κλαίω για (Gb)σέν’ αγάπη μ(Bbm)ου, που τώρα ζ(Ebm)εις μακρ(Db)ιά μ(Abm)ου (_) (Bbm) " }
             ]
         },
         {
@@ -37,16 +38,16 @@ const pareTaChnariaMouData = {
         },
         {
             "lines": [
-                { "rawInline": "(Eb:blue)Αντιλαλούν οι ρεμα(Abm)τιές, όταν αναστε(Db)νάζω (Gb)" },
-                { "rawInline": "(Abm)Κι απ' την καρδιά μου βγαίνουν φω(Bbm)τιές, για σένα όταν σπα(Ebm)ράζω" },
-                { "rawInline": "(B)Πάρε τ’ αχνάρια να με (Db)βρεις και σώσε με αφού (Ebm)μπο(Abm)ρείς (Bbm)" }
+                { "rawInline": "Αντιλαλ(Eb:blue)ούν οι ρεματ(Abm)ιές, όταν α(Db)ναστενά(Gb)ζω" },
+                { "rawInline": "Κι απ' την καρδ(Abm)ιά μου βγαίνουν φωτιές, για σένα ότ(Bbm)αν σπαρά(Ebm)ζω" },
+                { "rawInline": "Πάρε τ’ αχν(B)άρια να με βρ(Db)εις και σώσε (Ebm)με αφ(Abm)ού μπορ(Bbm)είς" }
             ]
         },
         {
             "lines": [
-                { "rawInline": "(Eb:blue)Δακρύζουν μάτια και καρ(Abm)διές, όταν αναστε(Db)νάζω (Gb)" },
-                { "rawInline": "(Abm)Κι από τα στήθη βγαίνουν φω(Bbm)τιές, για σένα όταν σπα(Ebm)ράζω" },
-                { "rawInline": "(B)Πάρε τα χνάρια να με (Db)βρεις και σώσε με αφού (Ebm)μπο(Abm)ρείς (Bbm)" }
+                { "rawInline": "Δακρύζουν (Eb)μάτια και καρδ(Abm)ιές, όταν α(Db)ναστενά(Gb)ζω" },
+                { "rawInline": "Κι από τα σ(Abm)τήθη βγαίνουν φωτιές, για σένα ό(Bbm)ταν σπαρά(Ebm)ζω" },
+                { "rawInline": "Πάρε τ' αχν(B)άρια να με βρ(Db)εις και σώσε (Ebm)με αφ(Abm)ού μπορ(Bbm)είς" }
             ]
         }
     ]
