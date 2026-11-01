@@ -1,901 +1,1722 @@
 <!DOCTYPE html>
 <html lang="el">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Song Sheet Viewer</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Marcellus&display=swap');
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Foyer d'Athènes — Retro Bar & Secret Spot | Athens</title>
+  <meta name="description" content="Foyer d'Athènes — το αγαπημένο secret spot της Αθήνας. Ρετρό σκηνικό από ταινία της Φίνος, signature cocktails και θεατρική ατμόσφαιρα στο κέντρο της πόλης." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --cream: #f7f3ec;
+      --cream-dark: #efe8dc;
+      --off-white: #faf8f4;
+      --charcoal: #1c1917;
+      --ink: #2a2522;
+      --muted: #6b635b;
+      --gold: #9a7b4f;
+      --gold-dark: #7a5f3a;
+      --burgundy: #5c2a32;
+      --soft-border: rgba(28, 25, 23, 0.08);
+    }
 
-        body {
-            background-color: #1a1612;
-            font-family: 'Marcellus', serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 15px 10px;
-            box-sizing: border-box;
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        .navbar-container {
-            width: 100%;
-            max-width: 980px;
-            margin-bottom: 25px;
-            position: relative;
-            z-index: 1000;
-        }
+    html {
+      scroll-behavior: smooth;
+    }
 
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            background-color: #e2cca8;
-            border: 1px solid #a48455;
-            border-radius: 4px;
-        }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--off-white);
+      color: var(--ink);
+      line-height: 1.65;
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      -webkit-text-size-adjust: 100%;
+    }
 
-        .nav-item {
-            position: relative;
-        }
+    h1, h2, h3, h4, .serif {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+    }
 
-        .nav-link {
-            display: block;
-            padding: 12px 20px;
-            color: #241911;
-            font-weight: bold;
-            font-size: 1.05rem;
-            text-decoration: none;
-            cursor: pointer;
-            border-right: 1px solid #c8b18a;
-            transition: background 0.2s;
-        }
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.25s ease, opacity 0.25s ease;
+    }
 
-        .nav-item.active > .nav-link,
-        .nav-item:hover > .nav-link {
-            background-color: #cbb081;
-        }
+    img {
+      max-width: 100%;
+      display: block;
+    }
 
-        .flag-nav-link {
-            display: flex;
-            align-items: center;
-            padding: 6px 16px !important;
-        }
+    /* ========== TOP BAR ========== */
+    .top-bar {
+      background: var(--charcoal);
+      color: var(--cream);
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      padding: 0.55rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
 
-        .flag-icon-container {
-            position: relative;
-            width: 32px;
-            height: 32px;
-            display: inline-block;
-        }
+    .top-bar a:hover {
+      color: var(--gold);
+    }
 
-        .flag-heart-svg {
-            width: 100%;
-            height: 100%;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
-        }
+    /* ========== NAV ========== */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(250, 248, 244, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--soft-border);
+      padding: 1.1rem 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
 
-        .submenu {
-            display: none;
-            position: absolute;
-            list-style: none;
-            margin: 0;
-            background-color: #f2e3c6;
-            border: 1px solid #a48455;
-            box-shadow: 0 6px 16px rgba(0,0,0,0.5);
-            min-width: 280px;
-            z-index: 100;
-        }
+    .nav-left,
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      flex: 1;
+    }
 
-        .submenu.alphabet-grid {
-            display: none;
-            grid-template-columns: repeat(6, minmax(140px, 1fr));
-            gap: 6px;
-            padding: 10px;
-            min-width: 840px;
-            top: 100%;
-            left: 0;
-            z-index: 200;
-        }
+    .nav-right {
+      justify-content: flex-end;
+    }
 
-        .nav-item.active > .submenu,
-        .submenu-item.active > .submenu {
-            display: block;
-        }
+    .nav-links {
+      display: flex;
+      gap: 1.8rem;
+      list-style: none;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
 
-        .nav-item.active > .submenu.alphabet-grid {
-            display: grid;
-        }
+    .nav-links a:hover {
+      color: var(--gold);
+    }
 
-        .submenu-item {
-            position: relative;
-            border-bottom: 1px solid #d4be9a;
-            z-index: 100;
-        }
+    .logo-img {
+      height: 48px;
+      width: auto;
+      display: block;
+    }
 
-        .submenu-item.active {
-            z-index: 500;
-        }
+    .nav .logo-img {
+      height: 52px;
+    }
 
-        .submenu-item.active > .submenu {
-            z-index: 600;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.6);
-        }
+    .footer-brand .logo-img {
+      height: 56px;
+      margin-bottom: 1rem;
+    }
 
-        .submenu-item:last-child {
-            border-bottom: none;
-        }
+    .nav .logo {
+      background: var(--off-white);
+      padding: 0.35rem 0.6rem;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-        .submenu .submenu {
-            top: 0;
-            left: 100%;
-            padding-left: 5px; 
-            margin-left: -5px;
-        }
+    .footer-brand .logo {
+      background: transparent;
+      padding: 0;
+    }
 
-        .submenu .submenu.flip-left {
-            left: auto !important;
-            right: 100% !important;
-            padding-left: 0 !important;
-            padding-right: 5px !important;
-            margin-left: 0 !important;
-            margin-right: -5px !important;
-        }
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.75rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--charcoal);
+      text-align: center;
+      line-height: 1.1;
+    }
 
-        .submenu-link {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 14px 18px;
-            color: #241911;
-            text-decoration: none;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: background 0.15s;
-            white-space: nowrap;
-        }
+    .logo span {
+      display: block;
+      font-size: 0.65rem;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-top: 0.15rem;
+    }
 
-        .submenu-item.active > .submenu-link,
-        .submenu-item:hover > .submenu-link {
-            background-color: #e2cca8;
-        }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.6rem;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      min-height: 44px;
+    }
 
-        .range-with-collage {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
+    .btn-dark {
+      background: var(--charcoal);
+      color: var(--cream);
+    }
 
-        .menu-collage-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 28px);
-            grid-template-rows: repeat(2, 28px);
-            gap: 3px;
-            width: 59px;
-            height: 59px;
-            background: #d4be9a;
-            padding: 2px;
-            border-radius: 6px;
-            border: 1px solid #a48455;
-            box-shadow: inset 0 0 3px rgba(0,0,0,0.25);
-            overflow: hidden;
-            flex-shrink: 0;
-        }
+    .btn-dark:hover {
+      background: var(--ink);
+    }
 
-        .menu-collage-img {
-            width: 28px;
-            height: 28px;
-            object-fit: cover;
-            border-radius: 2px;
-        }
+    .btn-outline {
+      background: transparent;
+      color: var(--charcoal);
+      border: 1px solid var(--charcoal);
+    }
 
-        .composer-with-avatar {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
+    .btn-outline:hover {
+      background: var(--charcoal);
+      color: var(--cream);
+    }
 
-        .composer-avatar {
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 1px solid #a48455;
-        }
+    /* Mobile Hamburger Trigger */
+    .mobile-menu-btn {
+      display: none;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+      color: var(--charcoal);
+      z-index: 101;
+    }
 
-        .arrow {
-            font-size: 0.9rem;
-            margin-left: 10px;
-        }
+    .mobile-menu-btn svg {
+      width: 24px;
+      height: 24px;
+    }
 
-        .sheet-container {
-            position: relative;
-            width: 100%;
-            max-width: 980px;
-            background-color: #f2e3c6;
-            background-image: 
-                radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.35) 0%, transparent 70%),
-                radial-gradient(circle at 10% 10%, #d8be92 0%, transparent 40%),
-                radial-gradient(circle at 90% 85%, #cbb081 0%, transparent 45%),
-                radial-gradient(circle at 50% 100%, #be9e6c 0%, transparent 50%);
-            box-shadow: 0 0 50px rgba(0, 0, 0, 0.8), inset 0 0 100px rgba(80, 50, 20, 0.45);
-            border: 1px solid #a48455;
-            border-radius: 3px;
-            padding: 35px 30px;
-            box-sizing: border-box;
-            color: #241911;
-        }
+    /* Mobile Menu Drawer */
+    .mobile-drawer {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 100%;
+      height: 100vh;
+      background: var(--off-white);
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: right 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      padding: 2rem;
+    }
 
-        .sheet-container::before {
-            content: "";
-            position: absolute;
-            top: 10px; left: 10px; right: 10px; bottom: 10px;
-            border: 1px solid rgba(90, 60, 30, 0.35);
-            pointer-events: none;
-        }
+    .mobile-drawer.open {
+      right: 0;
+    }
 
-        .info-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 25px;
-            font-family: 'Marcellus', serif;
-            border-bottom: 2px solid #5a4028;
-        }
+    .mobile-drawer-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+      color: var(--charcoal);
+    }
 
-        .info-table th {
-            border-bottom: 1px solid #7a5c3e;
-            color: #4a321d;
-            padding: 5px 8px;
-            text-align: left;
-            font-size: 0.9em;
-            letter-spacing: 0.5px;
-        }
+    .mobile-drawer-links {
+      list-style: none;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
 
-        .info-table td {
-            padding: 6px 8px;
-            color: #241911;
-            font-weight: 600;
-            font-size: 1em;
-        }
+    .mobile-drawer-links a {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      color: var(--charcoal);
+      font-weight: 500;
+    }
 
-        .song-content {
-            font-family: 'EB Garamond', serif;
-            font-size: 1.8rem;
-            line-height: 1.6;
-            letter-spacing: 0.3px;
-            overflow-x: hidden;
-            width: 100%;
-            box-sizing: border-box;
-        }
+    .mobile-drawer-links a:hover {
+      color: var(--gold);
+    }
 
-        .lyric-line-block {
-            display: flex;
-            flex-wrap: nowrap;
-            width: max-content;
-            margin-bottom: 16px;
-            align-items: flex-end;
-        }
+    /* ========== HERO ========== */
+    .hero {
+      position: relative;
+      min-height: 62vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background:
+        linear-gradient(to bottom, rgba(28,25,23,0.35) 0%, rgba(28,25,23,0.78) 100%),
+        url('images/venue/exterior_seating_2.jpeg') center/cover no-repeat;
+      color: var(--cream);
+      overflow: hidden;
+      padding: 5rem 2rem 4rem;
+    }
 
-        .token-pair {
-            display: inline-flex;
-            flex-direction: column;
-            align-items: flex-start;
-            vertical-align: bottom;
-            white-space: pre;
-            min-width: 0;
-            padding-right: 0;
-        }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 720px;
+    }
 
-        .token-pair.spacer-token {
-            min-width: 1ch;
-            pointer-events: none;
-        }
+    .hero-crest {
+      font-size: 0.7rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.2rem;
+      opacity: 0.95;
+    }
 
-        .token-chord, .instrumental-chord {
-            font-family: 'Caveat', cursive !important;
-            font-size: 1.8rem;
-            font-weight: 700;
-            display: block;
-            line-height: 1.1;
-            min-height: 1.8rem;
-            white-space: nowrap;
-        }
+    .hero h1 {
+      font-size: clamp(3.2rem, 9vw, 6.5rem);
+      font-weight: 500;
+      line-height: 0.95;
+      margin-bottom: 0.8rem;
+      color: #faf8f4;
+      text-shadow: 0 2px 24px rgba(0,0,0,0.35);
+    }
 
-        .token-lyric {
-            font-family: 'EB Garamond', serif !important;
-            font-size: 1.8rem;
-            letter-spacing: 0.3px;
-            color: #000000;
-            display: block;
-            line-height: 1.2;
-            white-space: pre;
-        }
+    .hero h1 em {
+      font-style: italic;
+      font-weight: 400;
+    }
 
-        .instrumental-grid-block {
-            display: grid;
-            column-gap: 5ch;
-            row-gap: 8px;
-            margin-bottom: 16px;
-            width: fit-content;
-        }
+    .hero-tagline {
+      font-size: 1.1rem;
+      font-weight: 300;
+      max-width: 460px;
+      margin: 0 auto 2rem;
+      opacity: 0.92;
+      letter-spacing: 0.02em;
+      text-shadow: 0 1px 12px rgba(0,0,0,0.3);
+    }
 
-        .verse-space {
-            height: 14px;
-        }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+      justify-content: center;
+      margin-top: 0.5rem;
+    }
 
-        @media (max-width: 750px) {
-            .sheet-container { padding: 20px 15px; }
-            .info-table th, .info-table td { font-size: 0.7em; padding: 3px; }
-            .submenu .submenu { position: static; box-shadow: none; padding-left: 0; margin-left: 0; }
-            .submenu.alphabet-grid {
-                grid-template-columns: repeat(3, 1fr);
-                min-width: 100%;
-            }
-        }
-    </style>
+    .hero-actions .btn {
+      min-width: 140px;
+    }
+
+    .hero .btn-light {
+      background: var(--cream);
+      color: var(--charcoal);
+      border: 1px solid var(--cream);
+    }
+
+    .hero .btn-light:hover {
+      background: transparent;
+      color: var(--cream);
+      border-color: rgba(250,248,244,0.55);
+    }
+
+    .hero .btn-ghost {
+      background: transparent;
+      color: var(--cream);
+      border: 1px solid rgba(250,248,244,0.45);
+    }
+
+    .hero .btn-ghost:hover {
+      background: rgba(250,248,244,0.12);
+      border-color: var(--cream);
+    }
+
+    /* ========== INTRO ========== */
+    .intro {
+      padding: 7rem 2rem;
+      background: var(--off-white);
+    }
+
+    .intro-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .intro-text .label {
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.2rem;
+      font-weight: 500;
+    }
+
+    .intro-text h2 {
+      font-size: clamp(2.4rem, 4.5vw, 3.4rem);
+      line-height: 1.15;
+      color: var(--charcoal);
+      margin-bottom: 1.6rem;
+    }
+
+    .intro-text p {
+      color: var(--muted);
+      font-size: 1.05rem;
+      margin-bottom: 1.3rem;
+      font-weight: 300;
+    }
+
+    .intro-visual {
+      position: relative;
+      aspect-ratio: 4/5;
+      overflow: hidden;
+      background: var(--charcoal);
+    }
+
+    .intro-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .intro-visual-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 2;
+      color: var(--cream);
+      padding: 2.2rem 2rem;
+      background: linear-gradient(to top, rgba(0,0,0,0.75), transparent);
+    }
+
+    .intro-visual-caption span {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 0.4rem;
+    }
+
+    .intro-visual-caption p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.45rem;
+      font-style: italic;
+      line-height: 1.35;
+    }
+
+    /* ========== GALLERY STRIP ========== */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      padding: 4rem 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      background: var(--off-white);
+    }
+
+    .gallery-main {
+      position: relative;
+      overflow: hidden;
+      border-radius: 4px;
+      aspect-ratio: 4 / 3;
+    }
+
+    .gallery-main img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .gallery-main:hover img {
+      transform: scale(1.03);
+    }
+
+    .gallery-side {
+      display: contents;
+    }
+
+    .gallery-side img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-radius: 4px;
+      aspect-ratio: 4 / 3;
+      transition: transform 0.5s ease;
+    }
+
+    .gallery-side img:hover {
+      transform: scale(1.03);
+    }
+
+    @media (max-width: 800px) {
+      .gallery {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 2.5rem 1.5rem;
+      }
+      .gallery-main,
+      .gallery-side img {
+        aspect-ratio: 16 / 10;
+      }
+    }
+
+    /* ========== MENU / DRINKS ========== */
+    .drinks {
+      padding: 6.5rem 2rem;
+      background: var(--off-white);
+    }
+
+    .menu-categories {
+      max-width: 1100px;
+      margin: 0 auto 3.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      justify-content: center;
+    }
+
+    .menu-cat-btn {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.55rem 1.2rem;
+      border: 1px solid var(--soft-border);
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.25s ease;
+      font-family: inherit;
+      min-height: 40px;
+    }
+
+    .menu-cat-btn:hover,
+    .menu-cat-btn.active {
+      background: var(--charcoal);
+      color: var(--cream);
+      border-color: var(--charcoal);
+    }
+
+    .drinks-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .menu-column h3 {
+      font-size: 1.5rem;
+      color: var(--charcoal);
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid var(--soft-border);
+    }
+
+    .drink-list {
+      list-style: none;
+      margin-bottom: 2.5rem;
+    }
+
+    .drink-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 1.25rem 0;
+      border-bottom: 1px solid var(--soft-border);
+    }
+
+    .drink-item:first-child {
+      padding-top: 0;
+    }
+
+    .drink-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      color: var(--charcoal);
+    }
+
+    .drink-desc {
+      font-size: 0.86rem;
+      color: var(--muted);
+      margin-top: 0.15rem;
+      font-weight: 300;
+    }
+
+    .drink-price {
+      font-size: 0.95rem;
+      color: var(--charcoal);
+      font-weight: 500;
+      white-space: nowrap;
+      margin-left: 1.2rem;
+      padding-top: 0.3rem;
+    }
+
+    .drink-tag {
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 500;
+      display: inline-block;
+      margin-top: 0.25rem;
+    }
+
+    .menu-visuals {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .menu-visuals img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border: 1px solid var(--soft-border);
+    }
+
+    .menu-visuals img:first-child {
+      grid-column: span 2;
+      height: 240px;
+    }
+
+    .drinks-aside {
+      background: var(--cream);
+      padding: 0;
+      border: 1px solid var(--soft-border);
+      overflow: hidden;
+    }
+
+    .drinks-aside img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .drinks-aside-body {
+      padding: 2rem;
+    }
+
+    .drinks-aside h3 {
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
+      color: var(--charcoal);
+    }
+
+    .drinks-aside p {
+      color: var(--muted);
+      font-size: 0.98rem;
+      font-weight: 300;
+      margin-bottom: 1.2rem;
+    }
+
+    .drinks-aside .btn {
+      margin-top: 0.5rem;
+    }
+
+    @media (max-width: 800px) {
+      .drinks-grid {
+        grid-template-columns: 1fr;
+      }
+      .menu-visuals {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    /* ========== NIGHTS ========== */
+    .nights {
+      padding: 6.5rem 2rem;
+      background: var(--charcoal);
+      color: var(--cream);
+    }
+
+    .nights .section-header .label {
+      color: var(--gold);
+    }
+
+    .nights .section-header h2 {
+      color: var(--cream);
+    }
+
+    .nights-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    .night-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 0;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .night-card:hover {
+      background: rgba(255,255,255,0.07);
+      transform: translateY(-3px);
+    }
+
+    .night-card-img {
+      width: 100%;
+      height: 380px;
+      object-fit: contain;
+      background: #111;
+      display: block;
+    }
+
+    .night-card-body {
+      padding: 2rem 2.4rem;
+      flex: 1;
+    }
+
+    .night-day {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.7rem;
+      font-weight: 500;
+    }
+
+    .night-card h3 {
+      font-size: 1.6rem;
+      margin-bottom: 0.9rem;
+      color: var(--cream);
+    }
+
+    .night-card p {
+      font-size: 0.95rem;
+      color: rgba(247, 243, 236, 0.7);
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    /* ========== LOCATION ========== */
+    .location {
+      padding: 6.5rem 2rem;
+      background: var(--cream);
+    }
+
+    .location-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+    }
+
+    .info-block {
+      margin-bottom: 2rem;
+    }
+
+    .info-block h4 {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.55rem;
+      font-weight: 500;
+    }
+
+    .info-block p,
+    .info-block a {
+      font-size: 1.05rem;
+      color: var(--ink);
+      font-weight: 300;
+    }
+
+    .info-block a:hover {
+      color: var(--gold);
+    }
+
+    .hours-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .hours-table td {
+      padding: 0.5rem 0;
+      font-size: 0.95rem;
+      color: var(--muted);
+      font-weight: 300;
+      border-bottom: 1px solid var(--soft-border);
+    }
+
+    .hours-table td:last-child {
+      text-align: right;
+      color: var(--ink);
+    }
+
+    .hours-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .map-box {
+      background: var(--off-white);
+      border: 1px solid var(--soft-border);
+      height: 100%;
+      min-height: 340px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .map-box img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .map-box-body {
+      padding: 1.8rem;
+      text-align: center;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .map-box-body p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      max-width: 260px;
+      margin-bottom: 1.2rem;
+      font-weight: 300;
+    }
+
+    /* ========== FOOTER ========== */
+    .footer {
+      background: var(--charcoal);
+      color: var(--cream);
+      padding: 4.5rem 2rem 2rem;
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .footer-brand .logo {
+      color: var(--cream);
+      text-align: left;
+      margin-bottom: 1rem;
+    }
+
+    .footer-brand .logo span {
+      color: var(--gold);
+    }
+
+    .footer-brand p {
+      font-size: 0.9rem;
+      color: rgba(247, 243, 236, 0.65);
+      font-weight: 300;
+      max-width: 280px;
+      line-height: 1.7;
+    }
+
+    .footer h4 {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.2rem;
+      font-weight: 500;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.55rem;
+    }
+
+    .footer-links a {
+      font-size: 0.95rem;
+      color: rgba(247, 243, 236, 0.75);
+      font-weight: 300;
+    }
+
+    .footer-links a:hover {
+      color: var(--cream);
+    }
+
+    .footer-bottom {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: rgba(247, 243, 236, 0.45);
+    }
+
+    .socials {
+      display: flex;
+      gap: 1.2rem;
+    }
+
+    .socials a {
+      color: rgba(247, 243, 236, 0.6);
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+    }
+
+    .socials a:hover {
+      color: var(--gold);
+    }
+
+    /* ========== EVENTS (Optimized for uncropped Instagram images) ========== */
+    .events {
+      padding: 6.5rem 2rem;
+      background: var(--off-white);
+    }
+
+    .events-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .event-card {
+      background: var(--cream);
+      border: 1px solid var(--soft-border);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .event-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.08);
+    }
+
+    .event-card img {
+      width: 100%;
+      height: 380px;
+      object-fit: contain; /* Prevents Instagram post images from getting cropped */
+      background: #111;    /* Dark background fill for portrait/square aspect differences */
+      display: block;
+    }
+
+    .event-card-body {
+      padding: 1.25rem 1.35rem 1.5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .event-date {
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 500;
+      margin-bottom: 0.45rem;
+    }
+
+    .event-card h3 {
+      font-size: 1.25rem;
+      color: var(--charcoal);
+      margin-bottom: 0.4rem;
+      line-height: 1.25;
+    }
+
+    .event-card p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      font-weight: 300;
+      line-height: 1.5;
+    }
+
+    /* Progressive items hiding */
+    .step-hidden {
+      display: none !important;
+    }
+
+    .view-more-wrap {
+      text-align: center;
+      margin-top: 3rem;
+    }
+
+    .btn-view-more {
+      background: transparent;
+      border: 1px solid var(--charcoal);
+      color: var(--charcoal);
+      padding: 0.75rem 2rem;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-view-more:hover {
+      background: var(--charcoal);
+      color: var(--cream);
+    }
+
+    .nights .btn-view-more {
+      border-color: rgba(255,255,255,0.4);
+      color: var(--cream);
+    }
+
+    .nights .btn-view-more:hover {
+      background: var(--cream);
+      color: var(--charcoal);
+      border-color: var(--cream);
+    }
+
+    @media (max-width: 960px) {
+      .events-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .events-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ========== PHOTO GALLERY (ID matched to images-venue_2.js) ========== */
+    .photo-gallery {
+      padding: 0 0 5rem;
+      background: var(--off-white);
+    }
+
+    .photo-gallery .section-header {
+      padding: 4.5rem 2rem 2rem;
+    }
+
+    .photo-mosaic {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-auto-rows: 180px;
+      gap: 0.75rem;
+    }
+
+    .photo-mosaic figure {
+      margin: 0;
+      overflow: hidden;
+      position: relative;
+      background: #1a1a1a;
+    }
+
+    .photo-mosaic figure img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .photo-mosaic figure:hover img {
+      transform: scale(1.05);
+    }
+
+    .photo-mosaic .span-2 { grid-column: span 2; }
+    .photo-mosaic .span-2-row { grid-row: span 2; }
+    .photo-mosaic .span-2x2 {
+      grid-column: span 2;
+      grid-row: span 2;
+    }
+
+    @media (max-width: 900px) {
+      .photo-mosaic {
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: 160px;
+      }
+      .photo-mosaic .span-2x2 {
+        grid-column: span 2;
+        grid-row: span 2;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .photo-mosaic {
+        grid-template-columns: 1fr 1fr;
+        grid-auto-rows: 140px;
+        gap: 0.5rem;
+      }
+    }
+
+    /* ========== RESPONSIVE & IPHONE 12 PRO (<= 390px / 480px) ========== */
+    @media (max-width: 960px) {
+      .top-bar,
+      .nav {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+      }
+
+      .nav-links {
+        display: none !important;
+      }
+
+      .mobile-menu-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .intro-inner,
+      .drinks-grid,
+      .location-grid,
+      .nights-grid,
+      .footer-inner {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      .intro-visual {
+        aspect-ratio: 16/10;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .top-bar {
+        padding: 0.4rem 1rem;
+        font-size: 0.7rem;
+        justify-content: center;
+        text-align: center;
+        gap: 0.5rem;
+      }
+
+      .nav {
+        padding: 0.8rem 1rem;
+      }
+
+      .hero {
+        min-height: 56vh;
+        padding: 4rem 1.2rem 3rem;
+      }
+
+      .hero h1 {
+        font-size: 2.8rem;
+      }
+
+      .hero-tagline {
+        font-size: 0.95rem;
+      }
+
+      .intro, .drinks, .events, .photo-gallery, .nights, .location, .press {
+        padding: 4rem 1.2rem;
+      }
+
+      .photo-gallery .section-header {
+        padding: 3rem 1.2rem 1.5rem;
+      }
+
+      .photo-mosaic {
+        padding: 0 0.5rem;
+        grid-auto-rows: 130px;
+        gap: 0.5rem;
+      }
+
+      .btn, .btn-view-more, .menu-cat-btn {
+        min-height: 44px;
+        padding: 0.7rem 1.4rem;
+      }
+    }
+
+    /* ========== PRESS / AS SEEN IN (FLOWING) ========== */
+    .press {
+      padding: 6rem 2rem;
+      background: var(--off-white);
+      border-top: 1px solid var(--soft-border);
+      border-bottom: 1px solid var(--soft-border);
+    }
+
+    .press-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .press-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.75rem;
+      font-weight: 500;
+    }
+
+    .press-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.85rem;
+      color: var(--charcoal);
+      margin-bottom: 3.5rem;
+      font-weight: 500;
+    }
+
+    .press-flow-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 3.5rem 4rem;
+      text-align: left;
+    }
+
+    .press-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .press-item:hover .press-quote-text {
+      color: var(--gold-dark);
+    }
+
+    .press-item-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .press-item-brand img {
+      height: 24px;
+      width: auto;
+      max-width: 110px;
+      object-fit: contain;
+      opacity: 0.75;
+      transition: opacity 0.25s ease;
+    }
+
+    .press-item:hover .press-item-brand img {
+      opacity: 1;
+    }
+
+    .press-item-brand img.av-logo {
+      filter: invert(1) brightness(0.2);
+      height: 20px;
+    }
+
+    .press-item-brand .wordmark {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--charcoal);
+      opacity: 0.8;
+    }
+
+    .press-item-brand .wordmark.lifo {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      font-size: 1.4rem;
+    }
+
+    .press-quote-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-style: italic;
+      line-height: 1.45;
+      color: var(--charcoal);
+      transition: color 0.25s ease;
+    }
+
+    @media (max-width: 768px) {
+      .press-flow-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<div class="navbar-container">
-    <ul class="nav-menu" id="multilevel-nav-menu">
+  <!-- Top bar -->
+  <div class="top-bar">
+    <a href="tel:+302114125948">211 412 5948</a>
+    <div style="display: flex; align-items: center; gap: 1.5rem;">
+      <span>Κοδριγκτώνος 19 · Αθήνα</span>
+      <div style="display: flex; align-items: center; gap: 0.8rem;">
+        <a href="https://www.instagram.com/foyer_d_athenes/" target="_blank" rel="noopener" aria-label="Instagram" style="display: inline-flex; align-items: center; color: inherit;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+        </a>
+        <a href="https://www.facebook.com/FoyerDAthenes/" target="_blank" rel="noopener" aria-label="Facebook" style="display: inline-flex; align-items: center; color: inherit;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav-left">
+      <ul class="nav-links">
+        <li><a href="#about">Η Ιστορία</a></li>
+        <li><a href="#drinks">Menu</a></li>
+      </ul>
+    </div>
+
+    <a href="#" class="logo" aria-label="Foyer d'Athènes">
+      <img data-logo src="" alt="Foyer d'Athènes" class="logo-img" />
+    </a>
+
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="#events">Events</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#nights">Νύχτες</a></li>
+        <li><a href="#press">Press</a></li>
+        <li><a href="#location">Τοποθεσία</a></li>
+      </ul>
+
+      <button class="mobile-menu-btn" aria-label="Open Navigation Menu" onclick="toggleMobileMenu()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu Drawer -->
+  <div class="mobile-drawer" id="mobile-drawer">
+    <button class="mobile-drawer-close" aria-label="Close Menu" onclick="toggleMobileMenu()">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+    <ul class="mobile-drawer-links">
+      <li><a href="#about" onclick="toggleMobileMenu()">Η Ιστορία</a></li>
+      <li><a href="#drinks" onclick="toggleMobileMenu()">Menu</a></li>
+      <li><a href="#events" onclick="toggleMobileMenu()">Events</a></li>
+      <li><a href="#gallery" onclick="toggleMobileMenu()">Gallery</a></li>
+      <li><a href="#nights" onclick="toggleMobileMenu()">Νύχτες</a></li>
+      <li><a href="#press" onclick="toggleMobileMenu()">Press</a></li>
+      <li><a href="#location" onclick="toggleMobileMenu()">Τοποθεσία</a></li>
     </ul>
-</div>
+  </div>
 
-<div class="sheet-container">
-    <table class="info-table">
-        <thead>
-            <tr>
-                <th>Τίτλος</th>
-                <th>Χρόνος</th>
-                <th>Ρυθμός</th>
-                <th>Πρώτη Ερμηνεία</th>
-                <th>Συνθέτης</th>
-                <th>Στιχουργός</th>
-                <th>Έτος</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><strong id="meta-title"></strong></td>
-                <td id="meta-timesig"></td>
-                <td id="meta-rhythm"></td>
-                <td id="meta-artist"></td>
-                <td id="meta-composer"></td>
-                <td id="meta-lyricist"></td>
-                <td id="meta-year"></td>
-            </tr>
-        </tbody>
-    </table>
+  <!-- Hero with exterior photo -->
+  <header class="hero">
+    <div class="hero-content">
+      <p class="hero-crest">Athens · Secret Spot</p>
+      <h1>Foyer <em>d'Athènes</em></h1>
+      <p class="hero-tagline">
+        Ρετρό σκηνικό από ταινία της Φίνος Φιλμ. Signature cocktails, μουσική και θεατρική ατμόσφαιρα στο κέντρο της πόλης.
+      </p>
+      <div class="hero-actions">
+        <a href="#drinks" class="btn btn-light">Menu</a>
+        <a href="#location" class="btn btn-ghost">Πού είμαστε</a>
+      </div>
+    </div>
+  </header>
 
-    <div class="song-content" id="song-content"></div>
-</div>
+  <!-- Intro / About with bookshelf photo -->
+  <section class="intro" id="about">
+    <div class="intro-inner">
+      <div class="intro-text">
+        <p class="label">Το Foyer</p>
+        <h2>Όχι απλώς ένα μπαρ.<br />Ένα σκηνικό.</h2>
+        <p>
+          Κρυμμένο σε έναν δρόμο που δεν φωνάζει αλλά «ψιθυρίζει», το Foyer d'Athènes είναι το hidden gem της Αθήνας.
+        </p>
+        <p>
+          Με αισθητική που συνδυάζει vintage αναφορές, θεατρική ατμόσφαιρα και αυτή τη χαρακτηριστική μελαγχολική κομψότητα, μοιάζει με σκηνικό από ταινία όπου ξαφνικά νιώθεις πως ανήκεις.
+        </p>
+        <p>
+          Η διακόσμηση, οι παλιοί καθρέφτες και το παιχνίδι του φωτός είναι φτιαγμένα για να σε βάζουν σε mood «σιωπηλού πρωταγωνιστή».
+        </p>
+      </div>
+      <div class="intro-visual">
+        <img id="venue-hero-main" src="" alt="Bar and side wall at Foyer d'Athènes" />
+        <div class="intro-visual-caption">
+          <span>Athens Voice</span>
+          <p>«Υπάρχουν μαγαζιά που απλώς τα επισκέπτεσαι – και υπάρχουν κι εκείνα που τα ζεις.»</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<script src="songs-db.js"></script>
+  <!-- Press / As seen in (Flowing Quotes) -->
+  <section class="press" id="press" aria-label="Press coverage">
+    <div class="press-inner">
+      <p class="press-label">Press</p>
+      <h2 class="press-title">Όπως γράφουν για εμάς</h2>
+      <div class="press-flow-grid">
+        <a class="press-item" href="https://www.athensvoice.gr/life/geusi/wine-spirits/994317/foyer-dathenes-retro-skiniko-cocktails-kai-dj-sets-sto-kedro-tis-athinas/" target="_blank" rel="noopener noreferrer">
+          <div class="press-item-brand">
+            <img class="av-logo" src="https://www.athensvoice.gr/content/media/images/logo.svg" alt="Athens Voice" />
+          </div>
+          <p class="press-quote-text">«Ρετρό σκηνικό, signature cocktails και dj sets στο κέντρο της Αθήνας.»</p>
+        </a>
 
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const navMenuEl = document.getElementById("multilevel-nav-menu");
+        <a class="press-item" href="https://www.lifo.gr/guide/taste/news/foyer-d-athenes-ena-all-day-steki-bgalmeno-apo-tainia-tis-finos" target="_blank" rel="noopener noreferrer">
+          <div class="press-item-brand">
+            <span class="wordmark lifo">LiFO</span>
+          </div>
+          <p class="press-quote-text">«Ένα all-day στέκι βγαλμένο από ταινία της Φίνος Φιλμ.»</p>
+        </a>
 
-        function fitSong() {
-            const contentContainer = document.getElementById("song-content");
-            const sheetContainer = contentContainer.closest('.sheet-container');
-            
-            const containerStyle = window.getComputedStyle(sheetContainer);
-            const paddingX = parseFloat(containerStyle.paddingLeft) + parseFloat(containerStyle.paddingRight);
-            const availableWidth = (sheetContainer.clientWidth - paddingX) * 0.95;
+        <a class="press-item" href="https://www.xrysietairia.eu/company/foyer-d-athenes-359554" target="_blank" rel="noopener noreferrer">
+          <div class="press-item-brand">
+            <img src="https://www.xrysietairia.eu/company-image/359554-dark.png" alt="Χρυσή Εταιρεία" style="height:32px; max-width:130px;" />
+          </div>
+          <p class="press-quote-text">«Ένα ατμοσφαιρικό retro bar που ξεχωρίζει για την ποιότητα και την αισθητική του.»</p>
+        </a>
 
-            contentContainer.style.fontSize = '1.8rem';
-            const elements = contentContainer.querySelectorAll('.lyric-line-block, .instrumental-grid-block');
-            if (elements.length === 0) return;
+        <a class="press-item" href="https://koitamagazine.gr/tag/foyer-d-athenes-athina/" target="_blank" rel="noopener noreferrer">
+          <div class="press-item-brand">
+            <span class="wordmark">Koita</span>
+          </div>
+          <p class="press-quote-text">«Θεατρική ατμόσφαιρα και ζεστή φιλοξενία στην καρδιά της πόλης.»</p>
+        </a>
+      </div>
+    </div>
+  </section>
 
-            let maxWidth = 0;
-            elements.forEach(el => {
-                if (el.scrollWidth > maxWidth) maxWidth = el.scrollWidth;
-            });
+  <!-- Photo gallery strip -->
+  <section class="gallery" aria-label="Gallery">
+    <div class="gallery-main">
+      <img id="venue-strip-main" src="" alt="Warm interior with checkered floor and red walls at Foyer d'Athènes" />
+    </div>
+    <div class="gallery-side" id="venue-hero-strip">
+      <!-- populated by images-venue.js -->
+    </div>
+  </section>
 
-            if (maxWidth > 0) {
-                const currentSize = parseFloat(window.getComputedStyle(contentContainer).fontSize);
-                const targetSize = currentSize * (availableWidth / maxWidth);
-                
-                contentContainer.style.fontSize = targetSize + 'px';
-                
-                contentContainer.querySelectorAll('.token-chord, .instrumental-chord, .token-lyric').forEach(node => {
-                    node.style.fontSize = targetSize + 'px';
-                });
-            }
+  <!-- Menu (data loaded from menu.js) -->
+  <section class="drinks" id="drinks">
+    <div class="section-header">
+      <p class="label">Το Μπαρ</p>
+      <h2>Menu</h2>
+    </div>
+
+    <div class="drinks-grid">
+      <div class="menu-column">
+        <h3>Signature Cocktails</h3>
+        <ul class="drink-list" id="menu-signature">
+          <!-- populated by menu.js -->
+        </ul>
+
+        <h3>Classics</h3>
+        <ul class="drink-list" id="menu-classics">
+          <!-- populated by menu.js -->
+        </ul>
+
+        <h3>Beer &amp; Wine</h3>
+        <ul class="drink-list" id="menu-beer-wine">
+          <!-- populated by menu.js -->
+        </ul>
+      </div>
+
+      <div>
+        <div class="menu-visuals" id="venue-menu-visuals">
+          <!-- populated by images-venue.js -->
+        </div>
+
+        <div class="drinks-aside" style="margin-top: 1.5rem;">
+          <img id="venue-menu-aside" src="" alt="The bar counter at Foyer d'Athènes" />
+          <div class="drinks-aside-body">
+            <h3>Πέρα από τα cocktails</h3>
+            <p>
+              Καφές, μπύρες, κρασιά και ελαφριά snacks — τοστ, γιαούρτι με δημητριακά και παραδοσιακά γλυκά.
+            </p>
+            <p>
+              Κάθε βραδιά έχει τις δικές της signature δημιουργίες. Ρώτα τον Μπάμπη τι προτείνει απόψε.
+            </p>
+            <a href="#location" class="btn btn-outline">Έλα να τα δοκιμάσεις</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Events (newest → oldest) with Progressive Step Load -->
+  <section class="events" id="events">
+    <div class="section-header">
+      <p class="label">Το Πρόγραμμα</p>
+      <h2>Events &amp; Πάρτυ</h2>
+    </div>
+
+    <div id="events-container">
+      <div class="events-grid" id="events-grid">
+        <!-- populated by images-events.js -->
+      </div>
+      <div class="view-more-wrap" id="events-more-wrap">
+        <button class="btn-view-more" id="events-toggle-btn" onclick="stepLoad('events')">
+          <span>Περισσότερα...</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Photo Gallery (ID matched to images-venue_2.js) -->
+  <section class="photo-gallery" id="gallery">
+    <div class="section-header">
+      <p class="label">Ο Χώρος</p>
+      <h2>Ατμόσφαιρα</h2>
+    </div>
+
+    <div id="gallery-container">
+      <div class="photo-mosaic" id="venue-gallery">
+        <!-- populated by images-venue_2.js -->
+      </div>
+      <div class="view-more-wrap" id="gallery-more-wrap">
+        <button class="btn-view-more" id="gallery-toggle-btn" onclick="stepLoad('gallery')">
+          <span>Περισσότερα...</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Nights / Schedule with Progressive Step Load -->
+  <section class="nights" id="nights">
+    <div class="section-header">
+      <p class="label">Το Πρόγραμμα</p>
+      <h2>Νύχτες που θυμάσαι</h2>
+    </div>
+
+    <div id="nights-container">
+      <div class="nights-grid" id="nights-grid">
+        <!-- populated by schedule.js -->
+      </div>
+      <div class="view-more-wrap" id="nights-more-wrap">
+        <button class="btn-view-more" id="nights-toggle-btn" onclick="stepLoad('nights')">
+          <span>Περισσότερα...</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Location -->
+  <section class="location" id="location">
+    <div class="section-header">
+      <p class="label">Επίσκεψη</p>
+      <h2>Πού θα μας βρεις</h2>
+    </div>
+
+    <div class="location-grid">
+      <div>
+        <div class="info-block">
+          <h4>Διεύθυνση</h4>
+          <p>Κοδριγκτώνος 19 &amp; Πατησίων 101<br />Αθήνα 104 34<br />Μετρό: Βικτώρια</p>
+        </div>
+        <div class="info-block">
+          <h4>Τηλέφωνο</h4>
+          <p><a href="tel:+302114125948">211 412 5948</a></p>
+        </div>
+        <div class="info-block">
+          <h4>Ώρες Λειτουργίας</h4>
+          <table class="hours-table">
+            <tr><td>Δευτέρα</td><td>Κλειστά</td></tr>
+            <tr><td>Τρίτη – Τετάρτη</td><td>18:00 – 01:00</td></tr>
+            <tr><td>Πέμπτη – Σάββατο</td><td>18:00 – 03:00</td></tr>
+            <tr><td>Κυριακή</td><td>18:00 – 23:45</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="map-box">
+        <img id="venue-location" src="" alt="Foyer d'Athènes exterior entrance at night" />
+        <div class="map-box-body">
+          <p>Κοδριγκτώνος 19, δίπλα στην Πατησίων — λίγα βήματα από το Μετρό Βικτώρια</p>
+          <a href="https://maps.google.com/?q=Foyer+d%27Athènes+Kodrigktonos+19+Athens" target="_blank" rel="noopener" class="btn btn-dark">Google Maps</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="#" class="logo" aria-label="Foyer d'Athènes">
+          <img data-logo src="" alt="Foyer d'Athènes" class="logo-img" />
+        </a>
+        <p>
+          Το ρετρό είναι η αφορμή… η διασκέδαση ο λόγος. Το αγαπημένο secret spot της Αθήνας.
+        </p>
+      </div>
+
+      <div>
+        <h4>Πλοήγηση</h4>
+        <ul class="footer-links">
+          <li><a href="#about">Η Ιστορία</a></li>
+          <li><a href="#drinks">Menu</a></li>
+          <li><a href="#events">Events</a></li>
+          <li><a href="#press">Press</a></li>
+          <li><a href="#location">Τοποθεσία</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Επικοινωνία</h4>
+        <ul class="footer-links">
+          <li><a href="tel:+302114125948">211 412 5948</a></li>
+          <li><a href="mailto:foyerdathenes@gmail.com">foyerdathenes@gmail.com</a></li>
+          <li>Κοδριγκτώνος 19, Αθήνα</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© Foyer d'Athènes · Athens</span>
+      <div class="socials" style="display:none;"></div>
+    </div>
+  </footer>
+
+  <!-- Mobile Navigation & Progressive Step Load Script -->
+  <script>
+    function toggleMobileMenu() {
+      const drawer = document.getElementById('mobile-drawer');
+      if (drawer) {
+        drawer.classList.toggle('open');
+        document.body.style.overflow = drawer.classList.contains('open') ? 'hidden' : '';
+      }
+    }
+
+    const visibleCounts = {
+      events: 3,
+      nights: 2,
+      gallery: 16
+    };
+    const stepSizes = {
+      events: 3,
+      nights: 2,
+      gallery: 4
+    };
+
+    function applyVisibility(sectionKey) {
+      const grid = document.getElementById(sectionKey === 'gallery' ? 'venue-gallery' : sectionKey + '-grid');
+      if (!grid) return;
+      const cards = Array.from(grid.children);
+      const currentVisible = visibleCounts[sectionKey];
+      
+      cards.forEach((card, i) => {
+        if (i < currentVisible) {
+          card.classList.remove('step-hidden');
+          card.style.display = '';
+        } else {
+          card.classList.add('step-hidden');
+          card.style.display = 'none';
         }
+      });
 
-        function parseInlineLineToTokens(rawString, colorState) {
-            const tokens = [];
-            const regex = /\(([^)]*)\)/g;
-            let lastIndex = 0;
-            let match;
+      const btnSpan = document.querySelector('#' + sectionKey + '-toggle-btn span');
+      const btn = document.getElementById(sectionKey + '-toggle-btn');
+      const minCount = sectionKey === 'events' ? 3 : (sectionKey === 'gallery' ? 16 : 2);
 
-            const firstParen = rawString.indexOf('(');
-            if (firstParen > 0) {
-                tokens.push({
-                    chord: "",
-                    color: colorState.current,
-                    text: rawString.substring(0, firstParen)
-                });
-                lastIndex = firstParen;
-            } else if (firstParen === -1 && rawString.length > 0) {
-                return [{ chord: "", color: colorState.current, text: rawString }];
-            }
-
-            while ((match = regex.exec(rawString)) !== null) {
-                let tagContent = match[1].trim();
-                let chordName = tagContent;
-                let isSpacer = false;
-
-                if (tagContent === "_" || tagContent === "") {
-                    isSpacer = true;
-                    chordName = "";
-                } else if (tagContent.includes(':')) {
-                    const parts = tagContent.split(':');
-                    chordName = parts[0];
-                    colorState.current = parts[1];
-                }
-
-                let textStart = regex.lastIndex;
-                let nextParenIndex = rawString.indexOf('(', textStart);
-                let textEnd = nextParenIndex !== -1 ? nextParenIndex : rawString.length;
-                let textChunk = rawString.substring(textStart, textEnd);
-
-                const lyricText = (!textChunk) ? "" : textChunk;
-
-                tokens.push({
-                    chord: chordName,
-                    color: colorState.current,
-                    text: isSpacer ? "" : lyricText,
-                    isSpacer: isSpacer
-                });
-                lastIndex = textEnd;
-            }
-
-            return tokens;
+      if (cards.length <= visibleCounts[sectionKey] && currentVisible <= minCount) {
+        if (btn) btn.style.display = 'none';
+      } else {
+        if (btn) btn.style.display = 'inline-flex';
+        if (currentVisible >= cards.length) {
+          if (btnSpan) btnSpan.textContent = 'Λιγότερα...';
+        } else {
+          if (btnSpan) btnSpan.textContent = 'Περισσότερα...';
         }
+      }
+    }
 
-        function parseInstrumentalLine(rawString, colorState) {
-            const chords = [];
-            const regex = /\(([^)]+)\)/g;
-            let match;
+    function stepLoad(sectionKey) {
+      const grid = document.getElementById(sectionKey === 'gallery' ? 'venue-gallery' : sectionKey + '-grid');
+      if (!grid) return;
+      const cards = grid.children;
+      const minCount = sectionKey === 'events' ? 3 : (sectionKey === 'gallery' ? 16 : 2);
+      
+      if (visibleCounts[sectionKey] >= cards.length) {
+        visibleCounts[sectionKey] = minCount;
+        applyVisibility(sectionKey);
+        document.getElementById(sectionKey).scrollIntoView({ behavior: 'smooth' });
+      } else {
+        visibleCounts[sectionKey] += stepSizes[sectionKey];
+        applyVisibility(sectionKey);
+      }
+    }
 
-            while ((match = regex.exec(rawString)) !== null) {
-                let tagContent = match[1];
-                let chordName = tagContent;
-
-                if (tagContent.includes(':')) {
-                    const parts = tagContent.split(':');
-                    chordName = parts[0];
-                    colorState.current = parts[1];
-                }
-
-                chords.push({
-                    chord: chordName,
-                    color: colorState.current
-                });
-            }
-            return chords;
+    window.addEventListener('DOMContentLoaded', () => {
+      ['events', 'nights', 'gallery'].forEach(sec => {
+        const gridId = sec === 'gallery' ? 'venue-gallery' : sec + '-grid';
+        const grid = document.getElementById(gridId);
+        if (grid) {
+          applyVisibility(sec);
+          const observer = new MutationObserver(() => {
+            applyVisibility(sec);
+          });
+          observer.observe(grid, { childList: true });
         }
-
-        function getColorHex(colorName) {
-            if (colorName === 'blue') return '#0d47a1'; 
-            if (colorName === 'green') return '#1b5e20';
-            if (colorName === 'black') return '#000000';
-            return '#8b1e1e'; 
-        }
-
-        window.loadSongUI = function(value) {
-            const data = getSongData(value);
-            if (!data) return;
-
-            localStorage.setItem("activeSongValue", value);
-
-            document.getElementById("meta-title").textContent = data.title || "";
-            document.getElementById("meta-timesig").textContent = data.timeSignature || "";
-            document.getElementById("meta-rhythm").textContent = data.rhythm || "";
-            document.getElementById("meta-artist").textContent = data.artist || "";
-            document.getElementById("meta-composer").textContent = data.composer || "";
-            document.getElementById("meta-lyricist").textContent = data.lyricist || "";
-            document.getElementById("meta-year").textContent = data.year || "";
-
-            const contentContainer = document.getElementById("song-content");
-            contentContainer.innerHTML = "";
-
-            const colorState = { current: "red" };
-
-            if (Array.isArray(data.stanzas)) {
-                data.stanzas.forEach((stanza, sIdx) => {
-                    if (Array.isArray(stanza.lines)) {
-                        const isInstrumentalStanza = stanza.lines.every(line => {
-                            let textToCheck = "";
-                            if (Array.isArray(line.tokens)) {
-                                textToCheck = line.tokens.map(t => t.text || "").join("").trim();
-                            } else if (typeof line.rawInline === "string") {
-                                const parsed = parseInlineLineToTokens(line.rawInline, { current: colorState.current });
-                                textToCheck = parsed.map(t => t.text || "").join("").trim();
-                            }
-                            return textToCheck === "";
-                        });
-
-                        if (isInstrumentalStanza && stanza.lines.length > 0) {
-                            const parsedRows = stanza.lines.map(line => {
-                                if (Array.isArray(line.tokens)) {
-                                    return line.tokens.filter(t => t.chord).map(t => ({ chord: t.chord, color: t.color || colorState.current }));
-                                } else {
-                                    return parseInstrumentalLine(line.rawInline, colorState);
-                                }
-                            });
-
-                            const maxCols = Math.max(...parsedRows.map(row => row.length), 1);
-                            const gridBlock = document.createElement("div");
-                            gridBlock.className = "instrumental-grid-block";
-                            gridBlock.style.gridTemplateColumns = `repeat(${maxCols}, auto)`;
-
-                            parsedRows.forEach(row => {
-                                for (let colIdx = 0; colIdx < maxCols; colIdx++) {
-                                    const chordSpan = document.createElement("span");
-                                    chordSpan.className = "instrumental-chord";
-                                    if (row[colIdx]) {
-                                        chordSpan.style.color = getColorHex(row[colIdx].color);
-                                        chordSpan.textContent = row[colIdx].chord;
-                                    } else {
-                                        chordSpan.textContent = "";
-                                    }
-                                    gridBlock.appendChild(chordSpan);
-                                }
-                            });
-
-                            contentContainer.appendChild(gridBlock);
-                        } else {
-                            stanza.lines.forEach((line) => {
-                                const lineBlock = document.createElement("div");
-                                lineBlock.className = "lyric-line-block";
-
-                                let tokens = line.tokens;
-                                if (typeof line.rawInline === "string") {
-                                    tokens = parseInlineLineToTokens(line.rawInline, colorState);
-                                }
-
-                                if (Array.isArray(tokens)) {
-                                    tokens.forEach((token) => {
-                                        const pairSpan = document.createElement("span");
-                                        pairSpan.className = "token-pair" + (token.isSpacer ? " spacer-token" : "");
-
-                                        const chordSpan = document.createElement("span");
-                                        chordSpan.className = "token-chord";
-                                        chordSpan.style.color = getColorHex(token.color || colorState.current);
-                                        chordSpan.textContent = token.chord || "";
-
-                                        const lyricSpan = document.createElement("span");
-                                        lyricSpan.className = "token-lyric";
-                                        lyricSpan.textContent = token.text || "";
-
-                                        pairSpan.appendChild(chordSpan);
-                                        pairSpan.appendChild(lyricSpan);
-                                        lineBlock.appendChild(pairSpan);
-                                    });
-                                }
-
-                                contentContainer.appendChild(lineBlock);
-                            });
-                        }
-                    }
-
-                    if (sIdx < data.stanzas.length - 1) {
-                        const spaceDiv = document.createElement("div");
-                        spaceDiv.className = "verse-space";
-                        contentContainer.appendChild(spaceDiv);
-                    }
-                });
-            }
-            fitSong();
-        }
-
-        window.addEventListener('resize', fitSong);
-
-        function buildMultilevelMenu() {
-            navMenuEl.innerHTML = "";
-
-            const greekRanges = [
-                { label: "Α - Β", filter: (cat) => /^[Α-ΒΆΒ]/i.test(cat) || /^Άκης Πάνου/i.test(cat) },
-                { label: "Γ - Δ", filter: (cat) => /^[Γ-Δ]/i.test(cat) && !/^Άκης Πάνου/i.test(cat) },
-                { label: "Ε - Ζ", filter: (cat) => /^[Ε-ΖΈ]/i.test(cat) },
-                { label: "Η - Θ", filter: (cat) => /^[Η-ΘΉ]/i.test(cat) },
-                { label: "Ι - Κ", filter: (cat) => /^[Ι-ΚΊ]/i.test(cat) },
-                { label: "Λ - Μ", filter: (cat) => /^[Λ-Μ]/i.test(cat) },
-                { label: "Ν - Ξ", filter: (cat) => /^[Ν-Ξ]/i.test(cat) },
-                { label: "Ο - Π", filter: (cat) => /^[Ο-ΠΌ]/i.test(cat) },
-                { label: "Ρ - Σ", filter: (cat) => /^[Ρ-Σ]/i.test(cat) },
-                { label: "Τ - Υ", filter: (cat) => /^[Τ-ΥΎ]/i.test(cat) },
-                { label: "Φ - Χ", filter: (cat) => /^[Φ-Χ]/i.test(cat) || /^Φοίβος/i.test(cat) },
-                { label: "Ψ - Ω", filter: (cat) => /^[Ψ-ΩΏ]/i.test(cat) },
-                { label: "A - Z", filter: (cat) => !/^[Α-ΩΆΈΉΊΌΎΏ]/i.test(cat) && !/^Φοίβος/i.test(cat) && !/^Άκης Πάνου/i.test(cat) }
-            ];
-
-            const greekHeartSvgHtml = `
-                <div class="flag-icon-container">
-                    <svg class="flag-heart-svg" viewBox="0 0 100 90" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <clipPath id="heart-clip-gr">
-                                <path d="M50 85 C50 85, 95 50, 95 27 C95 12, 80 2, 67 2 C56 2, 50 12, 50 12 C50 12, 44 2, 33 2 C20 2, 5 12, 5 27 C5 50, 50 85, 50 85 Z"/>
-                            </clipPath>
-                        </defs>
-                        <path d="M50 87 C50 87, 97 51, 97 27 C97 11, 81 0, 67 0 C55 0, 50 10, 50 10 C50 10, 45 0, 33 0 C19 0, 3 11, 3 27 C3 51, 50 87, 50 87 Z" fill="#ffffff" stroke="#dcdcdc" stroke-width="2"/>
-                        <g clip-path="url(#heart-clip-gr)">
-                            <rect width="100" height="90" fill="#0d5eaf"/>
-                            <rect y="10" width="100" height="10" fill="#ffffff"/>
-                            <rect y="30" width="100" height="10" fill="#ffffff"/>
-                            <rect y="50" width="100" height="10" fill="#ffffff"/>
-                            <rect y="70" width="100" height="10" fill="#ffffff"/>
-                            <rect width="40" height="40" fill="#0d5eaf"/>
-                            <rect x="15" width="10" height="40" fill="#ffffff"/>
-                            <rect y="15" width="40" height="10" fill="#ffffff"/>
-                        </g>
-                    </svg>
-                </div>
-            `;
-
-            const britishHeartSvgHtml = `
-                <div class="flag-icon-container">
-                    <svg class="flag-heart-svg" viewBox="0 0 100 90" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <clipPath id="heart-clip-uk">
-                                <path d="M50 85 C50 85, 95 50, 95 27 C95 12, 80 2, 67 2 C56 2, 50 12, 50 12 C50 12, 44 2, 33 2 C20 2, 5 12, 5 27 C5 50, 50 85, 50 85 Z"/>
-                            </clipPath>
-                        </defs>
-                        <path d="M50 87 C50 87, 97 51, 97 27 C97 11, 81 0, 67 0 C55 0, 50 10, 50 10 C50 10, 45 0, 33 0 C19 0, 3 11, 3 27 C3 51, 50 87, 50 87 Z" fill="#ffffff" stroke="#dcdcdc" stroke-width="2"/>
-                        <g clip-path="url(#heart-clip-uk)">
-                            <rect width="100" height="90" fill="#012169"/>
-                            <polygon points="0,0 15,0 100,75 100,90" fill="#ffffff"/>
-                            <polygon points="100,0 85,0 0,75 0,90" fill="#ffffff"/>
-                            <polygon points="0,0 6,0 100,68 100,76" fill="#c8102e"/>
-                            <polygon points="100,0 94,0 0,68 0,76" fill="#c8102e"/>
-                            <polygon points="0,90 8,90 100,18 100,10" fill="#c8102e"/>
-                            <polygon points="100,90 92,90 0,18 0,10" fill="#c8102e"/>
-                            <rect x="40" width="20" height="90" fill="#ffffff"/>
-                            <rect y="35" width="100" height="20" fill="#ffffff"/>
-                            <rect x="43" width="14" height="90" fill="#c8102e"/>
-                            <rect y="38" width="100" height="14" fill="#c8102e"/>
-                        </g>
-                    </svg>
-                </div>
-            `;
-
-            const topCategories = [
-                {
-                    title: greekHeartSvgHtml,
-                    isCustomHtml: true,
-                    isGrid: true,
-                    ranges: greekRanges,
-                    data: SONGS_DB.greek
-                },
-                {
-                    title: britishHeartSvgHtml,
-                    isCustomHtml: true,
-                    isGrid: false,
-                    ranges: [
-                        { label: "A - Z", filter: () => true }
-                    ],
-                    data: SONGS_DB.english
-                }
-            ];
-
-            document.addEventListener('click', (e) => {
-                if (!e.target.closest('.navbar-container')) {
-                    document.querySelectorAll('.nav-item.active, .submenu-item.active').forEach(el => el.classList.remove('active'));
-                }
-            });
-
-            topCategories.forEach(topCat => {
-                const navItem = document.createElement("li");
-                navItem.className = "nav-item";
-
-                let hideTimeout = null;
-
-                navItem.addEventListener('mouseenter', () => {
-                    clearTimeout(hideTimeout);
-                    document.querySelectorAll('.nav-item').forEach(i => {
-                        if (i !== navItem) i.classList.remove('active');
-                    });
-                    navItem.classList.add('active');
-                });
-
-                navItem.addEventListener('mouseleave', () => {
-                    hideTimeout = setTimeout(() => {
-                        navItem.classList.remove('active');
-                    }, 350);
-                });
-
-                const navLink = document.createElement("a");
-                navLink.className = "nav-link" + (topCat.isCustomHtml ? " flag-nav-link" : "");
-                if (topCat.isCustomHtml) {
-                    navLink.innerHTML = topCat.title;
-                } else {
-                    navLink.textContent = topCat.title;
-                }
-                navItem.appendChild(navLink);
-
-                const level1Submenu = document.createElement("ul");
-                level1Submenu.className = "submenu" + (topCat.isGrid ? " alphabet-grid" : "");
-
-                topCat.ranges.forEach(range => {
-                    const matchingComposers = topCat.data.filter(group => range.filter(group.category));
-                    if (matchingComposers.length === 0) return;
-
-                    const level1Item = document.createElement("li");
-                    level1Item.className = "submenu-item";
-
-                    let rangeTimeout = null;
-                    level1Item.addEventListener('mouseenter', () => {
-                        clearTimeout(rangeTimeout);
-                        level1Submenu.querySelectorAll(':scope > .submenu-item').forEach(i => {
-                            if (i !== level1Item) i.classList.remove('active');
-                        });
-                        level1Item.classList.add('active');
-                        
-                        const sub = level1Item.querySelector(':scope > .submenu');
-                        if (sub) {
-                            sub.classList.remove('flip-left');
-                            const rect = sub.getBoundingClientRect();
-                            if (rect.right > window.innerWidth - 10) {
-                                sub.classList.add('flip-left');
-                            }
-                        }
-                    });
-
-                    level1Item.addEventListener('mouseleave', () => {
-                        rangeTimeout = setTimeout(() => {
-                            level1Item.classList.remove('active');
-                        }, 350);
-                    });
-
-                    const profileImgs = [];
-                    matchingComposers.forEach(group => {
-                        if (group.songs.length > 0 && group.songs[0].script) {
-                            const lastSlash = group.songs[0].script.lastIndexOf('/');
-                            if (lastSlash !== -1) {
-                                const folder = group.songs[0].script.substring(0, lastSlash + 1);
-                                profileImgs.push(folder + "Profile.jpeg");
-                            }
-                        }
-                    });
-
-                    const collageImgs = profileImgs.slice(0, 4);
-                    let collageHtml = "";
-                    if (collageImgs.length > 0) {
-                        collageHtml = `<div class="menu-collage-grid">`;
-                        for (let c = 0; c < 4; c++) {
-                            const imgSrc = collageImgs[c % collageImgs.length];
-                            collageHtml += `<img src="${imgSrc}" class="menu-collage-img" onerror="this.style.opacity='0.2'">`;
-                        }
-                        collageHtml += `</div>`;
-                    }
-
-                    const level1Link = document.createElement("a");
-                    level1Link.className = "submenu-link";
-                    level1Link.innerHTML = `
-                        <div class="range-with-collage">
-                            ${collageHtml}
-                            <span>${range.label}</span>
-                        </div>
-                        <span class="arrow">»</span>
-                    `;
-                    level1Item.appendChild(level1Link);
-
-                    const level2Submenu = document.createElement("ul");
-                    level2Submenu.className = "submenu";
-
-                    matchingComposers.forEach(composerGroup => {
-                        const level2Item = document.createElement("li");
-                        level2Item.className = "submenu-item";
-
-                        let compTimeout = null;
-                        level2Item.addEventListener('mouseenter', () => {
-                            clearTimeout(compTimeout);
-                            level2Submenu.querySelectorAll(':scope > .submenu-item').forEach(i => {
-                                if (i !== level2Item) i.classList.remove('active');
-                            });
-                            level2Item.classList.add('active');
-
-                            const sub = level2Item.querySelector(':scope > .submenu');
-                            if (sub) {
-                                sub.classList.remove('flip-left');
-                                const rect = sub.getBoundingClientRect();
-                                if (rect.right > window.innerWidth - 10) {
-                                    sub.classList.add('flip-left');
-                                }
-                            }
-                        });
-
-                        level2Item.addEventListener('mouseleave', () => {
-                            compTimeout = setTimeout(() => {
-                                level2Item.classList.remove('active');
-                            }, 350);
-                        });
-
-                        const level2Link = document.createElement("a");
-                        level2Link.className = "submenu-link";
-
-                        let folderPath = "Songs/Traditional/";
-                        if (composerGroup.songs.length > 0 && composerGroup.songs[0].script) {
-                            const lastSlash = composerGroup.songs[0].script.lastIndexOf('/');
-                            if (lastSlash !== -1) {
-                                folderPath = composerGroup.songs[0].script.substring(0, lastSlash + 1);
-                            }
-                        }
-                        const profileImgSrc = folderPath + "Profile.jpeg";
-
-                        level2Link.innerHTML = `
-                            <div class="composer-with-avatar">
-                                <img src="${profileImgSrc}" class="composer-avatar" alt="${composerGroup.category}" onerror="this.style.display='none'">
-                                <span>${composerGroup.category}</span>
-                            </div>
-                            <span class="arrow">»</span>
-                        `;
-
-                        level2Item.appendChild(level2Link);
-
-                        const level3Submenu = document.createElement("ul");
-                        level3Submenu.className = "submenu";
-
-                        composerGroup.songs.forEach(song => {
-                            const level3Item = document.createElement("li");
-                            level3Item.className = "submenu-item";
-
-                            let songTimeout = null;
-                            level3Item.addEventListener('mouseenter', () => {
-                                clearTimeout(songTimeout);
-                                level3Submenu.querySelectorAll(':scope > .submenu-item').forEach(i => {
-                                    if (i !== level3Item) i.classList.remove('active');
-                                });
-                                level3Item.classList.add('active');
-                            });
-
-                            level3Item.addEventListener('mouseleave', () => {
-                                songTimeout = setTimeout(() => {
-                                    level3Item.classList.remove('active');
-                                }, 350);
-                            });
-
-                            const level3Link = document.createElement("a");
-                            level3Link.className = "submenu-link";
-                            level3Link.textContent = song.label;
-                            level3Link.onclick = (e) => {
-                                e.preventDefault();
-                                e.stopPropagation();
-                                
-                                level3Item.classList.add('active');
-                                window.loadSongUI(song.value);
-                            };
-
-                            level3Item.appendChild(level3Link);
-                            level3Submenu.appendChild(level3Item);
-                        });
-
-                        level2Item.appendChild(level3Submenu);
-                        level2Submenu.appendChild(level2Item);
-                    });
-
-                    level1Item.appendChild(level2Submenu);
-                    level1Submenu.appendChild(level1Item);
-                });
-
-                navItem.appendChild(level1Submenu);
-                navMenuEl.appendChild(navItem);
-            });
-        }
-
-        loadAllSongScripts().then(() => {
-            buildMultilevelMenu();
-            const lastSong = localStorage.getItem("activeSongValue") || "roza";
-            loadSongUI(lastSong);
-        });
+      });
     });
-</script>
+  </script>
 
+  <!-- Scripts -->
+  <script src="images-logo.js" defer></script>
+  <script src="images-venue.js" defer></script>
+  <script src="images-events.js" defer></script>
+  <script src="schedule.js" defer></script>
+  <script src="menu.js" defer></script>
 </body>
 </html>
