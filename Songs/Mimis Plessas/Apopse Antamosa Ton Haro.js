@@ -1,6 +1,7 @@
 const apopseAntamosaTonHaroData = {
     "title": "Απόψε Αντάμωσα Τον Χάρο",
-    "rhythm": "Ζεϊμπέκικος",
+    "timeSignature": "9/8",
+    "rhythm": "Ζεϊμπέκικος (Μοντέρνος)",
     "artist": "Σταύρος Πασπαράκης",
     "composer": "Μίμης Πλέσσας",
     "lyricist": "Λευτέρης Παπαδόπουλος",
@@ -8,38 +9,38 @@ const apopseAntamosaTonHaroData = {
     "stanzas": [
         {
             "lines": [
-                { "rawInline": "(G#:green)     (A)           (B)         (A)     (G#)     (A)     (G#)" },
-                { "rawInline": "(G#)     (F#m)     (G#)      (C#m)" }
+                { "rawInline": "(G#:green)     (A)           (B)         (A)        (G#)      (A)      (G#)" },
+                { "rawInline": "(G#)           (F#m)         (G#)        (C#m)" }
             ]
         },
         {
             "lines": [
-                { "rawInline": "(C#m:red)Απόψε αντάμωσα το (A:red)Χάρο, σε μια γωνι(B:red)ά, στην Κοκκι(G#:red)νιά" },
-                { "rawInline": "(C#m:red)Έρχομαι μου 'πε, να σε (A:red)πάρω, ταξίδι (B:red)για τη λησμο(G#:red)νιά" }
+                { "rawInline": "(C#m:red)Απόψε αντ(A)άμωσ(B)α το (G#)Χάρο,(A) σε μια γων(G#)ιά, σ(A)την Κοκκιν(G#)ιά" },
+                { "rawInline": "(C#m:red)Έρχομαι μο(A)υ 'πε,(B) να σε (G#)πάρω, τα(C#m)ξίδι γι(B)α τη λησμονι(E)ά" }
             ]
         },
         {
             "lines": [
-                { "rawInline": "(F#m:blue)Κάν' το στερνό σου το (G#:blue)τσιγάρο κι άιντε ν' ανοίξουμε (C#m:blue)πανιά" },
-                { "rawInline": "(A:blue)Κάν' το στερνό σου το (G#:blue)τσιγάρο κι άιντε ν' ανοίξουμε (C#m:blue)πανιά" }
+                { "rawInline": "(F#m:blue)Κάν' το στερ(G#)νό σου το τσι(C#m)γάρο(B) κι άιντε ν' αν(G#)οίξουμ(A)ε παν(G#)ιά" },
+                { "rawInline": "(F#m:blue)Κάν' το στερ(G#)νό σου το τσι(C#m)γάρο(B) κι άιντε ν' αν(G#)οίξουμε πα(C#m)νιά" }
             ]
         },
         {
             "lines": [
-                { "rawInline": "(G#:green)     (A)           (B)         (A)     (G#)     (A)     (G#)" },
-                { "rawInline": "(G#)     (F#m)     (G#)      (C#m)" }
+                { "rawInline": "(G#:green)     (A)           (B)         (A)        (G#)      (A)      (G#)" },
+                { "rawInline": "(G#)           (F#m)         (G#)        (C#m)" }
             ]
         },
         {
             "lines": [
-                { "rawInline": "(C#m:red)Με πήγε στο, στενό κελί (A:red)του, που το φωτού(B:red)σε, ένα κε(G#:red)ρί" },
-                { "rawInline": "(C#m:red)Αργά που κύλησε η (A:red)νύχτα, γρήγορα (B:red)που 'φυγ' η ζωή" }
+                { "rawInline": "(C#m:red)Με πήγε στ(A)ο, στεν(B)ό κε(G#)λί του,(A) που το φωτ(G#)ούσε,(A) ένα κε(G#)ρί" },
+                { "rawInline": "(C#m:red)Αργά που κ(A)ύλησ(B)ε η (G#)νύχτα, γ(C#m)ρήγορα πο(B)υ 'φυγ' η ζω(E)ή" }
             ]
         },
         {
             "lines": [
-                { "rawInline": "(F#m:blue)Κι εγώ παντρεύτηκα τη (G#:blue)νύχτα, δεκαοκτώ (C#m:blue)χρονώ παιδί" },
-                { "rawInline": "(A:blue)Κι εγώ παντρεύτηκα τη (G#:blue)νύχτα, δεκαοκτώ (C#m:blue)χρονώ παιδί" }
+                { "rawInline": "(F#m:blue)Κάν' το στερ(G#)νό σου το τσι(C#m)γάρο(B) κι άιντε ν' αν(G#)οίξουμ(A)ε παν(G#)ιά" },
+                { "rawInline": "(F#m:blue)Κάν' το στερ(G#)νό σου το τσι(C#m)γάρο(B) κι άιντε ν' αν(G#)οίξουμε πα(C#m)νιά" }
             ]
         }
     ]

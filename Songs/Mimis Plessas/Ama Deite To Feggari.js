@@ -32,13 +32,13 @@ const amaDeiteToFeggariData = {
         },
         {
             "lines": [
-                { "rawInline": "(Bm:red)Το σκοτάδι (F#m)χίμηξε, (Bm:green)🪕απ' το παραθύρι, το κρασί σου (E)πάγωσε, μέσα στο πο(Bm)τήρι" },
-                { "rawInline": "(Em:red)Φάνηκαν στο π(A)έλαγο, (D:green)🪕κάτι πυρο(D:red)φάνια, (Em:green)🪕πέλαγος ατέλειωτο (G)🪕(F#m:red)κι η δική μου ορφ(A)άνια" }
+                { "rawInline": "(Bm:red)Το σκοτάδι (F#m)χίμηξε, (Bm:green)🪕α(E:red)π' το παρα(Bm)θύρι, (Bm:green)🪕το κρασί σου (F#m:red)πάγωσε, (Bm:green)🪕μ(E:red)έσα στο πο(Bm)τήρι (Bm:green)🪕" },
+                { "rawInline": "(Em:red)Φάνηκαν στο π(A)έλαγο, (D:green)🪕κάτι πυροφ(D:red)άνια, (Em:green)🪕πέλαγος ατέλειωτο (G)🪕(F#m:red)κι η δική μου ορφ(A)άνια" }
             ]
         },
         {
             "lines": [
-                { "rawInline": "(Em:blue)Άμα δείτε το φεγγά(Bm)ρι, να του πείτε να μη (F#)βγει (F#:green)🪕, (Em:blue)να μη δει τα δ(D)άκρυά μου(Em), που πλημμύρισ(A)αν (F#m)τη γη(Bm) ([X2]:black)" }
+                { "rawInline": "(Em:blue)Άμα δείτε το φεγγά(Bm)ρι, να του πείτε να μη (F#)βγει (F#:green)🪕, (Em:blue)να μη δει τα δ(D)άκρυά μου(Em), που πλημμύρισ(A)αν (F#m)τη γη(Bm) " }
             ]
         }
     ]
