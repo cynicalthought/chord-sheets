@@ -1,5 +1,6 @@
 const toPalikariEhiKaimoData = {
     "title": "Το Παλληκάρι Έχει Καϋμό",
+    "timeSignature": "2/4",
     "rhythm": "Χασαποσέρβικος",
     "artist": "Γιώργος Καπερνάρος",
     "composer": "Μίκης Θεοδωράκης",
@@ -8,35 +9,35 @@ const toPalikariEhiKaimoData = {
     "stanzas": [
         {
             "lines": [
-                { "rawInline": "(Ab:green)   (Bbm)   (Ab) [X2]" }
+                { "rawInline": "(Ab:green)   (Bbm)   (Ab) ([X2]:black)" }
             ]
         },
         {
             "lines": [
-                { "rawInline": "(Ab)Το παλικάρι έχει καημό κι εγώ στα μάτια το κοιτώ (Eb)" },
-                { "rawInline": "(Ab:blue)Και το κοιτώ και δε μιλώ (Db), απόψε, απόψε που έχει τον καημό (Ab)                          (Eb)                            (Ab) [X2]" }
+                { "rawInline": "(Ab:red)Το παλικάρι έχει καημό κι εγώ στα (Eb)μάτια το κοι(Ab)τώ" },
+                { "rawInline": "Και το κοιτώ και δε μι(Ab:blue)λώ, α(Db)πόψε, α(Ab)πόψε που(Eb) έχει τον καη(Ab)μό ([X2]:black)" }
             ]
         },
         {
             "lines": [
-                { "rawInline": "(Ab:green)   (Bbm)   (Ab) [X2]" }
+                { "rawInline": "(Ab:green)   (Bbm)   (Ab) ([X2]:black)" }
             ]
         },
         {
             "lines": [
-                { "rawInline": "(Ab)‘βδομάδα πάει χωρίς δουλειά κι έξω χιονίζει και φυσά (Eb)" },
-                { "rawInline": "(Ab:blue)Χωρίς τσιγάρο και δουλειά (Db), απόψε, απόψε το δάκρυ του κυλά (Ab)                              (Eb)                                (Ab) [X2]" }
+                { "rawInline": "(Ab:red)‘βδομάδα πάει χωρίς δουλειά κι έξω χιο(Eb)νίζει και φυ(Ab)σά" },
+                { "rawInline": "Χωρίς τσιγάρο και δουλε(Ab:blue)ιά, α(Db)πόψε, α(Ab)πόψε το (Eb)δάκρυ του κυ(Ab)λά ([X2]:black)" }
             ]
         },
         {
             "lines": [
-                { "rawInline": "(Ab:green)   (Bbm)   (Ab) [X2]" }
+                { "rawInline": "(Ab:green)   (Bbm)   (Ab) ([X2]:black)" }
             ]
         },
         {
             "lines": [
-                { "rawInline": "(Ab)Το παλικάρι έχει καημό και σε κανέναν δε μιλά (Eb)" },
-                { "rawInline": "(Ab:blue)Μα όταν κοιτάει τον ουρανό (Db), απόψε, απόψε μου σκίζει την καρδιά (Ab)                               (Eb)                                (Ab) [X3]" }
+                { "rawInline": "(Ab:red)Το παλικάρι έχει καημό, μα όταν κοι(Eb)τά τον ουρα(Ab)νό" },
+                { "rawInline": "Τα μάτια του είναι δυο πουλ(Ab:blue)ιά, α(Db)πόψε, α(Ab)πόψε μου σ(Eb)κίζει την καρδ(Ab)ιά ([X3]:black)" }
             ]
         }
     ]
