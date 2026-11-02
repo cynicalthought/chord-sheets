@@ -1,6 +1,7 @@
 const kakesSinithiesData = {
     "title": "Κακές Συνήθειες",
-    "rhythm": "4/4",
+    "timeSignature": "4/4",
+    "rhythm": "",
     "artist": "Μίλτος Πασχαλίδης",
     "composer": "Μίλτος Πασχαλίδης",
     "lyricist": "Μίλτος Πασχαλίδης",
