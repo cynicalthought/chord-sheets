@@ -1,6 +1,7 @@
 const goniaGoniaData = {
     "title": "Γωνιά-Γωνιά",
-    "rhythm": "Ζεϊμπέκικος",
+    "timeSignature": "9/8",
+    "rhythm": "Ζεϊμπέκικος (Μοντέρνος)",
     "artist": "Γρηγόρης Μπιθικώτσης",
     "composer": "Μίκης Θεοδωράκης",
     "lyricist": "Δημήτρης Χριστοδούλου",
@@ -13,15 +14,15 @@ const goniaGoniaData = {
         },
         {
             "lines": [
-                { "rawInline": "Γωνιά-γωνιά σε καρτερώ (Em), γωνιά-γωνιά σε ψάχνω (Bm) (F#) (Bm) (Em:green) (Bm) (F#) (Bm) (Em) (Bm) (F#) (Bm) (Em:green) (Bm) (F#) (Bm)" },
-                { "rawInline": "Ψάχνω να βρω τα μάτια σου κι απ' τον καημό (D), κι απ' τον καημό τα χάνω (A) (D) (D:green) (A) (D) (Em) (Bm:red)                               (F#) (Bm)" }
+                { "rawInline": "Γων(Em:red)ιά-γων(Bm)ιά σε (F#)καρτε(Bm)ρώ, (Em Bm F# Bm:green)🪕🪕🪕🪕γων(Em:red)ιά-γων(Bm)ιά σε (F#)ψάχ(Bm)νω(_)(Em Bm F# Bm:green)🪕🪕🪕🪕" },
+                { "rawInline": "Ψ(D:red)άχνω να βρω τα μ(A)άτια σ(D)ου (D A D Em:green)🪕🪕🪕🪕κι απ' τον καη(Bm:red)μό, κι απ' τον καη(F#)μό τα χά(Bm)νω" }
             ]
         },
         {
             "lines": [
-                { "rawInline": "(Bm:blue)Για αλλού απλώνεται δροσιά (A), για αλλού χιονιάς σφυρίζει (G) (F#) (Bm:green) (A) (G) (F#) (Bm:blue) (A) (G) (F#) (Bm:green) (A) (G) (F#)" },
-                { "rawInline": "(Bm:blue)Και τ' όνειρο που χάνεται πάει και δε γυρίζει (G)                                  (F#) (Em)     (G)               (F#)" },
-                { "rawInline": "(Bm:blue)Και τ' όνειρο που χάνεται πάει και δε γυρίζει (G)                                  (F#) (Em)          (F#)" }
+                { "rawInline": "Για αλλ(Bm:blue)ού απλ(A)ώνετα(G)ι δροσ(F#)ιά, (Bm A G F#:green)🪕🪕🪕🪕για αλλ(Bm:blue)ού χιονι(A)άς σφυ(G)ρίζ(F#)ει(_)(Bm A G F#:green)🪕🪕🪕🪕" },
+                { "rawInline": "Κ(Bm:blue)αι τ' όνειρ(G)ο που χάνετ(F#)αι, (Em)πάει και δ(G)ε γυρίζ(F#)ει" },
+                { "rawInline": "Κ(Bm:blue)αι τ' όνειρ(G)ο που χάνετ(F#)αι, (Em)πάει και δε γυρίζ(F#)ει" }
             ]
         },
         {
@@ -31,15 +32,15 @@ const goniaGoniaData = {
         },
         {
             "lines": [
-                { "rawInline": "Γωνιά-γωνιά σε ζήτησα (Em), γωνιά-γωνιά σε βρήκα (Bm) (F#) (Bm) (Em:green) (Bm) (F#) (Bm) (Em) (Bm) (F#) (Bm) (Em:green) (Bm) (F#) (Bm)" },
-                { "rawInline": "Σου φίλησα τα μάτια σου και στους καημούς (D), και στους καημούς σου μπήκα (A) (D) (D:green) (A) (D) (Em) (Bm:red)                                     (F#)         (Bm)" }
+                { "rawInline": "Γων(Em:red)ιά-γων(Bm)ιά σε (F#)ζήτη(Bm)σα, (Em Bm F# Bm:green)🪕🪕🪕🪕γων(Em:red)ιά-γων(Bm)ιά σε β(F#)ρήκ(Bm)α(_)(Em Bm F# Bm:green)🪕🪕🪕🪕" },
+                { "rawInline": "Σο(D:red)υ φίλησα τα μ(A)άτια σ(D)ου (D A D Em:green)🪕🪕🪕🪕και στους καημ(Bm:red)ούς, και στους καη(F#)μούς σου μπή(Bm)κα" }
             ]
         },
         {
             "lines": [
-                { "rawInline": "(Bm:blue)Για αλλού απλώνεται δροσιά (A), για αλλού χιονιάς σφυρίζει (G) (F#) (Bm:green) (A) (G) (F#) (Bm:blue) (A) (G) (F#) (Bm:green) (A) (G) (F#)" },
-                { "rawInline": "(Bm:blue)Και τ' όνειρο που χάνεται πάει και δε γυρίζει (G)                                  (F#) (Em)     (G)               (F#)" },
-                { "rawInline": "(Bm:blue)Και τ' όνειρο που χάνεται πάει και δε γυρίζει (G)                                  (F#) (Em)          (F#)" }
+                { "rawInline": "Για αλλ(Bm:blue)ού απλ(A)ώνετα(G)ι δροσ(F#)ιά, (Bm A G F#:green)🪕🪕🪕🪕για αλλ(Bm:blue)ού χιονι(A)άς σφυ(G)ρίζ(F#)ει(_)(Bm A G F#:green)🪕🪕🪕🪕" },
+                { "rawInline": "Κ(Bm:blue)αι τ' όνειρ(G)ο που χάνετ(F#)αι, (Em)πάει και δ(G)ε γυρίζ(F#)ει" },
+                { "rawInline": "Κ(Bm:blue)αι τ' όνειρ(G)ο που χάνετ(F#)αι, (Em)πάει και δε γυρίζ(F#)ει" }
             ]
         }
     ]

@@ -1,6 +1,7 @@
 const drapetsonaData = {
     "title": "Δραπετσώνα",
-    "rhythm": "Ζεϊμπέκικος",
+    "timeSignature": "9/8",
+    "rhythm": "Ζεϊμπέκικος (Μοντέρνος)",
     "artist": "Γρηγόρης Μπιθικώτσης",
     "composer": "Μίκης Θεοδωράκης",
     "lyricist": "Τάσος Λειβαδίτης",

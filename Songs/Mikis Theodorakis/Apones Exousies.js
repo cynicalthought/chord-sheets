@@ -1,6 +1,6 @@
 const aponesExousiesData = {
     "title": "Άπονες Εξουσίες",
-    "rhythm": "9/8",
+    "timeSignature": "9/8",
     "rhythm": "Ζεϊμπέκικος (Μοντέρνος)",
     "artist": "Στέλιος Καζαντζίδης",
     "composer": "Μίκης Θεοδωράκης",
@@ -14,16 +14,16 @@ const aponesExousiesData = {
         },
         {
             "lines": [
-                { "rawInline": "(Bb:red)Μια νύχτα που βουλιάζανε, τα σπίτια μέσ' το χιόνι, καρδούλα μου (F)   (Bb) " },
+                { "rawInline": "(Bb:red)Μια νύχτα που βουλιάζανε, τα σπίτια μ(F)έσ' το χιό(Bb)νι, καρδούλα μου" },
                 { "rawInline": "(Bb:green)Στον κάτω δ(Eb:red)ρόμο του χωρι(Bb)ού, καρδούλα μου" },
-                { "rawInline": "Σκο(Bb7:green)τώσαν, Τον Αντώνη, Αντώνη μου (Eb:red) (Bb) (Eb) (Bb) " },
-                { "rawInline": "Σκο(Bb:green)τώσαν, Τον Αντώνη, Αντώνη μου (F:red)  (Bb) " }
+                { "rawInline": "Σκο(Bb7:green)τώσαν, (Eb:red)Τον Αν(Bb)τώ(Eb)νη, Αν(Bb)τώνη μου     " },
+                { "rawInline": "Σκο(Bb:green)τώσαν, Τ(F:red)ον Αντώνη(Bb), Αντώνη μου" }
             ]
         },
         {
             "lines": [
-                { "rawInline": "Μάνα, σε ξεκληρίσανε(Bb:blue), άπονες εξουσίες (F) (Bb) (F) (Eb) (Bb) (Eb) (Bb) " },
-                { "rawInline": "Ψυχή δε σου αφήσανε(Bb), μόνο, μόνο, μόνο φωτογραφίες (Cm) (F)  (Bb)" }
+                { "rawInline": "(Bb:blue)Μάνα, σε ξεκληρ(F)ίσα(Bb)νε, (F)άπ(Eb)ονες(Bb) εξου(Eb)σίες(Bb) " },
+                { "rawInline": "Ψυ(Bb:green)χή δε σου αφήσανε, (Cm:blue)μόνο, μ(F)όνο, (Bb)μόνο φωτογραφίες" }
             ]
         },
         {
@@ -33,16 +33,16 @@ const aponesExousiesData = {
         },
         {
             "lines": [
-                { "rawInline": "Ο ένας γιος της μπάρκαρε(Bb:red), κρυφά από τη Μεθώνη (F)   (Bb) " },
-                { "rawInline": "Τον άλλον τον συλλάβα(Bb)νε, καρδούλα μου (Eb)   (Bb) " },
-                { "rawInline": "Γιατί ‘ταν γιος Του Αντώνη(Bb7), Αντώνη μου (Eb) (Bb) (Eb) (Bb) " },
-                { "rawInline": "Γιατί ‘ταν γιος Του Αντώνη(Bb), Αντώνη μου (F)               (Bb) " }
+                { "rawInline": "(Bb:red)Ο ένας γιος της μπάρκαρε, κρυφά από τ(F)η Μεθώ(Bb)νη" },
+                { "rawInline": "(Bb:green)Τον άλλον (Eb:red)τον συλλάβα(Bb)νε, καρδούλα μου" },
+                { "rawInline": "Για(Bb7:green)τί ‘ταν γ(Eb:red)ιος Του Αν(Bb)τώ(Eb)νη, Αντώνη μ(Bb)ου" },
+                { "rawInline": "Για(Bb:green)τί ‘ταν γι(F:red)ος Του Αντώνη(Bb), Αντώνη μου" }
             ]
         },
         {
             "lines": [
-                { "rawInline": "Μάνα, σε ξεκληρίσανε(Bb:blue), άπονες εξουσίες (F) (Bb) (F) (Eb) (Bb) (Eb) (Bb) " },
-                { "rawInline": "Ψυχή δε σου αφήσανε(Bb), μόνο, μόνο, μόνο φωτογραφίες (Cm) (F) (Bb) ([X2]:black)" }
+                { "rawInline": "(Bb:blue)Μάνα, σε ξεκληρ(F)ίσα(Bb)νε, (F)άπ(Eb)ονες(Bb) εξου(Eb)σίες(Bb) " },
+                { "rawInline": "Ψυ(Bb:green)χή δε σου αφήσανε, (Cm:blue)μόνο, μ(F)όνο, (Bb)μόνο φωτογραφίες ([X2]:black)" }
             ]
         }
     ]

@@ -1,5 +1,6 @@
 const vrehiStiFtohogitoniaData = {
     "title": "Βρέχει Στη Φτωχογειτονιά",
+    "timeSignature": "9/8",
     "rhythm": "Ζεϊμπέκικος/Παραλλαγή",
     "artist": "Γρηγόρης Μπιθικώτσης",
     "composer": "Μίκης Θεοδωράκης",
@@ -8,44 +9,52 @@ const vrehiStiFtohogitoniaData = {
     "stanzas": [
         {
             "lines": [
-                { "rawInline": "(C)   (G)   (Am)   (Bm)" },
-                { "rawInline": "(C)   (G)   (Em)   (Am)   (B)   (Em) [X2]" }
+                { "rawInline": "(C:green)   (G)   (Am)   (Bm)   (🎼)" },
+                { "rawInline": "(C)         (G)   (Em)   (Am)   (B)   (Em)  ([X2]:black)" }
             ]
         },
         {
             "lines": [
-                { "rawInline": "Μικρά κι ανήλιαγα στενά και σπίτια χαμηλά μου (Em)                                         (D)     (C)    (B)" },
-                { "rawInline": "Βρέχει στη φτωχογειτονιά (Em), βρέχει και στην καρδιά μου, ω (D) (Em) (D)" },
-                { "rawInline": "Βρέχει στη φτωχογειτονιά (G), βρέχει και στην καρδιά μου (B) (C) (D) (C) (B) (D) (G) (B) (Am) (B) (Em) (D) (G) (B) (Em) (D)" },
-                { "rawInline": "Βρέχει στη φτωχογειτονιά (G), βρέχει και στην καρδιά μου (B) (C) (D) (C) (B) (D) (G) (B) (Am) (B) (Em)" }
+                { "rawInline": "(Em:red)Μικρά κι αν(D)ήλιαγ(C)α στεν(B)ά κ(Em)αι σπίτια χ(D)αμηλά μ(Em)ου (_)(D:green)🪕" },
+                { "rawInline": "Βρ(G:red)έχε(B)ι στη φτ(C)ωχογε(D)ιτο(C)νι(B)ά, (D:green)🪕βρ(G:red)έχε(B)ι και σ(Am)την καρδι(B)ά μ(Em)ου, (D)ω, (G)ω, (B)ω,(Em) ω (_)(D:green)🪕" },
+                { "rawInline": "Βρ(G:red)έχε(B)ι στη φτ(C)ωχογε(D)ιτο(C)νι(B)ά, (D:green)🪕βρ(G:red)έχε(B)ι και σ(Am)την καρδι(B)ά μ(Em)ου" }
             ]
         },
         {
             "lines": [
-                { "rawInline": "(Em)   (B)   (Am)   (B)   (Em)" },
-                { "rawInline": "Αχ ψεύτη κι άδικε ντουνιά (D), ω, π' άναψες τον καημό μου (G) (Am) (B) (Em) (D) (C) (D) (G)" },
-                { "rawInline": "Είσαι μικρός και δεν χωράς (Am), τον αναστε-, τον αναστεναγμό μου (B) (Em) (C) (G) (Am) (Bm) (C) (Em) (Am) (B) (Em) [X2]" }
+                { "rawInline": "(Em:green)   (B)   (Am)   (B)   (Em)  (🎼)" },
             ]
         },
         {
             "lines": [
-                { "rawInline": "(C)   (G)   (Am)   (Bm)" },
-                { "rawInline": "(C)   (G)   (Em)   (Am)   (B)   (Em)" }
+                
+                { "rawInline": "(D:blue)Αχ ψε(G)ύτη κι(Am) άδικ(B)ε ντουν(Em)ιά, ω(D), ω, ω, (C)ω, (D)π' άν(G)αψες (Am)τον καημ(B)ό μ(Em)ου" },
+                { "rawInline": "Ε(C)ίσαι μικρός και δεν χωρ(G)ά-,(Am) α-, (Bm)ας, τ(C)ον ανασ(Em)τε-, τον ανασ(Am)τεναγμ(B)ό μ(Em)ου([X2]:black)" }
             ]
         },
         {
             "lines": [
-                { "rawInline": "Οι συμφορές αμέτρητες, δεν έχει ο κόσμος άλλες (Em)                                              (D)      (C)    (B)" },
-                { "rawInline": "Πέφτουν οι μέρες μου βαριές σαν της βροχής τις στάλες, ω (Em) (D) (C) (D)" },
-                { "rawInline": "Πέφτουν οι μέρες μου βαριές (G), σαν της βροχής τις στάλες (B) (C) (D) (C) (B) (D) (G) (B) (Am) (B) (Em) (D) (G) (B) (Em) (D)" },
-                { "rawInline": "Πέφτουν οι μέρες μου βαριές (G), σαν της βροχής τις στάλες (B) (C) (D) (C) (B) (D) (G) (B) (Am) (B) (Em)" }
+                { "rawInline": "(C:green)   (G)   (Am)   (Bm)   (🎼)" },
+                { "rawInline": "(C)         (G)   (Em)   (Am)   (B)   (Em)" }
             ]
         },
         {
             "lines": [
-                { "rawInline": "(Em)   (B)   (Am)   (B)   (Em)" },
-                { "rawInline": "Αχ ψεύτη κι άδικε ντουνιά (D), ω, π' άναψες τον καημό μου (G) (Am) (B) (Em) (D) (C) (D) (G)" },
-                { "rawInline": "Είσαι μικρός και δεν χωράς (Am), τον αναστε-, τον αναστεναγμό μου (B) (Em) (C) (G) (Am) (Bm) (C) (Em) (Am) (B) (Em) [X2]" }
+                { "rawInline": "(Em:red)Οι συμφορ(D)ές αμ(C)έτρητ(B)ες, (Em)δεν έχει ο κ(D)όσμος άλλ(C)ες (_)(D:green)🪕" },
+                { "rawInline": "Π(G:red)έφτο(G)υν οι μ(C)έρες μο(D)υ β(C)αρι(B)ές, (D:green)🪕σ(G:red)αν τ(B)ης βρο(Am)χής τις σ(B)τά(Em)λες, (D)ω, (G)ω, (B)ω,(Em) ω (_)(D:green)🪕" },
+                { "rawInline": "Π(G:red)έφτο(G)υν οι μ(C)έρες μο(D)υ β(C)αρι(B)ές, (D:green)🪕σ(G:red)αν τ(B)ης βρο(Am)χής τις στ(B)άλ(Em)ες" }
+            ]
+        },
+        {
+            "lines": [
+                { "rawInline": "(Em:green)   (B)   (Am)   (B)   (Em)  (🎼)" },
+            ]
+        },
+        {
+            "lines": [
+                
+                { "rawInline": "(D:blue)Αχ ψε(G)ύτη κι(Am) άδικ(B)ε ντουν(Em)ιά, ω(D), ω, ω, (C)ω, (D)π' άν(G)αψες (Am)τον καημ(B)ό μ(Em)ου" },
+                { "rawInline": "Ε(C)ίσαι μικρός και δεν χωρ(G)ά-,(Am) α-, (Bm)ας, τ(C)ον ανασ(Em)τε-, τον ανασ(Am)τεναγμ(B)ό μ(Em)ου([X2]:black)" }
             ]
         }
     ]
