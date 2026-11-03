@@ -9,12 +9,12 @@ const apohairetismos1966Data = {
     "stanzas": [
         {
             "lines": [
-                { "rawInline": "(Db:green)     (Ebm)     (Ab)     (Db)     (Fm)     (Bbm)" }
+                { "rawInline": "(Db:green)     (Ebm)     (Ab)     (Db)     (F)     (Bbm)" }
             ]
         },
         {
             "lines": [
-                { "rawInline": "Με (Bbm:red)τί καρδ(Ab)ιά να σ'(Ebm) αποχαιρετήσω; Με τί καρδ(Ab)ιά τραγ(Ebm)ούδι να σου (Bbm)πω;" },
+                { "rawInline": "Με (Bbm:red)τί καρδ(Ab)ιά να σ'(Ebm) αποχαιρε(Bbm)τήσω; Με τί καρδ(Ab)ιά τραγ(Ebm)ούδι να σου (Bbm)πω;" },
                 { "rawInline": "Στον (Db)ουρα(Ebm)νό με τ'(Ab) όνειρο θα (Db)ζήσω, στον ουρα(Ebm)νό σαν(Ab) άστρο θα χα(Db)θώ" }
             ]
         },
@@ -25,7 +25,7 @@ const apohairetismos1966Data = {
         },
         {
             "lines": [
-                { "rawInline": "(Db:green)     (Ebm)     (Ab)     (Db)     (Fm)     (Bbm)" }
+                { "rawInline": "(Db:green)     (Ebm)     (Ab)     (Db)     (F)     (Bbm)" }
             ]
         },
         {
