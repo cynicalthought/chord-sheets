@@ -1,6 +1,7 @@
 const autiINyhtaMeneiData = {
     "title": "Αυτή Η Νύχτα Μένει",
-    "rhythm": "Ζεϊμπέκικος",
+    "timeSignature": "9/8",
+    "rhythm": "Ζεϊμπέκικος (Μοντέρνος)",
     "artist": "Δήμητρα Παπίου",
     "composer": "Σταμάτης Κραουνάκης",
     "lyricist": "Σταμάτης Κραουνάκης",
