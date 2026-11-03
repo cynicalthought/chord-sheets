@@ -7,6 +7,12 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Marcellus&display=swap');
 
+        html {
+            /* Stop iOS Safari from auto-inflating text while scrolling */
+            -webkit-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+        }
+
         body {
             background-color: #1a1612;
             font-family: 'Marcellus', serif;
@@ -93,7 +99,7 @@
             border: 1px solid #a48455;
             box-shadow: 0 6px 16px rgba(0,0,0,0.5);
             box-sizing: border-box;
-            min-width: 280px;
+            min-width: min(280px, calc(100vw - 16px));
             width: max-content;
             max-width: calc(100vw - 16px);
             max-height: calc(100vh - 16px);
@@ -152,7 +158,17 @@
             font-size: 1.1rem;
             cursor: pointer;
             transition: background 0.15s;
-            white-space: nowrap;
+            white-space: normal;           /* long names wrap instead of being cut off */
+            overflow-wrap: anywhere;
+            gap: 8px;
+            min-height: 44px;              /* comfortable touch target */
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: rgba(0,0,0,0.08);
+        }
+
+        .submenu-link > span,
+        .submenu-link > div {
+            min-width: 0;
         }
 
         .submenu-item.active > .submenu-link,
@@ -193,11 +209,15 @@
             display: flex;
             align-items: center;
             gap: 14px;
+            min-width: 0;
         }
+
+        .range-with-collage { min-width: 0; }
 
         .composer-avatar {
             width: 44px;
             height: 44px;
+            flex-shrink: 0;
             border-radius: 50%;
             object-fit: cover;
             border: 1px solid #a48455;
@@ -206,6 +226,16 @@
         .arrow {
             font-size: 0.9rem;
             margin-left: 10px;
+            flex-shrink: 0;
+            display: inline-block;
+            transition: transform 0.15s;
+        }
+
+        .nav-link {
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+            -webkit-user-select: none;
         }
 
         .sheet-container {
@@ -326,17 +356,34 @@
         @media (max-width: 750px) {
             .sheet-container { padding: 20px 15px; }
             .info-table th, .info-table td { font-size: 0.7em; padding: 3px; }
+            .nav-link { padding: 12px 14px; }
+        }
+
+        /* Phones, iPads and any touch-only device: sub-menus open as an
+           accordion (tap to expand / collapse) inside the visible menu panel,
+           so nothing can fall off the edge of the screen. */
+        @media (max-width: 900px), (hover: none) {
             .submenu .submenu {
                 position: static;
                 box-shadow: none;
+                border: none;
+                border-top: 1px solid #d4be9a;
+                background-color: rgba(120, 85, 40, 0.08);
                 width: auto;
+                min-width: 0;
                 max-width: none;
-                max-height: none;
+                max-height: none !important;
                 overflow: visible;
             }
+            .submenu .submenu > .submenu-item > .submenu-link { padding-left: 30px; }
+            .submenu .submenu .submenu > .submenu-item > .submenu-link { padding-left: 46px; }
             .submenu.alphabet-grid {
-                grid-template-columns: repeat(3, 1fr);
+                grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
             }
+            .alphabet-grid > .submenu-item.active { grid-column: 1 / -1; }
+            .submenu-item.active > .submenu-link .arrow { transform: rotate(90deg); }
+            .submenu-item:hover > .submenu-link { background-color: transparent; }
+            .submenu-item.active > .submenu-link { background-color: #e2cca8; }
         }
     </style>
 </head>
@@ -599,7 +646,16 @@
             fitSong();
         }
 
-        window.addEventListener('resize', fitSong);
+        // iPad Safari fires 'resize' while scrolling (toolbar show/hide changes the
+        // viewport height). Only refit when the WIDTH actually changes (e.g. rotation),
+        // so the chord/lyric size stays fixed while scrolling.
+        let lastFitWidth = window.innerWidth;
+        window.addEventListener('resize', () => {
+            if (window.innerWidth !== lastFitWidth) {
+                lastFitWidth = window.innerWidth;
+                fitSong();
+            }
+        });
 
         function buildMultilevelMenu() {
             navMenuEl.innerHTML = "";
@@ -750,10 +806,54 @@
             window.addEventListener('orientationchange', queueReposition);
             window.addEventListener('scroll', queueReposition, true);
 
-            document.addEventListener('click', (e) => {
-                if (!e.target.closest('.navbar-container')) {
-                    document.querySelectorAll('.nav-item.active, .submenu-item.active').forEach(el => el.classList.remove('active'));
+            /* ---- Touch support (iPad / phones) ----
+               Touch devices fake mouseenter/mouseleave events, which makes
+               hover-only menus unreliable. Track the last input type, ignore
+               those fake hover events, and open/close by tapping instead. */
+            let lastPointerType = 'mouse';
+            let lastTouchTime = 0;
+            document.addEventListener('pointerdown', (e) => {
+                lastPointerType = e.pointerType || 'mouse';
+                if (lastPointerType !== 'mouse') lastTouchTime = Date.now();
+            }, true);
+            const touchRecent = () => Date.now() - lastTouchTime < 1000;
+
+            function closeAllMenus() {
+                document.querySelectorAll('.nav-item.active, .submenu-item.active')
+                    .forEach(el => el.classList.remove('active'));
+            }
+
+            // Tap: toggle. Mouse click: just make sure it is open (hover opens it already).
+            function activateItem(item, siblingsParent) {
+                const isOpen = item.classList.contains('active');
+                const willOpen = lastPointerType === 'mouse' ? true : !isOpen;
+
+                siblingsParent.querySelectorAll(':scope > .active').forEach(sib => {
+                    if (sib !== item) {
+                        sib.classList.remove('active');
+                        sib.querySelectorAll('.active').forEach(x => x.classList.remove('active'));
+                    }
+                });
+
+                if (willOpen) {
+                    item.classList.add('active');
+                    positionSubmenu(item.querySelector(':scope > .submenu'));
+                    // In accordion mode make sure the opened section is visible
+                    const sub = item.querySelector(':scope > .submenu');
+                    if (sub && getComputedStyle(sub).position === 'static') {
+                        requestAnimationFrame(() => {
+                            item.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+                        });
+                    }
+                } else {
+                    item.classList.remove('active');
+                    item.querySelectorAll('.active').forEach(x => x.classList.remove('active'));
                 }
+            }
+
+            // pointerdown (not click) so iOS Safari reliably registers taps on the page background
+            document.addEventListener('pointerdown', (e) => {
+                if (!e.target.closest('.navbar-container')) closeAllMenus();
             });
 
             topCategories.forEach(topCat => {
@@ -763,6 +863,7 @@
                 let hideTimeout = null;
 
                 navItem.addEventListener('mouseenter', () => {
+                    if (touchRecent()) return;
                     clearTimeout(hideTimeout);
                     document.querySelectorAll('.nav-item').forEach(i => {
                         if (i !== navItem) i.classList.remove('active');
@@ -772,6 +873,7 @@
                 });
 
                 navItem.addEventListener('mouseleave', () => {
+                    if (touchRecent()) return;
                     hideTimeout = setTimeout(() => {
                         navItem.classList.remove('active');
                     }, 350);
@@ -784,6 +886,16 @@
                 } else {
                     navLink.textContent = topCat.title;
                 }
+                navLink.setAttribute('role', 'button');
+                navLink.setAttribute('aria-haspopup', 'true');
+                navLink.tabIndex = 0;
+                navLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    activateItem(navItem, navMenuEl);
+                });
+                navLink.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); lastPointerType = 'key'; activateItem(navItem, navMenuEl); }
+                });
                 navItem.appendChild(navLink);
 
                 const level1Submenu = document.createElement("ul");
@@ -798,6 +910,7 @@
 
                     let rangeTimeout = null;
                     level1Item.addEventListener('mouseenter', () => {
+                        if (touchRecent()) return;
                         clearTimeout(rangeTimeout);
                         level1Submenu.querySelectorAll(':scope > .submenu-item').forEach(i => {
                             if (i !== level1Item) i.classList.remove('active');
@@ -808,6 +921,7 @@
                     });
 
                     level1Item.addEventListener('mouseleave', () => {
+                        if (touchRecent()) return;
                         rangeTimeout = setTimeout(() => {
                             level1Item.classList.remove('active');
                         }, 350);
@@ -844,6 +958,11 @@
                         </div>
                         <span class="arrow">»</span>
                     `;
+                    level1Link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        activateItem(level1Item, level1Submenu);
+                    });
                     level1Item.appendChild(level1Link);
 
                     const level2Submenu = document.createElement("ul");
@@ -855,6 +974,7 @@
 
                         let compTimeout = null;
                         level2Item.addEventListener('mouseenter', () => {
+                            if (touchRecent()) return;
                             clearTimeout(compTimeout);
                             level2Submenu.querySelectorAll(':scope > .submenu-item').forEach(i => {
                                 if (i !== level2Item) i.classList.remove('active');
@@ -865,6 +985,7 @@
                         });
 
                         level2Item.addEventListener('mouseleave', () => {
+                            if (touchRecent()) return;
                             compTimeout = setTimeout(() => {
                                 level2Item.classList.remove('active');
                             }, 350);
@@ -890,6 +1011,11 @@
                             <span class="arrow">»</span>
                         `;
 
+                        level2Link.addEventListener('click', (e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            activateItem(level2Item, level2Submenu);
+                        });
                         level2Item.appendChild(level2Link);
 
                         const level3Submenu = document.createElement("ul");
@@ -901,6 +1027,7 @@
 
                             let songTimeout = null;
                             level3Item.addEventListener('mouseenter', () => {
+                                if (touchRecent()) return;
                                 clearTimeout(songTimeout);
                                 level3Submenu.querySelectorAll(':scope > .submenu-item').forEach(i => {
                                     if (i !== level3Item) i.classList.remove('active');
@@ -909,6 +1036,7 @@
                             });
 
                             level3Item.addEventListener('mouseleave', () => {
+                                if (touchRecent()) return;
                                 songTimeout = setTimeout(() => {
                                     level3Item.classList.remove('active');
                                 }, 350);
@@ -921,8 +1049,9 @@
                                 e.preventDefault();
                                 e.stopPropagation();
                                 
-                                level3Item.classList.add('active');
                                 window.loadSongUI(song.value);
+                                closeAllMenus();   // close the menu after choosing a song (essential on touch)
+                                window.scrollTo({ top: 0, behavior: 'smooth' });
                             };
 
                             level3Item.appendChild(level3Link);
