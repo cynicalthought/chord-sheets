@@ -1,6 +1,6 @@
 const deMasSighoroData = {
     "title": "Δεν Μας Συγχωρώ",
-    "timeSignature": "2/4",
+    "timeSignature": "9/8",
     "rhythm": "Ζεϊμπέκικος (Μοντέρνος)",
     "artist": "Νίκος Πορτοκάλογλου",
     "composer": "Νίκος Πορτοκάλογλου",
