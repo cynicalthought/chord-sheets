@@ -1,6 +1,7 @@
 const liomaSeGremoData = {
     "title": "Λιώμα Σε Γκρεμό",
-    "rhythm": "4/4",
+    "timeSignature": "4/4",
+    "rhythm": "",
     "artist": "Παντελής Παντελίδης",
     "composer": "Παντελής Παντελίδης",
     "lyricist": "Παντελής Παντελίδης",
