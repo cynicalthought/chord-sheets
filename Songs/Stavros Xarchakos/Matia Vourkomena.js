@@ -1,5 +1,6 @@
 const matiaVourkomenaData = {
     "title": "Μάτια Βουρκωμένα",
+    "timeSignature": "2/4",
     "rhythm": "Χασάπικος",
     "artist": "Δημήτρης Παπαμιχαήλ",
     "composer": "Σταύρος Ξαρχάκος",
@@ -8,30 +9,30 @@ const matiaVourkomenaData = {
     "stanzas": [
         {
             "lines": [
-                { "rawInline": "(Cm:green)     (Bb:green)     (Cm:green)     (Eb:green)     (Ab:green)     (Eb:green)     (Bb:green)" }
+                { "rawInline": "(Cm:green)     (Bb)     (Cm)     (Eb)     (Ab)     (Eb)     (Bb)" }
             ]
         },
         {
             "lines": [
-                { "rawInline": "(Eb:red)Κάτω στον Πειραιά, στα (C:red)Καμίνια, φτώχια, καλή καρδιά, (Fm:red)μα και γκρίνια" },
-                { "rawInline": "(Bb:red)Μάζεψα μια βραδιά, τα σαΐνια (C:red)κι ήρθα (Fm:red)ξανά τον παλιό (Gm:red)μου καημό (Ab:red)να σου (Bb:red)πω (Eb:red)" }
+                { "rawInline": "(Eb:red)Κάτω στον Πειραιά(C), στα Κα(Fm)μίνια, φ(Bb)τώχια, καλή καρδιά, μα και γκ(Eb)ρίνια" },
+                { "rawInline": "(Eb:green)Μάζεψα μια βραδιά(C:red), τα σ(Fm)αΐνια κι(Bb) ήρθα ξα(Ab)νά τον παλ(Gm)ιό μου καη(Fm)μό να σου (Eb)πω" }
             ]
         },
         {
             "lines": [
-                { "rawInline": "(Bb:blue)Μάτια (Ab:blue)βουρκωμένα, (Bb:blue)παραπονεμένα, (Eb:blue)δίχως αγάπη και πόνο (Ab:blue)κανένας (Gm:blue)δε (Fm:blue)ζει (Eb:blue)" },
-                { "rawInline": "(Bb:blue)Μάτια (Ab:blue)βουρκωμένα, (Bb:blue)πάρτε με και μένα, (Eb:blue)πάρ’ τε με τώρα να πάμε (Ab:blue)στον κόσμο (Gm:blue)μα(Fm:blue)ζί (Eb:blue)" }
+                { "rawInline": "(Bb:blue)Μάτια βουρκω(Ab)μένα, παραπονε(Bb)μέν(Eb)α, δ(Bb)ίχως α(Ab)γάπη και (Gm)πόνο κα(Fm)νένας δε ζ(Eb)ει" },
+                { "rawInline": "(Bb)Μάτια βουρκωμέ(Ab)να, πάρτε με και '(Bb)μέν(Eb)α, π(Bb)άρ’ τε με (Ab)τώρα να (Gm)πάμε στον (Fm)κόσμο μα(Eb)ζί" }
             ]
         },
         {
             "lines": [
-                { "rawInline": "(Eb:red)Κάτω στον Πειραιά, στο (C:red)Μουράγιο, είπα να σκοτω(Fm:red)θώ, μα τον άγιο" },
-                { "rawInline": "(Bb:red)Μα έκανα υπομονή και κουράγιο (C:red)κι ήρθα (Fm:red)κρυφά τον παλιό (Gm:red)μου καημό (Ab:red)να σου (Bb:red)πω (Eb:red)" }
+                { "rawInline": "(Eb:red)Κάτω στον Πειραιά(C), στο Μου(Fm)ράγιο, (Bb)είπα να σκοτωθώ, μα τον(Eb) άγιο" },
+                { "rawInline": "(Eb:green)Μα έκανα υπομονή(C:red) και κου(Fm)ράγιο κι(Bb) ήρθα ξα(Ab)νά τον παλ(Gm)ιό μου καη(Fm)μό να σου (Eb)πω" }
             ]
         },
         {
             "lines": [
-                { "rawInline": "(Bb:blue)Μάτια (Ab:blue)βουρκωμένα..." }
+                { "rawInline": "(Bb:blue)Μάτια βουρκω(Ab)μένα..." }
             ]
         }
     ]
