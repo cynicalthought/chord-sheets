@@ -7,6 +7,12 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Marcellus&display=swap');
 
+        html {
+            /* Stop iOS Safari from auto-inflating text while scrolling */
+            -webkit-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+        }
+
         body {
             background-color: #1a1612;
             font-family: 'Marcellus', serif;
@@ -640,7 +646,16 @@
             fitSong();
         }
 
-        window.addEventListener('resize', fitSong);
+        // iPad Safari fires 'resize' while scrolling (toolbar show/hide changes the
+        // viewport height). Only refit when the WIDTH actually changes (e.g. rotation),
+        // so the chord/lyric size stays fixed while scrolling.
+        let lastFitWidth = window.innerWidth;
+        window.addEventListener('resize', () => {
+            if (window.innerWidth !== lastFitWidth) {
+                lastFitWidth = window.innerWidth;
+                fitSong();
+            }
+        });
 
         function buildMultilevelMenu() {
             navMenuEl.innerHTML = "";
