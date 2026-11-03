@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Song Sheet Viewer</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Marcellus&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=GFS+Didot&family=Source+Sans+3:wght@400;500;600;700&display=swap');
 
         html {
             /* Stop iOS Safari from auto-inflating text while scrolling */
@@ -385,7 +385,220 @@
             .submenu-item:hover > .submenu-link { background-color: transparent; }
             .submenu-item.active > .submenu-link { background-color: #e2cca8; }
         }
+
+
+        /* ===== Design v2: editorial songbook ===== */
+        :root {
+            --ink: #1f1610;
+            --ink-soft: #6b4d2f;
+            --gold: #d9bd86;
+            --brass: #8f6f43;
+            --ui-font: 'Source Sans 3', 'Segoe UI', system-ui, -apple-system, sans-serif;
+            --display-font: 'GFS Didot', 'EB Garamond', 'Times New Roman', serif;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--ui-font);
+            background-color: #17120e;
+            background-image:
+                radial-gradient(ellipse at 50% -10%, rgba(140, 96, 48, 0.30) 0%, transparent 60%),
+                radial-gradient(ellipse at 50% 110%, rgba(0, 0, 0, 0.6) 0%, transparent 70%);
+            background-attachment: fixed;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+            padding-bottom: 48px;
+        }
+        ::selection { background: rgba(122, 76, 30, 0.35); }
+
+        /* ---- Navigation: espresso bar with gold type ---- */
+        .nav-menu {
+            background-image: linear-gradient(to bottom, #2e251d, #1f1812);
+            border: 1px solid #4d3c2b;
+            border-radius: 8px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 230, 180, 0.08);
+        }
+        .nav-link {
+            font-family: var(--ui-font);
+            font-weight: 600;
+            font-size: 0.95rem;
+            letter-spacing: 0.9px;
+            text-transform: uppercase;
+            color: #e8d6ae;
+            border-right: 1px solid rgba(217, 189, 134, 0.14);
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+        .nav-item:first-child > .nav-link { border-radius: 7px 0 0 7px; }
+        .nav-item:last-child > .nav-link { border-right: none; }
+        .nav-item.active > .nav-link,
+        .nav-item:hover > .nav-link {
+            background-color: rgba(217, 189, 134, 0.12);
+            background-image: none;
+            box-shadow: inset 0 -2px 0 var(--gold);
+            color: #f6e8c6;
+        }
+        .nav-link:focus-visible, .submenu-link:focus-visible {
+            outline: 2px solid var(--gold);
+            outline-offset: -3px;
+        }
+
+        /* ---- Dropdowns ---- */
+        .submenu {
+            background-color: #f4e7cc;
+            border: 1px solid var(--brass);
+            border-radius: 8px;
+            box-shadow: 0 14px 34px rgba(0, 0, 0, 0.6);
+        }
+        .submenu-item { border-bottom: 1px solid rgba(150, 115, 65, 0.28); }
+        .submenu-link {
+            font-family: var(--ui-font);
+            font-weight: 500;
+            font-size: 1.05rem;
+            color: var(--ink);
+            transition: background-color 0.18s ease;
+        }
+        .submenu-item.active > .submenu-link,
+        .submenu-item:hover > .submenu-link { background-color: #e6d2ab; }
+        .menu-collage-grid, .composer-avatar { box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35); }
+
+        /* ---- The sheet ---- */
+        .sheet-container {
+            border: 1px solid var(--brass);
+            border-radius: 8px;
+            padding: 52px 44px 46px;
+            box-shadow: 0 22px 60px rgba(0, 0, 0, 0.75),
+                        0 2px 6px rgba(0, 0, 0, 0.5),
+                        inset 0 0 90px rgba(80, 50, 20, 0.34),
+                        inset 0 0 0 1px rgba(255, 245, 220, 0.35);
+            background-image:
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .22 0 0 0 0 .1 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+                radial-gradient(circle at 50% 40%, rgba(255, 255, 255, 0.40) 0%, transparent 70%),
+                radial-gradient(circle at 10% 10%, #dcc499 0%, transparent 40%),
+                radial-gradient(circle at 90% 85%, #cfb485 0%, transparent 45%),
+                radial-gradient(circle at 50% 100%, #c3a373 0%, transparent 50%);
+        }
+        .sheet-container::before {
+            top: 14px; left: 14px; right: 14px; bottom: 14px;
+            border: 1px solid rgba(90, 60, 30, 0.5);
+            border-radius: 4px;
+            box-shadow: inset 0 0 0 4px rgba(244, 231, 204, 0.5),
+                        inset 0 0 0 5px rgba(90, 60, 30, 0.22);
+        }
+
+        /* ---- Song header ---- */
+        .song-header { text-align: center; margin-bottom: 30px; }
+        .song-title {
+            font-family: var(--display-font);
+            font-weight: 400;
+            font-size: clamp(1.9rem, 5vw, 2.9rem);
+            line-height: 1.15;
+            letter-spacing: 0.4px;
+            color: var(--ink);
+            margin: 0 0 22px;
+            text-wrap: balance;
+        }
+        .meta-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 14px 0;
+        }
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+            padding: 0 22px;
+            min-width: 0;
+        }
+        .meta-item + .meta-item { border-left: 1px solid rgba(90, 60, 30, 0.28); }
+        .meta-item:has(.meta-value:empty) { display: none; }
+        .meta-label {
+            font-family: var(--ui-font);
+            font-size: 0.68rem;
+            font-weight: 600;
+            letter-spacing: 1.8px;
+            text-transform: uppercase;
+            color: var(--ink-soft);
+        }
+        .meta-value {
+            font-family: 'EB Garamond', serif;
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--ink);
+            line-height: 1.25;
+        }
+        .ornament {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin: 28px 0 0;
+            color: var(--brass);
+        }
+        .ornament::before, .ornament::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(90, 60, 30, 0.6));
+        }
+        .ornament::after { background: linear-gradient(to left, transparent, rgba(90, 60, 30, 0.6)); }
+        .ornament span { font-size: 0.8rem; line-height: 1; }
+
+        /* ---- Chords & lyrics (sizes scale from .song-content) ---- */
+        .song-content { padding-top: 14px; line-height: 1.4; }
+        .lyric-line-block { margin-bottom: 20px; align-items: flex-end; }
+        .token-lyric {
+            font-family: 'EB Garamond', serif !important;
+            font-size: 1em;
+            font-weight: 500;
+            color: var(--ink);
+            line-height: 1.2;
+        }
+        .token-chord, .instrumental-chord {
+            font-family: var(--ui-font) !important;
+            font-size: 0.86em;
+            font-weight: 700;
+            letter-spacing: 0.2px;
+            line-height: 1.15;
+            min-height: 1.15em;
+            padding-bottom: 1px;
+        }
+
+        @media (max-width: 750px) {
+            .sheet-container { padding: 34px 20px 28px; }
+            .sheet-container::before { top: 8px; left: 8px; right: 8px; bottom: 8px; }
+            .meta-item { padding: 0 14px; }
+            .nav-link { font-size: 0.85rem; letter-spacing: 0.5px; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            * { transition: none !important; }
+        }
+
     </style>
+    <script>
+        /* Theme loader: Themes/<name>.js. Choose with index.html?theme=chalkboard
+           (the choice is remembered). Default: handwritten_parchment. */
+        (function () {
+            var theme = 'handwritten_parchment';
+            var ok = /^[a-z0-9_-]+$/i;
+            try {
+                var q = new URLSearchParams(location.search).get('theme');
+                if (q && ok.test(q)) {
+                    theme = q;
+                    localStorage.setItem('songTheme', q);
+                } else {
+                    var saved = localStorage.getItem('songTheme');
+                    if (saved && ok.test(saved)) theme = saved;
+                }
+            } catch (e) {}
+            if (theme !== 'plain') {
+                document.write('<script src="Themes/' + theme + '.js"><\/script>');
+            }
+            window.ACTIVE_THEME = theme;
+        })();
+    </script>
 </head>
 <body>
 
@@ -395,30 +608,18 @@
 </div>
 
 <div class="sheet-container">
-    <table class="info-table">
-        <thead>
-            <tr>
-                <th>Τίτλος</th>
-                <th>Χρόνος</th>
-                <th>Ρυθμός</th>
-                <th>Πρώτη Ερμηνεία</th>
-                <th>Συνθέτης</th>
-                <th>Στιχουργός</th>
-                <th>Έτος</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><strong id="meta-title"></strong></td>
-                <td id="meta-timesig"></td>
-                <td id="meta-rhythm"></td>
-                <td id="meta-artist"></td>
-                <td id="meta-composer"></td>
-                <td id="meta-lyricist"></td>
-                <td id="meta-year"></td>
-            </tr>
-        </tbody>
-    </table>
+    <header class="song-header">
+        <h1 class="song-title" id="meta-title"></h1>
+        <div class="meta-grid">
+            <div class="meta-item"><span class="meta-label">Χρόνος</span><span class="meta-value" id="meta-timesig"></span></div>
+            <div class="meta-item"><span class="meta-label">Ρυθμός</span><span class="meta-value" id="meta-rhythm"></span></div>
+            <div class="meta-item"><span class="meta-label">Πρώτη Ερμηνεία</span><span class="meta-value" id="meta-artist"></span></div>
+            <div class="meta-item"><span class="meta-label">Συνθέτης</span><span class="meta-value" id="meta-composer"></span></div>
+            <div class="meta-item"><span class="meta-label">Στιχουργός</span><span class="meta-value" id="meta-lyricist"></span></div>
+            <div class="meta-item"><span class="meta-label">Έτος</span><span class="meta-value" id="meta-year"></span></div>
+        </div>
+        <div class="ornament" aria-hidden="true"><span>&#9670;</span></div>
+    </header>
 
     <div class="song-content" id="song-content"></div>
 </div>
@@ -451,10 +652,6 @@
                 const targetSize = currentSize * (availableWidth / maxWidth);
                 
                 contentContainer.style.fontSize = targetSize + 'px';
-                
-                contentContainer.querySelectorAll('.token-chord, .instrumental-chord, .token-lyric').forEach(node => {
-                    node.style.fontSize = targetSize + 'px';
-                });
             }
         }
 
@@ -533,10 +730,12 @@
         }
 
         function getColorHex(colorName) {
-            if (colorName === 'blue') return '#0d47a1'; 
+            const t = window.SONG_THEME && window.SONG_THEME.chordColors;
+            if (t) return t[colorName] || t.red;
+            if (colorName === 'blue') return '#0d47a1';
             if (colorName === 'green') return '#1b5e20';
             if (colorName === 'black') return '#000000';
-            return '#8b1e1e'; 
+            return '#8b1e1e';
         }
 
         window.loadSongUI = function(value) {
@@ -649,6 +848,13 @@
         // iPad Safari fires 'resize' while scrolling (toolbar show/hide changes the
         // viewport height). Only refit when the WIDTH actually changes (e.g. rotation),
         // so the chord/lyric size stays fixed while scrolling.
+        // Re-fit once web fonts have loaded (their widths differ from the fallback fonts)
+        if (document.fonts) {
+            document.fonts.ready.then(() => fitSong());
+            if (document.fonts.addEventListener) {
+                document.fonts.addEventListener('loadingdone', () => fitSong());
+            }
+        }
         let lastFitWidth = window.innerWidth;
         window.addEventListener('resize', () => {
             if (window.innerWidth !== lastFitWidth) {
@@ -1077,6 +1283,101 @@
             loadSongUI(lastSong);
         });
     });
+</script>
+
+<!-- Theme switcher -->
+<style>
+    .theme-switcher { position: fixed; right: max(16px, env(safe-area-inset-right, 0px)); bottom: max(16px, env(safe-area-inset-bottom, 0px)); z-index: 3000; font-family: 'Source Sans 3', 'Segoe UI', system-ui, sans-serif; }
+    .theme-switcher-btn {
+        width: 48px; height: 48px; border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        background: rgba(28, 21, 15, 0.9); color: #e8d6ae;
+        border: 1px solid rgba(217, 189, 134, 0.55);
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.55);
+        cursor: pointer; padding: 0;
+        -webkit-tap-highlight-color: transparent; touch-action: manipulation;
+        transition: background-color 0.2s ease, transform 0.15s ease;
+    }
+    .theme-switcher-btn:hover { background: rgba(48, 36, 26, 0.95); }
+    .theme-switcher-btn:active { transform: scale(0.94); }
+    .theme-switcher-btn:focus-visible, .theme-option:focus-visible { outline: 2px solid #d9bd86; outline-offset: 2px; }
+    .theme-switcher-btn svg { width: 24px; height: 24px; }
+    .theme-switcher-panel {
+        position: absolute; right: 0; bottom: 58px; min-width: 260px;
+        background: rgba(28, 21, 15, 0.96); border: 1px solid rgba(217, 189, 134, 0.5);
+        border-radius: 10px; padding: 6px; box-shadow: 0 10px 28px rgba(0, 0, 0, 0.6);
+        display: none;
+    }
+    .theme-switcher.open .theme-switcher-panel { display: block; }
+    .theme-switcher-title { padding: 8px 12px 6px; font-size: 0.72rem; font-weight: 600; letter-spacing: 1.6px; text-transform: uppercase; color: #b89f72; }
+    .theme-option {
+        display: flex; align-items: center; justify-content: space-between; gap: 14px;
+        width: 100%; box-sizing: border-box; min-height: 44px; padding: 10px 12px;
+        background: none; border: none; border-radius: 6px;
+        color: #f0e2c0; font: inherit; font-size: 1.02rem; text-align: left; cursor: pointer;
+        -webkit-tap-highlight-color: transparent; touch-action: manipulation;
+    }
+    .theme-option:hover { background: rgba(217, 189, 134, 0.14); }
+    .theme-option[aria-checked="true"] { background: rgba(217, 189, 134, 0.2); font-weight: 600; }
+    .theme-option .tick { color: #d9bd86; visibility: hidden; }
+    .theme-option[aria-checked="true"] .tick { visibility: visible; }
+    @media print { .theme-switcher { display: none; } }
+</style>
+<script>
+    (function () {
+        // Add new themes here (id = file name in Themes/ without .js)
+        var THEMES = [
+            { id: 'handwritten_parchment', label: 'Handwritten Parchment' },
+            { id: 'beach_sand', label: 'Beach Sand' },
+            { id: 'chalkboard', label: 'Chalkboard' },
+            { id: 'plain', label: 'Plain' }
+        ];
+        var current = window.ACTIVE_THEME || 'handwritten_parchment';
+
+        var wrap = document.createElement('div');
+        wrap.className = 'theme-switcher';
+        wrap.innerHTML =
+            '<div class="theme-switcher-panel" role="radiogroup" aria-label="Theme">' +
+                '<div class="theme-switcher-title">Theme</div>' +
+            '</div>' +
+            '<button type="button" class="theme-switcher-btn" aria-haspopup="true" aria-expanded="false" aria-label="Change theme" title="Change theme">' +
+                '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+                    '<path d="M12 3a9 9 0 1 0 0 18c1.1 0 1.8-.8 1.8-1.7 0-.5-.2-.9-.5-1.3-.3-.4-.5-.8-.5-1.3 0-1 .8-1.7 1.8-1.7H17a4 4 0 0 0 4-4c0-4.4-4-8-9-8z"/>' +
+                    '<circle cx="7.5" cy="11" r="1" fill="currentColor"/><circle cx="10.5" cy="7" r="1" fill="currentColor"/><circle cx="15" cy="7.5" r="1" fill="currentColor"/>' +
+                '</svg>' +
+            '</button>';
+
+        var panel = wrap.querySelector('.theme-switcher-panel');
+        var btn = wrap.querySelector('.theme-switcher-btn');
+
+        THEMES.forEach(function (t) {
+            var o = document.createElement('button');
+            o.type = 'button';
+            o.className = 'theme-option';
+            o.setAttribute('role', 'radio');
+            o.setAttribute('aria-checked', String(t.id === current));
+            o.innerHTML = '<span></span><span class="tick" aria-hidden="true">&#10003;</span>';
+            o.firstChild.textContent = t.label;
+            o.addEventListener('click', function () {
+                if (t.id === current) { setOpen(false); return; }
+                try { localStorage.setItem('songTheme', t.id); } catch (e) {}
+                var url = new URL(window.location.href);
+                url.searchParams.delete('theme');
+                window.location.href = url.toString();
+            });
+            panel.appendChild(o);
+        });
+
+        function setOpen(open) {
+            wrap.classList.toggle('open', open);
+            btn.setAttribute('aria-expanded', String(open));
+        }
+        btn.addEventListener('click', function (e) { e.stopPropagation(); setOpen(!wrap.classList.contains('open')); });
+        document.addEventListener('click', function (e) { if (!wrap.contains(e.target)) setOpen(false); });
+        document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setOpen(false); });
+
+        document.body.appendChild(wrap);
+    })();
 </script>
 
 </body>
