@@ -953,6 +953,17 @@ const SONGS_DB = {
       ]
     },
     {
+      category: "Παντελής Θαλασσινός",
+      songs: [
+        {
+          value: "anathemaSe",
+          label: "Άναθεμά Σε - Παντελής Θαλασσινός",
+          script: "Songs/Pantelis Thalassinos/Anathema Se.js",
+          dataKey: "anathemaSeData"
+        }
+      ]
+    },
+    {
       category: "Παντελής Παντελίδης",
       songs: [
         {
