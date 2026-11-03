@@ -1,5 +1,6 @@
 const nataneTo21Data = {
     "title": "Να 'τανε Το 21",
+    "timeSignature": "2/4",
     "rhythm": "Χασάπικος",
     "artist": "Γιώργος Νταλάρας",
     "composer": "Σταύρος Κουγιουμτζής",
@@ -9,7 +10,7 @@ const nataneTo21Data = {
         {
             "lines": [
                 {
-                    "rawInline": "(F#m:green)   (C#:green)   (F#m:green) ([X2])"
+                    "rawInline": "(F#m:green)   (C#)   (F#m) ([X2]:black)"
                 },
                 {
                     "rawInline": "(Bm:green)   (D:green)   (C#:green)   (F#m:green)   (D:green)   (C#:green)   (F#m:green)"
@@ -22,10 +23,10 @@ const nataneTo21Data = {
         {
             "lines": [
                 {
-                    "rawInline": "(F#m:red)Μου ξα(C#)νάρχοντα(F#m)ι ένα-ένα, χρόνια δοξασ(C#)μένα, ν(D)α 'ταν(E)ε το ει(F#m)κοσιέ(Bm)να, να 'ρθει μια στιγμ(D)ή  (C#:green)    (F#m:green) "
+                    "rawInline": "(F#m:red)Μου ξα(C#)νάρχοντα(F#m)ι ένα-ένα, χρόνια δοξασ(C#)μένα, ν(D)α 'ταν(E)ε το ει(F#m)κοσιέ(Bm)να, να 'ρθει μια στιγμ(D)ή  (C# F#m:green) "
                 },
                 {
-                    "rawInline": "(F#m:red)Να περ(C#)νάω (F#m)καβα(C#)λάρη(F#m)ς, στο πλατύ τ' α(C#)λώνι, κα(D)ι με τ(E)ον Κο(F#)λοκοτ(Bm)ρών(C#)η να 'πινα κρα(F#m)σί (C#) (F#m) "
+                    "rawInline": "(F#m:red)Να περ(C#)νάω (F#m)καβα(C#)λάρη(F#m)ς, στο πλατύ τ' α(C#)λώνι, κα(D)ι με τ(E)ον Κο(F#)λοκοτ(Bm)ρών(C#)η να 'πινα κρα(F#m C# F#m)σί"
                 }
             ]
         },
@@ -38,7 +39,7 @@ const nataneTo21Data = {
                     "rawInline": "Και να κρα(Bm:blue)τάω τις ν(D:blue)ύχτες με τ'(C#:blue) άστρ(F#m:blue)α, μια Τουρκοπο(D:blue)ύλα(Bm:blue) αγκαλ(C#:blue)ιά"
                 },
                 {
-                    "rawInline": "Μ(F#m:blue)ου ξα(C#:blue)νάρχονται(F#m:blue) ένα-έ(C#:blue)να, (F#m:blue)χρόνια δοξασ(C#:blue)μένα, ν(D:blue)α 'ταν(E:blue)ε το ει(F#:blue)κοσ(Bm:blue)ιένα(C#:blue) να 'ρθει μια βραδι(D:blue)ά (C#:blue) (F#m:blue) "
+                    "rawInline": "Μ(F#m:blue)ου ξα(C#:blue)νάρχονται(F#m:blue) ένα-έ(C#:blue)να, (F#m:blue)χρόνια δοξασ(C#:blue)μένα, ν(D:blue)α 'ταν(E:blue)ε το ει(F#:blue)κοσ(Bm:blue)ιένα(C#:blue) να 'ρθει μια βραδι(D C# F#m:blue)ά"
                 }
             ]
         },
@@ -55,10 +56,10 @@ const nataneTo21Data = {
         {
             "lines": [
                 {
-                    "rawInline": "(F#m:red)Πρώτος (C#)το χο(F#m)ρό να (C#)σέρν(F#m)ω, στου Μωριά τις στ(C#)ράτες, κα(D)ι ξωπ(E)ίσω μ(F#)ου μαν(Bm)ιάτες κ(C#)αι οι ψαριανο(D)ί (C#) (F#m) "
+                    "rawInline": "(F#m:red)Πρώτος (C#)το χο(F#m)ρό να (C#)σέρν(F#m)ω, στου Μωριά τις στ(C#)ράτες, κα(D)ι ξωπ(E)ίσω μ(F#)ου μαν(Bm)ιάτες κ(C#)αι οι ψαριανο(D)ί (_)(C# F#m:green) "
                 },
                 {
-                    "rawInline": "(F#m) Κι όταν (C#)λαβω(F#m)μένος (C#)γέρν(F#m)ω κάτω απ' τους μπα(C#)ξέδες, ν(D)α με ρα(E)ίνουν (F#)μενε(Bm)ξέδε(C#)ς, χέρια κι ουραν(F#m)οί (C#) (F#m) "
+                    "rawInline": "(F#m:red)Κι όταν (C#)λαβω(F#m)μένος (C#)γέρν(F#m)ω κάτω απ' τους μπα(C#)ξέδες, ν(D)α με ρα(E)ίνουν (F#)μενε(Bm)ξέδε(C#)ς, χέρια κι ουραν(F#m C# F#m)οί"
                 }
             ]
         },

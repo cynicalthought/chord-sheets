@@ -1,5 +1,6 @@
 const kapouNihtoniData = {
     "title": "Κάπου Νυχτώνει",
+    "timeSignature": "2/4",
     "rhythm": "Χασάπικος",
     "artist": "Γιώργος Νταλάρας",
     "composer": "Σταύρος Κουγιουμτζής",

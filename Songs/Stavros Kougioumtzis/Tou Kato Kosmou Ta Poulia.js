@@ -1,6 +1,7 @@
 const touKatoKosmouTaPouliaData = {
     "title": "Του Κάτω Κόσμου Τα Πουλιά",
-    "rhythm": "Ζεϊμπέκικος",
+    "timeSignature": "9/8",
+    "rhythm": "Ζεϊμπέκικος (Μοντέρνος)",
     "artist": "Γιώργος Νταλάρας",
     "composer": "Σταύρος Κουγιουμτζής",
     "lyricist": "Μάνος Ελευθερίου",
@@ -9,7 +10,7 @@ const touKatoKosmouTaPouliaData = {
         {
             "lines": [
                 { "rawInline": "(G#m:green)     (D#)     (C#m)     (G#m)" },
-                { "rawInline": "(G#m)     (D#)     (C#m)     (D#)     (G#m)" }
+                { "rawInline": "(G#m)           (D#)     (C#m)     (D#)     (G#m)" }
             ]
         },
         {
@@ -28,7 +29,7 @@ const touKatoKosmouTaPouliaData = {
         {
             "lines": [
                 { "rawInline": "(G#m:green)     (D#)     (C#m)     (G#m)" },
-                { "rawInline": "(G#m)     (D#)     (C#m)     (D#)     (G#m)" }
+                { "rawInline": "(G#m)           (D#)     (C#m)     (D#)     (G#m)" }
             ]
         },
         {

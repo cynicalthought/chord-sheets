@@ -1,5 +1,6 @@
 const miMouThimonisMatiaMouData = {
     "title": "Μη Μου Θυμώνεις Μάτια Μου",
+    "timeSignature": "2/4",
     "rhythm": "Χασάπικος",
     "artist": "Χορωδία των Φίλων της Ελληνικής Μουσικής",
     "composer": "Σταύρος Κουγιουμτζής",
