@@ -1,6 +1,7 @@
 const apohairetismos1966Data = {
     "title": "Αποχαιρετισμός",
-    "rhythm": "Ζεϊμπέκικος",
+    "timeSignature": "9/8",
+    "rhythm": "Ζεϊμπέκικος (Μοντέρνος)",
     "artist": "Βίκυ Μοσχολιού",
     "composer": "Σταύρος Ξαρχάκος",
     "lyricist": "Νίκος Γκάτσος",
@@ -8,34 +9,34 @@ const apohairetismos1966Data = {
     "stanzas": [
         {
             "lines": [
-                { "rawInline": "(Db:green)     (Ebm:green)     (Ab:green)     (Db:green)     (Fm:green)     (Bbm:green)" }
+                { "rawInline": "(Db:green)     (Ebm)     (Ab)     (Db)     (Fm)     (Bbm)" }
             ]
         },
         {
             "lines": [
-                { "rawInline": "(Bbm:red)Με τί καρδιά (Ab:red)να σ' αποχαιρε(Ebm:red)τήσω; Με τί καρδιά (Bbm:red)τραγούδι να σου (Ab:red)πω;" },
-                { "rawInline": "(Db:red)Στον ουρα(Ebm:red)νό με (Ab:red)τ' όνειρο θα (Db:red)ζήσω, στον ουρανό (Ebm:red)σαν (Ab:red)άστρο θα χα(Db:red)θώ" }
+                { "rawInline": "Με (Bbm:red)τί καρδ(Ab)ιά να σ'(Ebm) αποχαιρετήσω; Με τί καρδ(Ab)ιά τραγ(Ebm)ούδι να σου (Bbm)πω;" },
+                { "rawInline": "Στον (Db)ουρα(Ebm)νό με τ'(Ab) όνειρο θα (Db)ζήσω, στον ουρα(Ebm)νό σαν(Ab) άστρο θα χα(Db)θώ" }
             ]
         },
         {
             "lines": [
-                { "rawInline": "(Gb:blue)Βάλε φωνή, (Ab:blue)κοντά σου να γυρίσω, (Db:blue)βάλε φωνή, (Gb:blue)τη (Ab:blue)γη να θυμη(Db:blue)θώ" }
+                { "rawInline": "(Gb:blue)Βάλε φω(Ab)νή, κοντά σου να γυ(Db)ρίσω, (Gb)βάλε φω(Ab)νή, τη γη να θυμη(Db)θώ" }
             ]
         },
         {
             "lines": [
-                { "rawInline": "(Db:green)     (Ebm:green)     (Ab:green)     (Db:green)     (Fm:green)     (Bbm:green)" }
+                { "rawInline": "(Db:green)     (Ebm)     (Ab)     (Db)     (Fm)     (Bbm)" }
             ]
         },
         {
             "lines": [
-                { "rawInline": "(Bbm:red)Με τί καρδιά (Ab:red)τα μάτια σου ν' α(Ebm:red)φήσω; Με τί καρδιά (Bbm:red)τον κόσμο ν' αρνη(Ab:red)θώ;" },
-                { "rawInline": "(Db:red)Σε σκοτει(Ebm:red)νό γε(Ab:red)φύρι θα κα(Db:red)θίσω, σε σκοτεινό (Ebm:red)πο(Ab:red)τάμι θα στα(Db:red)θώ" }
+                { "rawInline": "Με (Bbm:red)τί καρδ(Ab)ιά τα (Ebm)μάτια σου ν' α(Bbm)φήσω; Με τί καρδ(Ab)ιά τον (Ebm)κόσμο ν' αρνη(Bbm)θώ;" },
+                { "rawInline": "Σε σ(Db)κοτει(Ebm)νό γε(Ab)φύρι θα κα(Db)θίσω, σε σκοτει(Ebm)νό πο(Ab)τάμι θα στα(Db)θώ" }
             ]
         },
         {
             "lines": [
-                { "rawInline": "(Gb:blue)Δώσ' μου φωτιά, (Ab:blue)τη νύχτα μου να σβήσω, (Db:blue)δώσ' μου φωτιά, (Gb:blue)στον (Ab:blue)ήλιο να βρε(Db:blue)θώ" }
+                { "rawInline": "(Gb:blue)Δώσ' μου φωτ(Ab)ιά, τη νύχτα μου να σ(Db)βήσω, (Gb)δώσ' μου φωτ(Ab)ιά, στον ήλιο να βρε(Db)θώ" }
             ]
         }
     ]

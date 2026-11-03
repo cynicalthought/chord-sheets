@@ -1,5 +1,6 @@
 const geiaSouHaraSouVenetiaData = {
     "title": "Γειά Σου Χαρά Σου Βενετιά",
+    "timeSignature": "9/8",
     "rhythm": "Καρσιλαμάς",
     "artist": "Νίκος Ξυλούρης",
     "composer": "Σταύρος Ξαρχάκος",
@@ -9,7 +10,7 @@ const geiaSouHaraSouVenetiaData = {
         {
             "lines": [
                 { "rawInline": "(C#)Γεια σου, χαρά σου Βενετ(G#)ιά, πήρα τους δ(F#)ρόμους τ(G#7)ου νοτ(C#)ιά" },
-                { "rawInline": "(C#:green)Κι απ' το κατάρτι το ψη(G#:red)λό τον άνε(F#)μο πα(G#7)ρακα(C#)λώ " }
+                { "rawInline": "Κι(C#:green) απ' το κατάρτι το ψη(G#:red)λό τον άνε(F#)μο πα(G#7)ρακα(C#)λώ " }
             ]
         },
         {
@@ -20,8 +21,8 @@ const geiaSouHaraSouVenetiaData = {
         },
         {
             "lines": [
-                { "rawInline": "(C#:red)Γεια σου, χαρά σου Βενετ(G#)ιά, βγήκα σε (F#)θάλασσα π(G#7)λατι(C#)ά" },
-                { "rawInline": "(C#:green)Και τραγουδώ στην κουπασ(G#:red)τή σ' όλο τον (F#)κόσμο ν(G#7)' ακουστ(C#)εί" }
+                { "rawInline": "(C#:red)Γεια σου, χαρά σου Βενετ(G#)ιά, βγήκα σε (F#)θάλασσα π(G#7 C#)λατιά" },
+                { "rawInline": "Κ(C#:green)αι τραγουδώ στην κουπασ(G#:red)τή σ' όλο τον (F#)κόσμο ν(G#7)' ακουστ(C#)εί" }
             ]
         },
         {
