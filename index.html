@@ -729,6 +729,72 @@
             return chords;
         }
 
+        // ===== Transposition =====
+        const NOTE_PC = { C: 0, D: 2, E: 4, F: 5, G: 7, A: 9, B: 11 };
+        const MAJOR_NAMES = ['C', 'Db', 'D', 'Eb', 'E', 'F', 'F#', 'G', 'Ab', 'A', 'Bb', 'B'];
+        const MINOR_NAMES = ['C', 'C#', 'D', 'Eb', 'E', 'F', 'F#', 'G', 'G#', 'A', 'Bb', 'B'];
+        const SHARP_NAMES = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+        const FLAT_NAMES = ['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B'];
+        const CHORD_RE = /^([A-G])([#b\u266F\u266D]?)([^\/]*)(?:\/([A-G])([#b\u266F\u266D]?))?$/;
+
+        function accidentalValue(a) {
+            if (a === '#' || a === '\u266F') return 1;
+            if (a === 'b' || a === '\u266D') return -1;
+            return 0;
+        }
+
+        function transposeWord(word, semitones) {
+            const m = CHORD_RE.exec(word);
+            if (!m) return word;                         // not a chord (N.C., x2, |, ...)
+            const suffix = m[3] || '';
+            const isMinor = suffix.startsWith('min') || suffix.startsWith('dim') || suffix.startsWith('\u00F8') ||
+                            (suffix.charAt(0) === 'm' && !suffix.startsWith('maj'));
+            const names = isMinor ? MINOR_NAMES : MAJOR_NAMES;
+            const shiftedPc = (letter, acc) => ((NOTE_PC[letter] + accidentalValue(acc) + semitones) % 12 + 12) % 12;
+            const root = names[shiftedPc(m[1], m[2])];
+            let out = root + suffix;
+            if (m[4]) {
+                // Keep the bass note in the same sharp/flat family as the new root
+                let bassNames = names;
+                if (root.indexOf('#') !== -1) bassNames = SHARP_NAMES;
+                else if (root.indexOf('b') !== -1) bassNames = FLAT_NAMES;
+                out += '/' + bassNames[shiftedPc(m[4], m[5])];
+            }
+            return out;
+        }
+
+        function transposeChord(chord, semitones) {
+            if (!chord || !semitones) return chord;
+            return chord.split(/(\s+)/).map(part => /^\s*$/.test(part) ? part : transposeWord(part, semitones)).join('');
+        }
+
+        const TRANSPOSE_MIN = -11, TRANSPOSE_MAX = 11;
+        let currentSongValue = null;
+
+        function readTranspose(songValue) {
+            try {
+                const n = parseInt(localStorage.getItem('transpose:' + songValue), 10);
+                if (Number.isFinite(n)) return Math.max(TRANSPOSE_MIN, Math.min(TRANSPOSE_MAX, n));
+            } catch (e) {}
+            return 0;
+        }
+
+        // Change the transposition of the open song by an absolute amount
+        window.setTranspose = function (n) {
+            if (currentSongValue === null) return;
+            n = Math.max(TRANSPOSE_MIN, Math.min(TRANSPOSE_MAX, n));
+            try {
+                if (n === 0) localStorage.removeItem('transpose:' + currentSongValue);
+                else localStorage.setItem('transpose:' + currentSongValue, String(n));
+            } catch (e) {}
+            const y = window.scrollY;
+            window.loadSongUI(currentSongValue);
+            window.scrollTo(0, y);
+        };
+        window.getTranspose = function () {
+            return currentSongValue === null ? 0 : readTranspose(currentSongValue);
+        };
+
         function getColorHex(colorName) {
             const t = window.SONG_THEME && window.SONG_THEME.chordColors;
             if (t) return t[colorName] || t.red;
@@ -743,6 +809,8 @@
             if (!data) return;
 
             localStorage.setItem("activeSongValue", value);
+            currentSongValue = value;
+            const semitones = readTranspose(value);
 
             document.getElementById("meta-title").textContent = data.title || "";
             document.getElementById("meta-timesig").textContent = data.timeSignature || "";
@@ -791,7 +859,7 @@
                                     chordSpan.className = "instrumental-chord";
                                     if (row[colIdx]) {
                                         chordSpan.style.color = getColorHex(row[colIdx].color);
-                                        chordSpan.textContent = row[colIdx].chord;
+                                        chordSpan.textContent = transposeChord(row[colIdx].chord, semitones);
                                     } else {
                                         chordSpan.textContent = "";
                                     }
@@ -818,7 +886,7 @@
                                         const chordSpan = document.createElement("span");
                                         chordSpan.className = "token-chord";
                                         chordSpan.style.color = getColorHex(token.color || colorState.current);
-                                        chordSpan.textContent = token.chord || "";
+                                        chordSpan.textContent = transposeChord(token.chord || "", semitones);
 
                                         const lyricSpan = document.createElement("span");
                                         lyricSpan.className = "token-lyric";
@@ -843,6 +911,7 @@
                 });
             }
             fitSong();
+            if (window.updateTransposeUI) window.updateTransposeUI(semitones);
         }
 
         // iPad Safari fires 'resize' while scrolling (toolbar show/hide changes the
@@ -1357,6 +1426,7 @@
             { id: 'beach_sand', label: 'Beach Sand' },
             { id: 'professional_executive', label: 'Executive Professional' },
             { id: 'stage_noir', label: 'Stage Noir' },
+            { id: 'atelier_luxe', label: 'Atelier Luxe' },
             { id: 'chalkboard', label: 'Chalkboard' },
             { id: 'plain', label: 'Plain' }
         ];
@@ -1420,5 +1490,107 @@
     })();
 </script>
 
+
+<!-- Transpose control -->
+<style>
+    .transpose-control {
+        position: fixed;
+        left: max(16px, env(safe-area-inset-left, 0px));
+        bottom: max(16px, env(safe-area-inset-bottom, 0px));
+        z-index: 3000;
+        display: flex;
+        align-items: center;
+        height: 52px;
+        padding: 0 4px;
+        gap: 2px;
+        background: rgba(28, 21, 15, 0.94);
+        color: #e8d6ae;
+        border: 1px solid rgba(217, 189, 134, 0.6);
+        border-radius: 26px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.65);
+        font-family: 'Source Sans 3', 'Segoe UI', system-ui, -apple-system, sans-serif;
+        -webkit-user-select: none;
+        user-select: none;
+    }
+    .transpose-control button {
+        font: inherit;
+        color: inherit;
+        background: none;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+    }
+    .transpose-step {
+        width: 46px;
+        height: 44px;
+        border-radius: 22px;
+        font-size: 2.1rem;
+        line-height: 1;
+        font-weight: 400;
+        transition: background-color 0.15s ease, transform 0.12s ease;
+    }
+    .transpose-step:hover { background: rgba(217, 189, 134, 0.16); }
+    .transpose-step:active { background: rgba(217, 189, 134, 0.28); transform: scale(0.92); }
+    .transpose-step[disabled] { opacity: 0.3; cursor: default; background: none; transform: none; }
+    .transpose-value {
+        min-width: 70px;
+        height: 44px;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1px;
+    }
+    .transpose-value:hover { background: rgba(217, 189, 134, 0.1); }
+    .transpose-number { font-size: 1.2rem; font-weight: 700; line-height: 1.05; font-variant-numeric: tabular-nums; }
+    .transpose-caption { font-size: 0.62rem; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; color: #b89f72; line-height: 1; }
+    .transpose-control.is-shifted { border-color: #d9bd86; }
+    .transpose-control.is-shifted .transpose-number { color: #f6e3b0; }
+    .transpose-control.is-shifted .transpose-caption { color: #d9bd86; }
+    .transpose-control button:focus-visible { outline: 2px solid #d9bd86; outline-offset: 2px; }
+    @media print { .transpose-control { display: none; } }
+</style>
+<script>
+    (function () {
+        var wrap = document.createElement('div');
+        wrap.className = 'transpose-control';
+        wrap.setAttribute('role', 'group');
+        wrap.setAttribute('aria-label', 'Transpose');
+        wrap.innerHTML =
+            '<button type="button" class="transpose-step" data-dir="-1" aria-label="Transpose down one semitone" title="Down one semitone">&minus;</button>' +
+            '<button type="button" class="transpose-value" aria-label="Transposition: original key. Tap to reset" title="Tap to reset to the original key">' +
+                '<span class="transpose-number" aria-live="polite">0</span>' +
+                '<span class="transpose-caption">Original</span>' +
+            '</button>' +
+            '<button type="button" class="transpose-step" data-dir="1" aria-label="Transpose up one semitone" title="Up one semitone">+</button>';
+
+        var down = wrap.querySelector('[data-dir="-1"]');
+        var up = wrap.querySelector('[data-dir="1"]');
+        var value = wrap.querySelector('.transpose-value');
+        var number = wrap.querySelector('.transpose-number');
+        var caption = wrap.querySelector('.transpose-caption');
+
+        window.updateTransposeUI = function (n) {
+            number.textContent = n > 0 ? '+' + n : String(n);
+            caption.textContent = n === 0 ? 'Original' : (Math.abs(n) === 1 ? 'semitone' : 'semitones');
+            wrap.classList.toggle('is-shifted', n !== 0);
+            down.disabled = n <= -11;
+            up.disabled = n >= 11;
+            value.setAttribute('aria-label', n === 0
+                ? 'Transposition: original key'
+                : 'Transposed ' + (n > 0 ? 'up ' : 'down ') + Math.abs(n) + ' semitone' + (Math.abs(n) === 1 ? '' : 's') + '. Tap to reset');
+            value.title = n === 0 ? 'Original key' : 'Tap to reset to the original key';
+        };
+
+        down.addEventListener('click', function () { window.setTranspose(window.getTranspose() - 1); });
+        up.addEventListener('click', function () { window.setTranspose(window.getTranspose() + 1); });
+        value.addEventListener('click', function () { window.setTranspose(0); });
+
+        document.body.appendChild(wrap);
+    })();
+</script>
 </body>
 </html>
