@@ -181,7 +181,7 @@
             font-size: 0.82em !important;
             font-weight: 700 !important;
             letter-spacing: 0.05em !important;
-            text-transform: uppercase;
+            text-transform: none !important; /* Prevents global uppercase forcing */
             padding-bottom: 3px;
             text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
         }
@@ -200,4 +200,33 @@
         }
     `;
     document.head.appendChild(style);
+
+    // Formatter utility to ensure chord suffixes (like min, maj, dim, sus) are lowercase
+    function normalizeChordCasing(text) {
+        if (!text) return text;
+        return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
+    }
+
+    // Intercept chord text updates to enforce proper casing dynamically
+    function enforceChordFormatting() {
+        var chords = document.querySelectorAll('.token-chord, .instrumental-chord');
+        chords.forEach(function(el) {
+            if (el.textContent && el.dataset.normalized !== 'true') {
+                el.textContent = normalizeChordCasing(el.textContent.trim());
+                el.dataset.normalized = 'true';
+            }
+        });
+    }
+
+    var observer = new MutationObserver(function() {
+        enforceChordFormatting();
+    });
+
+    document.addEventListener("DOMContentLoaded", function() {
+        enforceChordFormatting();
+        var content = document.getElementById('song-content');
+        if (content) {
+            observer.observe(content, { childList: true, subtree: true });
+        }
+    });
 })();
