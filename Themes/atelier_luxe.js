@@ -1,7 +1,7 @@
 /*
  * Theme: Atelier Luxe / Architectural Haute-Couture
  * An uncompromising, ultra-refined editorial design featuring a bespoke floating 
- * glass header, artisanal typography pairing (Cinzel & Plus Jakarta Sans), micro-interactions, 
+ * glass header, artisanal typography pairing (Cormorant Garamond & Plus Jakarta Sans), micro-interactions, 
  * and precise musical hierarchy.
  */
 (function () {
@@ -19,7 +19,7 @@
 
     var font = document.createElement('link');
     font.rel = 'stylesheet';
-    font.href = 'https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap';
+    font.href = 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap';
     document.head.appendChild(font);
 
     var style = document.createElement('style');
@@ -154,7 +154,7 @@
             background-color: var(--luxe-gold);
         }
         .song-title {
-            font-family: 'Cinzel', serif !important;
+            font-family: 'Cormorant Garamond', serif !important;
             font-weight: 600 !important;
             font-size: clamp(2.4rem, 5.5vw, 3.6rem) !important;
             color: var(--luxe-text) !important;
@@ -213,10 +213,10 @@
             letter-spacing: -0.005em;
         }
         .token-chord, .instrumental-chord {
-            font-family: 'Cinzel', serif !important;
-            font-size: 0.85em !important;
+            font-family: 'Cormorant Garamond', serif !important;
+            font-size: 0.95em !important;
             font-weight: 700 !important;
-            letter-spacing: 0.08em !important;
+            letter-spacing: 0.05em !important;
             text-transform: none !important;
             padding-bottom: 4px;
         }
