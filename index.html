@@ -655,6 +655,25 @@
             }
         }
 
+        // Safe case normalization helper handling both single chords and space-separated chord sequences
+        function normalizeChordCasing(text) {
+            if (!text) return text;
+            const trimmed = text.trim();
+            if (trimmed.length === 0) return text;
+            
+            // Split by whitespace to handle consecutive chords within the same tag (e.g. "g# a# cm")
+            return trimmed.split(/\s+/).map(chordPart => {
+                if (chordPart.length === 0) return chordPart;
+                // Handle slash chords in sequence if any (e.g. "am/g")
+                if (chordPart.includes('/')) {
+                    return chordPart.split('/').map(sub => 
+                        sub.length > 0 ? sub.charAt(0).toUpperCase() + sub.slice(1).toLowerCase() : sub
+                    ).join('/');
+                }
+                return chordPart.charAt(0).toUpperCase() + chordPart.slice(1).toLowerCase();
+            }).join(' ');
+        }
+
         function parseInlineLineToTokens(rawString, colorState) {
             const tokens = [];
             const regex = /\(([^)]*)\)/g;
@@ -695,7 +714,7 @@
                 const lyricText = (!textChunk) ? "" : textChunk;
 
                 tokens.push({
-                    chord: chordName,
+                    chord: normalizeChordCasing(chordName),
                     color: colorState.current,
                     text: isSpacer ? "" : lyricText,
                     isSpacer: isSpacer
@@ -722,20 +741,18 @@
                 }
 
                 chords.push({
-                    chord: chordName,
+                    chord: normalizeChordCasing(chordName),
                     color: colorState.current
                 });
             }
             return chords;
         }
 
-        // ===== Transposition =====
+        // ===== Transposition & Uniform Accidental Engine =====
         const NOTE_PC = { C: 0, D: 2, E: 4, F: 5, G: 7, A: 9, B: 11 };
-        const MAJOR_NAMES = ['C', 'Db', 'D', 'Eb', 'E', 'F', 'F#', 'G', 'Ab', 'A', 'Bb', 'B'];
-        const MINOR_NAMES = ['C', 'C#', 'D', 'Eb', 'E', 'F', 'F#', 'G', 'G#', 'A', 'Bb', 'B'];
         const SHARP_NAMES = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
         const FLAT_NAMES = ['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B'];
-        const CHORD_RE = /^([A-G])([#b\u266F\u266D]?)([^\/]*)(?:\/([A-G])([#b\u266F\u266D]?))?$/;
+        const CHORD_RE = /^([A-G])([#b\u266F\u266D]?)([^\/]*)(?:\/([A-G])([#b\u266F\u266D]?))?$/i;
 
         function accidentalValue(a) {
             if (a === '#' || a === '\u266F') return 1;
@@ -743,29 +760,100 @@
             return 0;
         }
 
-        function transposeWord(word, semitones) {
-            const m = CHORD_RE.exec(word);
-            if (!m) return word;                         // not a chord (N.C., x2, |, ...)
-            const suffix = m[3] || '';
-            const isMinor = suffix.startsWith('min') || suffix.startsWith('dim') || suffix.startsWith('\u00F8') ||
-                            (suffix.charAt(0) === 'm' && !suffix.startsWith('maj'));
-            const names = isMinor ? MINOR_NAMES : MAJOR_NAMES;
-            const shiftedPc = (letter, acc) => ((NOTE_PC[letter] + accidentalValue(acc) + semitones) % 12 + 12) % 12;
-            const root = names[shiftedPc(m[1], m[2])];
-            let out = root + suffix;
-            if (m[4]) {
-                // Keep the bass note in the same sharp/flat family as the new root
-                let bassNames = names;
-                if (root.indexOf('#') !== -1) bassNames = SHARP_NAMES;
-                else if (root.indexOf('b') !== -1) bassNames = FLAT_NAMES;
-                out += '/' + bassNames[shiftedPc(m[4], m[5])];
+        // Determine whether a song context favors flats or sharps based on its existing chords
+        function determineSongAccidentalPreference(data) {
+            let sharpCount = 0;
+            let flatCount = 0;
+
+            function scanString(str) {
+                const regex = /\(([^)]+)\)/g;
+                let match;
+                while ((match = regex.exec(str)) !== null) {
+                    let content = match[1].split(':')[0].trim();
+                    // Handle space-separated chords inside scan
+                    content.split(/\s+/).forEach(singleChord => {
+                        const m = CHORD_RE.exec(singleChord);
+                        if (m) {
+                            if (m[2] === '#' || m[2] === '\u266F') sharpCount++;
+                            if (m[2] === 'b' || m[2] === '\u266D') flatCount++;
+                            if (m[5] === '#' || m[5] === '\u266F') sharpCount++;
+                            if (m[5] === 'b' || m[5] === '\u266D') flatCount++;
+                        }
+                    });
+                }
             }
-            return out;
+
+            if (Array.isArray(data.stanzas)) {
+                data.stanzas.forEach(stanza => {
+                    if (Array.isArray(stanza.lines)) {
+                        stanza.lines.forEach(line => {
+                            if (typeof line.rawInline === 'string') scanString(line.rawInline);
+                            if (Array.isArray(line.tokens)) {
+                                line.tokens.forEach(t => {
+                                    if (t.chord) {
+                                        t.chord.split(/\s+/).forEach(singleChord => {
+                                            const m = CHORD_RE.exec(singleChord);
+                                            if (m) {
+                                                if (m[2] === '#' || m[2] === '\u266F') sharpCount++;
+                                                if (m[2] === 'b' || m[2] === '\u266D') flatCount++;
+                                                if (m[5] === '#' || m[5] === '\u266F') sharpCount++;
+                                                if (m[5] === 'b' || m[5] === '\u266D') flatCount++;
+                                            }
+                                        });
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
+            }
+            return flatCount >= sharpCount ? FLAT_NAMES : SHARP_NAMES;
         }
 
-        function transposeChord(chord, semitones) {
-            if (!chord || !semitones) return chord;
-            return chord.split(/(\s+)/).map(part => /^\s*$/.test(part) ? part : transposeWord(part, semitones)).join('');
+        function transposeWord(word, semitones, preferredNames) {
+            const m = CHORD_RE.exec(word);
+            if (!m) return word; // not a chord (N.C., x2, |, ...)
+            const rootLetter = m[1].toUpperCase();
+            const suffix = m[3] || '';
+            const shiftedPc = ((NOTE_PC[rootLetter] + accidentalValue(m[2]) + semitones) % 12 + 12) % 12;
+            
+            const naturalPcs = [0, 2, 4, 5, 7, 9, 11];
+            let root = preferredNames[shiftedPc];
+            if (naturalPcs.includes(shiftedPc)) {
+                for (let l in NOTE_PC) {
+                    if (NOTE_PC[l] === shiftedPc) {
+                        root = l;
+                        break;
+                    }
+                }
+            }
+
+            let out = root + suffix;
+            if (m[4]) {
+                const bassLetter = m[4].toUpperCase();
+                const bassPc = ((NOTE_PC[bassLetter] + accidentalValue(m[5]) + semitones) % 12 + 12) % 12;
+                let bass = preferredNames[bassPc];
+                if (naturalPcs.includes(bassPc)) {
+                    for (let l in NOTE_PC) {
+                        if (NOTE_PC[l] === bassPc) {
+                            bass = l;
+                            break;
+                        }
+                    }
+                }
+                out += '/' + bass;
+            }
+            return normalizeChordCasing(out);
+        }
+
+        function transposeChord(chord, semitones, preferredNames) {
+            if (!chord) return chord;
+            // Transpose each individual chord in a space-separated sequence
+            return chord.split(/\s+/).map(subChord => {
+                const m = CHORD_RE.exec(subChord);
+                if (!m) return subChord;
+                return transposeWord(subChord, semitones, preferredNames);
+            }).join(' ');
         }
 
         const TRANSPOSE_MIN = -11, TRANSPOSE_MAX = 11;
@@ -779,7 +867,6 @@
             return 0;
         }
 
-        // Change the transposition of the open song by an absolute amount
         window.setTranspose = function (n) {
             if (currentSongValue === null) return;
             n = Math.max(TRANSPOSE_MIN, Math.min(TRANSPOSE_MAX, n));
@@ -811,6 +898,7 @@
             localStorage.setItem("activeSongValue", value);
             currentSongValue = value;
             const semitones = readTranspose(value);
+            const preferredNames = determineSongAccidentalPreference(data);
 
             document.getElementById("meta-title").textContent = data.title || "";
             document.getElementById("meta-timesig").textContent = data.timeSignature || "";
@@ -842,7 +930,7 @@
                         if (isInstrumentalStanza && stanza.lines.length > 0) {
                             const parsedRows = stanza.lines.map(line => {
                                 if (Array.isArray(line.tokens)) {
-                                    return line.tokens.filter(t => t.chord).map(t => ({ chord: t.chord, color: t.color || colorState.current }));
+                                    return line.tokens.filter(t => t.chord).map(t => ({ chord: normalizeChordCasing(t.chord), color: t.color || colorState.current }));
                                 } else {
                                     return parseInstrumentalLine(line.rawInline, colorState);
                                 }
@@ -859,7 +947,7 @@
                                     chordSpan.className = "instrumental-chord";
                                     if (row[colIdx]) {
                                         chordSpan.style.color = getColorHex(row[colIdx].color);
-                                        chordSpan.textContent = transposeChord(row[colIdx].chord, semitones);
+                                        chordSpan.textContent = transposeChord(row[colIdx].chord, semitones, preferredNames);
                                     } else {
                                         chordSpan.textContent = "";
                                     }
@@ -886,7 +974,7 @@
                                         const chordSpan = document.createElement("span");
                                         chordSpan.className = "token-chord";
                                         chordSpan.style.color = getColorHex(token.color || colorState.current);
-                                        chordSpan.textContent = transposeChord(token.chord || "", semitones);
+                                        chordSpan.textContent = transposeChord(normalizeChordCasing(token.chord || ""), semitones, preferredNames);
 
                                         const lyricSpan = document.createElement("span");
                                         lyricSpan.className = "token-lyric";
