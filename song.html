@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Song Viewer</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        (function () {
+            var theme = 'handwritten_parchment';
+            var ok = /^[a-z0-9_-]+$/i;
+            try {
+                var q = new URLSearchParams(location.search).get('theme');
+                if (q && ok.test(q)) {
+                    theme = q;
+                    localStorage.setItem('songTheme', q);
+                } else {
+                    var saved = localStorage.getItem('songTheme');
+                    if (saved && ok.test(saved)) theme = saved;
+                }
+            } catch (e) {}
+            if (theme !== 'plain') {
+                document.write('<script src="Themes/' + theme + '.js"><\/script>');
+            }
+            window.ACTIVE_THEME = theme;
+        })();
+    </script>
+</head>
+<body>
+
+<header class="navbar-container">
+    <nav class="top-nav">
+        <a href="javascript:history.back()" class="nav-btn">&larr; Πίσω</a>
+        <a href="Composers/composers.html" class="nav-btn">Συνθέτες</a>
+        <a href="Artists/artists.html" class="nav-btn">Ερμηνευτές</a>
+        <a href="Lyricists/lyricists.html" class="nav-btn">Στιχουργοί</a>
+        <a href="Rhythms/rhythms.html" class="nav-btn">Ρυθμοί</a>
+    </nav>
+</header>
+
+<div class="sheet-container">
+    <div class="song-header-wrapper">
+        <div id="artist-avatar-container" class="header-avatar-slot"></div>
+        
+        <header class="song-header">
+            <h1 class="song-title" id="meta-title"></h1>
+            <div class="meta-grid">
+                <div class="meta-item"><span class="meta-label">Χρόνος</span><span class="meta-value" id="meta-timesig"></span></div>
+                <div class="meta-item"><span class="meta-label">Ρυθμός</span><span class="meta-value" id="meta-rhythm"></span></div>
+                <div class="meta-item"><span class="meta-label">Πρώτη Ερμηνεία</span><span class="meta-value" id="meta-artist"></span></div>
+                <div class="meta-item"><span class="meta-label">Συνθέτης</span><span class="meta-value" id="meta-composer"></span></div>
+                <div class="meta-item"><span class="meta-label">Στιχουργός</span><span class="meta-value" id="meta-lyricist"></span></div>
+                <div class="meta-item"><span class="meta-label">Έτος</span><span class="meta-value" id="meta-year"></span></div>
+            </div>
+            <div class="ornament" aria-hidden="true"><span>&#9670;</span></div>
+        </header>
+    </div>
+
+    <div class="song-content" id="song-content"></div>
+</div>
+
+<script src="songs-db.js"></script>
+<script src="viewer-core.js"></script>
+<script>
+    const FOLDER_OVERRIDES = {
+        "Δημήτρης Μητροπάνος": "Dimitris Mitropanos"
+    };
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const urlParams = new URLSearchParams(location.search);
+        const songKey = urlParams.get('id') || localStorage.getItem("activeSongValue") || "roza";
+        const artistName = urlParams.get('artist');
+
+        loadAllSongScripts().then(() => {
+            loadSongUI(songKey);
+
+            if (artistName) {
+                const avatarContainer = document.getElementById("artist-avatar-container");
+                if (avatarContainer) {
+                    const subfolderName = FOLDER_OVERRIDES[artistName] || artistName;
+                    const imagePath = `Artists/${subfolderName}/Profile.webp`;
+                    avatarContainer.innerHTML = `
+                        <img src="${imagePath}" alt="${artistName}" class="viewer-artist-avatar" 
+                             onerror="if(this.src.endsWith('Profile.webp')){this.src='Artists/${subfolderName}/Profile.jpeg';}else if(this.src.endsWith('Profile.jpeg')){this.src='Artists/${subfolderName}/profile.jpeg';}else if(this.src.endsWith('profile.jpeg')){this.src='Artists/${subfolderName}/Profile.jpg';}else if(this.src.endsWith('Profile.jpg')){this.src='Artists/${subfolderName}/profile.jpg';}else{this.style.display='none';}">
+                    `;
+                }
+            }
+        });
+    });
+</script>
+</body>
+</html>

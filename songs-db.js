@@ -2,14 +2,6 @@
  * Song Database
  * -------------
  * Edit this file to add / remove / reorder songs.
- *
- * Each entry needs:
- *   value   – the option value used in the <select>
- *   label   – the text shown in the dropdown
- *   script  – path to the song’s .js data file (relative to index.html)
- *   dataKey – the global variable name that the song’s .js file defines
- *
- * After editing, just refresh the page. No changes to index.html are required.
  */
 
 const SONGS_DB = {
@@ -1612,15 +1604,27 @@ function loadAllSongScripts() {
 
   const promises = Array.from(paths).map(src => {
     return new Promise(resolve => {
-      if (document.querySelector(`script[src="${src}"]`)) {
+      // Handle loading scripts dynamically whether called from root or subfolder
+      const adjustedSrc = window.location.pathname.includes('/') && !window.location.pathname.endsWith('/') && window.location.pathname.split('/').pop().includes('.html') && window.location.pathname.split('/').length > 2 ? '../' + src : src;
+      // Alternatively, use root-absolute paths if hosted on a local server (e.g. http://localhost)
+      
+      if (document.querySelector(`script[src="${src}"], script[src="../${src}"]`)) {
         resolve();
         return;
       }
       const script = document.createElement("script");
-      script.src = src;
+      
+      // Check if we are currently inside a subfolder page
+      const isInSubfolder = window.location.pathname.includes('/Composers/') || 
+                            window.location.pathname.includes('/Artists/') || 
+                            window.location.pathname.includes('/Lyricists/') || 
+                            window.location.pathname.includes('/Rhythms/');
+                            
+      script.src = isInSubfolder ? "../" + src : src;
+      
       script.onload = () => resolve();
       script.onerror = () => {
-        console.warn("Could not load song script:", src);
+        console.warn("Could not load song script:", script.src);
         resolve();
       };
       document.head.appendChild(script);

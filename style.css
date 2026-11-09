@@ -1,0 +1,316 @@
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=GFS+Didot&family=Source+Sans+3:wght@400;500;600;700&display=swap');
+
+:root {
+    --ink: #1f1610;
+    --ink-soft: #6b4d2f;
+    --gold: #d9bd86;
+    --brass: #8f6f43;
+    --ui-font: 'Source Sans 3', sans-serif;
+    --display-font: 'GFS Didot', serif;
+}
+
+body {
+    font-family: var(--ui-font);
+    background-color: #17120e;
+    background-image:
+        radial-gradient(ellipse at 50% -10%, rgba(140, 96, 48, 0.30) 0%, transparent 60%),
+        radial-gradient(ellipse at 50% 110%, rgba(0, 0, 0, 0.6) 0%, transparent 70%);
+    background-attachment: fixed;
+    margin: 0;
+    padding: 20px 15px 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #f0e2c0;
+}
+
+.navbar-container {
+    width: 100%;
+    max-width: 1040px;
+    margin-bottom: 25px;
+}
+
+.top-nav {
+    display: flex;
+    gap: 8px;
+    background-image: linear-gradient(to bottom, #2e251d, #1f1812);
+    border: 1px solid #4d3c2b;
+    border-radius: 8px;
+    padding: 6px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.55);
+}
+
+.nav-btn {
+    flex: 1;
+    text-align: center;
+    padding: 12px 16px;
+    color: #e8d6ae;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    border-radius: 6px;
+    transition: background 0.2s, color 0.2s;
+}
+
+.nav-btn.active, .nav-btn:hover {
+    background-color: rgba(217, 189, 134, 0.18);
+    color: #ffffff;
+}
+
+.page-container {
+    width: 100%;
+    max-width: 1040px;
+}
+
+.page-title {
+    font-family: var(--display-font);
+    font-size: 2.2rem;
+    text-align: center;
+    margin-bottom: 25px;
+    color: var(--gold);
+}
+
+.filter-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.search-box {
+    width: 100%;
+    padding: 14px 18px;
+    font-size: 1.1rem;
+    background: #231b14;
+    border: 1px solid var(--brass);
+    border-radius: 8px;
+    color: #ffffff;
+    box-sizing: border-box;
+    outline: none;
+}
+.search-box:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 10px rgba(217, 189, 134, 0.3);
+}
+
+.alphabet-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    justify-content: center;
+}
+
+.alpha-btn {
+    background: #2e251d;
+    border: 1px solid #4d3c2b;
+    color: #e8d6ae;
+    padding: 6px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.85rem;
+}
+.alpha-btn.active, .alpha-btn:hover {
+    background: var(--brass);
+    color: #fff;
+}
+
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+    gap: 20px;
+}
+
+.category-card {
+    background: rgba(35, 27, 20, 0.9);
+    border: 1px solid var(--brass);
+    border-radius: 8px;
+    padding: 18px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+
+.category-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+    border-bottom: 1px solid rgba(217, 189, 134, 0.2);
+    padding-bottom: 10px;
+}
+
+.category-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid var(--brass);
+}
+
+.category-title {
+    font-family: var(--ui-font);
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 0;
+    color: var(--gold);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.badge {
+    font-size: 0.75rem;
+    background: var(--brass);
+    color: #fff;
+    padding: 2px 7px;
+    border-radius: 10px;
+}
+
+.song-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.song-list li {
+    margin-bottom: 6px;
+}
+
+.song-item-link {
+    color: #f0e2c0;
+    text-decoration: none;
+    font-size: 1.05rem;
+    display: block;
+    padding: 6px 8px;
+    border-radius: 4px;
+    transition: background 0.15s;
+}
+
+.song-item-link:hover {
+    background: rgba(217, 189, 134, 0.15);
+    color: #ffffff;
+}
+
+.no-results {
+    text-align: center;
+    grid-column: 1 / -1;
+    font-size: 1.2rem;
+    color: #a48455;
+    padding: 40px;
+}
+
+/* Sheet & Header Styles */
+.sheet-container {
+    position: relative;
+    width: 100%;
+    max-width: 980px;
+    background-color: #f2e3c6;
+    border: 1px solid var(--brass);
+    border-radius: 8px;
+    padding: 52px 44px 46px;
+    box-shadow: 0 22px 60px rgba(0, 0, 0, 0.75);
+    color: #241911;
+    box-sizing: border-box;
+}
+
+/* Header Wrapper using Grid spanning the full combined height of title + metadata */
+.song-header-wrapper {
+    position: relative;
+    width: 100%;
+    margin-bottom: 30px;
+    display: grid;
+    grid-template-columns: 145px 1fr;
+    align-items: center;
+}
+
+.header-avatar-slot {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+/* Larger, rounded square artist profile image perfectly balanced */
+.viewer-artist-avatar {
+    width: 125px;
+    height: 125px;
+    border-radius: 18px;
+    object-fit: cover;
+    border: 2px solid var(--brass, #8f6f43);
+    box-shadow: 0 5px 14px rgba(0, 0, 0, 0.28);
+    background-color: #fff;
+}
+
+.song-header { 
+    width: 100%;
+    text-align: center; 
+    margin-bottom: 0;
+    box-sizing: border-box;
+}
+
+.song-title {
+    font-family: var(--display-font);
+    font-weight: 400;
+    font-size: clamp(1.9rem, 5vw, 2.9rem);
+    color: var(--ink);
+    margin: 0 0 22px;
+}
+.meta-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 14px 0;
+}
+.meta-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 22px;
+}
+.meta-item + .meta-item { border-left: 1px solid rgba(90, 60, 30, 0.28); }
+.meta-label {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+}
+.meta-value {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--ink);
+}
+
+.song-content { padding-top: 14px; line-height: 1.4; }
+.lyric-line-block { margin-bottom: 20px; align-items: flex-end; display: flex; flex-wrap: nowrap; width: max-content; }
+.token-pair { display: inline-flex; flex-direction: column; align-items: flex-start; white-space: pre; }
+.token-lyric { font-family: 'EB Garamond', serif !important; font-size: 1em; font-weight: 500; color: var(--ink); }
+.token-chord, .instrumental-chord { font-family: var(--ui-font) !important; font-size: 0.86em; font-weight: 700; }
+.instrumental-grid-block { display: grid; column-gap: 5ch; row-gap: 8px; margin-bottom: 16px; width: fit-content; }
+.verse-space { height: 14px; }
+
+@media (max-width: 768px) {
+    .song-header-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .header-avatar-slot {
+        margin-bottom: 15px;
+    }
+}
+
+/* Theme Switcher & Transposition */
+.theme-switcher { position: fixed; right: 16px; bottom: 16px; z-index: 3000; }
+.theme-switcher-btn { width: 52px; height: 52px; border-radius: 50%; background: rgba(28, 21, 15, 0.94); color: #e8d6ae; border: 1px solid rgba(217, 189, 134, 0.6); cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.theme-switcher-panel { position: absolute; right: 0; bottom: 62px; min-width: 280px; background: rgba(28, 21, 15, 0.98); border: 1px solid rgba(217, 189, 134, 0.55); border-radius: 12px; padding: 8px; display: none; }
+.theme-switcher.open .theme-switcher-panel { display: block; }
+.theme-option { display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 12px 14px; background: none; border: none; color: #f0e2c0; cursor: pointer; border-radius: 8px; }
+
+.transpose-control { position: fixed; left: 16px; bottom: 16px; z-index: 3000; display: flex; align-items: center; height: 52px; padding: 0 4px; background: rgba(28, 21, 15, 0.94); color: #e8d6ae; border: 1px solid rgba(217, 189, 134, 0.6); border-radius: 26px; }
+.transpose-control button { background: none; border: none; color: inherit; cursor: pointer; }
+.transpose-step { width: 46px; height: 44px; font-size: 2.1rem; }
+.transpose-value { min-width: 70px; display: flex; flex-direction: column; align-items: center; }
+.transpose-number { font-size: 1.2rem; font-weight: 700; }
+.transpose-caption { font-size: 0.62rem; text-transform: uppercase; color: #b89f72; }
