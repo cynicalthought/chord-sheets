@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ρυθμοί | Song Library</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header class="navbar-container">
+    <nav class="top-nav">
+        <a href="../index.html" class="nav-btn">Αρχική</a>
+        <a href="../Composers/composers.html" class="nav-btn">Συνθέτες</a>
+        <a href="../Artists/artists.html" class="nav-btn">Ερμηνευτές</a>
+        <a href="../Lyricists/lyricists.html" class="nav-btn">Στιχουργοί</a>
+        <a href="rhythms.html" class="nav-btn active">Ρυθμοί</a>
+    </nav>
+</header>
+<main class="page-container">
+    <h1 class="page-title">Ρυθμοί</h1>
+    <div class="filter-controls">
+        <input type="text" id="search-input" class="search-box" placeholder="Αναζήτηση ρυθμού..." onkeyup="filterGroups()">
+        <div class="alphabet-bar" id="alphabet-bar"></div>
+    </div>
+    <div class="categories-grid" id="categories-grid"></div>
+</main>
+<script src="../songs-db.js"></script>
+<script src="../browser-core.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        initBrowserPage(data => data.rhythm, 'rhythm');
+    });
+</script>
+</body>
+</html>
