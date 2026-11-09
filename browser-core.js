@@ -10,7 +10,9 @@ const MODE_FOLDERS = {
 };
 
 const FOLDER_OVERRIDES = {
-    "Δημήτρης Μητροπάνος": "Dimitris Mitropanos"
+    "Δημήτρης Μητροπάνος": "Dimitris Mitropanos",
+    "Άκης Πάνου": "Akis Panou",
+    "Ειρήνη Χρυσοβέργη": "Eirini Chrysovergi"
 };
 
 function initBrowserPage(extractorFn, mode = 'composer') {
@@ -29,16 +31,31 @@ function extractGroupedData(extractorFn) {
             const data = getSongData(song.value);
             if (data) {
                 let rawKey = extractorFn(data);
-                const key = (rawKey && rawKey.trim()) ? rawKey.trim() : 'Άγνωστος';
-                if (!map.has(key)) {
-                    map.set(key, []);
-                }
-                if (!map.get(key).some(s => s.value === song.value)) {
-                    map.get(key).push({
-                        label: song.label,
-                        value: song.value,
-                        script: song.script
+                if (rawKey && rawKey.trim()) {
+                    const keys = rawKey.split(/[,;]+/).map(k => k.trim()).filter(Boolean);
+                    
+                    keys.forEach(key => {
+                        if (!map.has(key)) {
+                            map.set(key, []);
+                        }
+                        if (!map.get(key).some(s => s.value === song.value)) {
+                            map.get(key).push({
+                                label: song.label,
+                                value: song.value,
+                                script: song.script
+                            });
+                        }
                     });
+                } else {
+                    const key = 'Άγνωστος';
+                    if (!map.has(key)) map.set(key, []);
+                    if (!map.get(key).some(s => s.value === song.value)) {
+                        map.get(key).push({
+                            label: song.label,
+                            value: song.value,
+                            script: song.script
+                        });
+                    }
                 }
             }
         });
@@ -100,11 +117,8 @@ function renderCategories(groups, mode) {
             </div>
             <ul class="song-list">
                 ${group.songs.map(song => {
-                    const queryParam = (mode === 'artist')
-                        ? `id=${encodeURIComponent(song.value)}&artist=${encodeURIComponent(group.category)}`
-                        : `id=${encodeURIComponent(song.value)}`;
+                    const queryParam = `id=${encodeURIComponent(song.value)}&person=${encodeURIComponent(group.category)}&mode=${mode}`;
                     
-                    // If we are in artist mode, clean up the label to remove " - Artist Name"
                     let displayLabel = song.label;
                     if (mode === 'artist') {
                         const dashIndex = displayLabel.indexOf(' - ');

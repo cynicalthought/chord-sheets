@@ -63,25 +63,37 @@
 <script src="viewer-core.js"></script>
 <script>
     const FOLDER_OVERRIDES = {
-        "Δημήτρης Μητροπάνος": "Dimitris Mitropanos"
+        "Δημήτρης Μητροπάνος": "Dimitris Mitropanos",
+        "Άκης Πάνου": "Akis Panou",
+        "Ειρήνη Χρυσοβέργη": "Eirini Chrysovergi"
+    };
+
+    const MODE_FOLDERS = {
+        composer: 'Composers',
+        artist: 'Artists',
+        lyricist: 'Lyricists',
+        rhythm: 'Rhythms'
     };
 
     document.addEventListener("DOMContentLoaded", () => {
         const urlParams = new URLSearchParams(location.search);
         const songKey = urlParams.get('id') || localStorage.getItem("activeSongValue") || "roza";
-        const artistName = urlParams.get('artist');
+        const personName = urlParams.get('person') || urlParams.get('artist');
+        const mode = urlParams.get('mode') || 'artist';
 
         loadAllSongScripts().then(() => {
             loadSongUI(songKey);
 
-            if (artistName) {
+            if (personName) {
                 const avatarContainer = document.getElementById("artist-avatar-container");
                 if (avatarContainer) {
-                    const subfolderName = FOLDER_OVERRIDES[artistName] || artistName;
-                    const imagePath = `Artists/${subfolderName}/Profile.webp`;
+                    const subfolderName = FOLDER_OVERRIDES[personName] || personName;
+                    const folderName = MODE_FOLDERS[mode] || 'Artists';
+                    const basePath = `${folderName}/${subfolderName}`;
+                    
                     avatarContainer.innerHTML = `
-                        <img src="${imagePath}" alt="${artistName}" class="viewer-artist-avatar" 
-                             onerror="if(this.src.endsWith('Profile.webp')){this.src='Artists/${subfolderName}/Profile.jpeg';}else if(this.src.endsWith('Profile.jpeg')){this.src='Artists/${subfolderName}/profile.jpeg';}else if(this.src.endsWith('profile.jpeg')){this.src='Artists/${subfolderName}/Profile.jpg';}else if(this.src.endsWith('Profile.jpg')){this.src='Artists/${subfolderName}/profile.jpg';}else{this.style.display='none';}">
+                        <img src="${basePath}/Profile.webp" alt="${personName}" class="viewer-artist-avatar" 
+                             onerror="if(this.src.endsWith('Profile.webp')){this.src='${basePath}/Profile.jpeg';}else if(this.src.endsWith('Profile.jpeg')){this.src='${basePath}/profile.jpeg';}else if(this.src.endsWith('profile.jpeg')){this.src='${basePath}/Profile.jpg';}else if(this.src.endsWith('Profile.jpg')){this.src='${basePath}/profile.jpg';}else{this.style.display='none';}">
                     `;
                 }
             }
