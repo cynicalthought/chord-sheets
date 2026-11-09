@@ -52,7 +52,7 @@
             max-width: 1040px !important;
         }
         .nav-menu {
-            background-color: rgba(18, 18, 21, 0.85) !important;
+            background-color: rgba(18, 18, 21, 0.95) !important;
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.08) !important;
@@ -79,15 +79,21 @@
             box-shadow: 0 0 20px rgba(180, 83, 9, 0.2);
         }
 
-        /* ---- Ultra-Refined Dropdowns ---- */
+        /* ---- Ultra-Refined Dropdowns (Exact Native Theme Behavior) ---- */
         .submenu {
             background-color: #121215 !important;
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            border: 1px solid rgba(255, 255, 255, 0.12) !important;
             border-radius: 12px !important;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.85) !important;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.95) !important;
             padding: 6px !important;
+            z-index: 99999 !important;
+            box-sizing: border-box !important;
+        }
+        .submenu .submenu {
+            background-color: #121215 !important;
+            border: 1px solid rgba(255, 255, 255, 0.12) !important;
         }
         .submenu-item { border-bottom: none !important; border-radius: 6px; margin-bottom: 2px; }
         .submenu-link {
@@ -100,7 +106,7 @@
         }
         .submenu-item.active > .submenu-link,
         .submenu-item:hover > .submenu-link {
-            background-color: rgba(180, 83, 9, 0.15) !important;
+            background-color: rgba(180, 83, 9, 0.25) !important;
             color: #ffffff !important;
         }
         .menu-collage-grid {
@@ -239,7 +245,6 @@
     `;
     document.head.appendChild(style);
 
-    // Formatter utility to ensure chord suffixes stay lowercase while first letter is capitalized
     function normalizeChordCasing(text) {
         if (!text) return text;
         return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();

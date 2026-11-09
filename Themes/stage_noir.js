@@ -96,7 +96,7 @@
         }
         .nav-link:focus-visible, .submenu-link:focus-visible { outline: 2px solid #ffffff; outline-offset: -3px; }
 
-        .submenu {
+        .submenu, .submenu .submenu {
             background-color: #141414 !important;
             border: 1px solid #353535 !important;
             border-radius: 3px !important;
@@ -113,7 +113,6 @@
         @media (hover: hover) {
             .submenu-item:hover > .submenu-link { background-color: rgba(255, 255, 255, 0.12) !important; color: #fff !important; }
         }
-        .submenu .submenu { background-color: rgba(255, 255, 255, 0.04) !important; }
         .menu-collage-grid { background: #2a2a2a !important; border: 1px solid #444 !important; }
         .composer-avatar { border: 1px solid #555 !important; filter: grayscale(100%) contrast(1.05); }
 
@@ -280,8 +279,6 @@
         chords.forEach(function (el) {
             if (el.textContent) {
                 var fixed = normalizeChordCasing(el.textContent);
-                // Only write when something actually changed. Writing identical text still
-                // fires the observer again, which would loop forever.
                 if (fixed !== el.textContent) {
                     el.textContent = fixed;
                 }
