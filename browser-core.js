@@ -47,6 +47,12 @@ function extractGroupedData(extractorFn) {
                     const keys = rawKey.split(/[,;]+/).map(k => k.trim()).filter(Boolean);
                     
                     keys.forEach(key => {
+                        // Skip traditional / non-composer labels like "Δημοτικό" or "Traditional"
+                        const lowerKey = key.toLowerCase();
+                        if (lowerKey.includes('δημοτικό') || lowerKey.includes('traditional') || lowerKey.includes('παραδοσιακά')) {
+                            return;
+                        }
+
                         if (!map.has(key)) {
                             map.set(key, []);
                         }
@@ -58,16 +64,6 @@ function extractGroupedData(extractorFn) {
                             });
                         }
                     });
-                } else {
-                    const key = 'Άγνωστος';
-                    if (!map.has(key)) map.set(key, []);
-                    if (!map.get(key).some(s => s.value === song.value)) {
-                        map.get(key).push({
-                            label: song.label,
-                            value: song.value,
-                            script: song.script
-                        });
-                    }
                 }
             }
         });
@@ -80,6 +76,7 @@ function extractGroupedData(extractorFn) {
 
     return categories.sort((a, b) => a.category.localeCompare(b.category, 'el'));
 }
+
 
 function buildAlphabetBar() {
     const bar = document.getElementById("alphabet-bar");
