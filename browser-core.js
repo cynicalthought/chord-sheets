@@ -15,6 +15,24 @@ const FOLDER_OVERRIDES = {
     "Ειρήνη Χρυσοβέργη": "Eirini Chrysovergi"
 };
 
+function removeGreekAccents(str) {
+    if (!str) return str;
+    if (str === str.toLocaleUpperCase('el')) {
+        return str
+            .replace(/[Άά]/g, 'Α')
+            .replace(/[Έέ]/g, 'Ε')
+            .replace(/[Ήή]/g, 'Η')
+            .replace(/[ΊίΐΪϊ]/g, 'Ι')
+            .replace(/[Όό]/g, 'Ο')
+            .replace(/[ΎύΰΫϋ]/g, 'Υ')
+            .replace(/[Ώώ]/g, 'Ω')
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .normalize('NFC');
+    }
+    return str;
+}
+
 function initBrowserPage(extractorFn, mode = 'composer') {
     activeMode = mode;
     loadAllSongScripts().then(() => {
@@ -113,7 +131,7 @@ function renderCategories(groups, mode) {
         card.innerHTML = `
             <div class="category-header">
                 ${avatarHtml}
-                <h2 class="category-title">${group.category} <span class="badge">${group.songs.length}</span></h2>
+                <h2 class="category-title">${removeGreekAccents(group.category)} <span class="badge">${group.songs.length}</span></h2>
             </div>
             <ul class="song-list">
                 ${group.songs.map(song => {
@@ -130,7 +148,7 @@ function renderCategories(groups, mode) {
                     return `
                         <li>
                             <a href="../song.html?${queryParam}" class="song-item-link">
-                                ${displayLabel}
+                                ${removeGreekAccents(displayLabel)}
                             </a>
                         </li>
                     `;

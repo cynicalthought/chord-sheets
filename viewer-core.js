@@ -1,4 +1,24 @@
 /* Core Song Rendering, Accidental Preference & Transposition Logic */
+
+function removeGreekAccents(str) {
+    if (!str) return str;
+    // If string is fully uppercase, remove Greek diacritics
+    if (str === str.toLocaleUpperCase('el')) {
+        return str
+            .replace(/[Άά]/g, 'Α')
+            .replace(/[Έέ]/g, 'Ε')
+            .replace(/[Ήή]/g, 'Η')
+            .replace(/[ΊίΐΪϊ]/g, 'Ι')
+            .replace(/[Όό]/g, 'Ο')
+            .replace(/[ΎύΰΫϋ]/g, 'Υ')
+            .replace(/[Ώώ]/g, 'Ω')
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .normalize('NFC');
+    }
+    return str;
+}
+
 function fitSong() {
     const contentContainer = document.getElementById("song-content");
     if (!contentContainer) return;
@@ -280,13 +300,13 @@ window.loadSongUI = function(value) {
     const semitones = readTranspose(value);
     const preferredNames = determineSongAccidentalPreference(data, semitones);
 
-    document.getElementById("meta-title").textContent = data.title || "";
-    document.getElementById("meta-timesig").textContent = data.timeSignature || "";
-    document.getElementById("meta-rhythm").textContent = data.rhythm || "";
-    document.getElementById("meta-artist").textContent = data.artist || "";
-    document.getElementById("meta-composer").textContent = data.composer || "";
-    document.getElementById("meta-lyricist").textContent = data.lyricist || "";
-    document.getElementById("meta-year").textContent = data.year || "";
+    document.getElementById("meta-title").textContent = removeGreekAccents(data.title || "");
+    document.getElementById("meta-timesig").textContent = removeGreekAccents(data.timeSignature || "");
+    document.getElementById("meta-rhythm").textContent = removeGreekAccents(data.rhythm || "");
+    document.getElementById("meta-artist").textContent = removeGreekAccents(data.artist || "");
+    document.getElementById("meta-composer").textContent = removeGreekAccents(data.composer || "");
+    document.getElementById("meta-lyricist").textContent = removeGreekAccents(data.lyricist || "");
+    document.getElementById("meta-year").textContent = removeGreekAccents(data.year || "");
 
     const contentContainer = document.getElementById("song-content");
     contentContainer.innerHTML = "";
@@ -358,7 +378,7 @@ window.loadSongUI = function(value) {
 
                                 const lyricSpan = document.createElement("span");
                                 lyricSpan.className = "token-lyric";
-                                lyricSpan.textContent = token.text || "";
+                                lyricSpan.textContent = removeGreekAccents(token.text || "");
 
                                 pairSpan.appendChild(chordSpan);
                                 pairSpan.appendChild(lyricSpan);
