@@ -9,12 +9,6 @@ const MODE_FOLDERS = {
     rhythm: 'Rhythms'
 };
 
-const FOLDER_OVERRIDES = {
-    "Δημήτρης Μητροπάνος": "Dimitris Mitropanos",
-    "Άκης Πάνου": "Akis Panou",
-    "Ειρήνη Χρυσοβέργη": "Eirini Chrysovergi"
-};
-
 function removeGreekAccents(str) {
     if (!str) return str;
     if (str === str.toLocaleUpperCase('el')) {
@@ -124,21 +118,28 @@ function renderCategories(groups, mode) {
         const card = document.createElement("div");
         card.className = "category-card";
 
-        const subfolderName = FOLDER_OVERRIDES[group.category] || group.category;
+        const subfolderName = window.getFolderOverride ? window.getFolderOverride(group.category, mode) : group.category;
         const entityFolderPath = `../${folderName}/${encodeURIComponent(subfolderName)}`;
         const avatarHtml = `<img src="${entityFolderPath}/Profile.webp" class="category-avatar" onerror="if(this.src.endsWith('Profile.webp')){this.src='${entityFolderPath}/Profile.jpeg';}else if(this.src.endsWith('Profile.jpeg')){this.src='${entityFolderPath}/profile.jpeg';}else if(this.src.endsWith('profile.jpeg')){this.src='${entityFolderPath}/Profile.jpg';}else if(this.src.endsWith('Profile.jpg')){this.src='${entityFolderPath}/profile.jpg';}else{this.style.display='none';}">`;
+
+        // Lifespan lookup
+        const lifespan = (window.LIFESPANS && window.LIFESPANS[group.category]) ? window.LIFESPANS[group.category] : '';
+        const lifespanHtml = lifespan ? `<div class="category-lifespan">${lifespan}</div>` : '';
 
         card.innerHTML = `
             <div class="category-header">
                 ${avatarHtml}
-                <h2 class="category-title">${removeGreekAccents(group.category)} <span class="badge">${group.songs.length}</span></h2>
+                <div class="category-header-info">
+                    <h2 class="category-title">${removeGreekAccents(group.category)} <span class="badge">${group.songs.length}</span></h2>
+                    ${lifespanHtml}
+                </div>
             </div>
             <ul class="song-list">
                 ${group.songs.map(song => {
                     const queryParam = `id=${encodeURIComponent(song.value)}&person=${encodeURIComponent(group.category)}&mode=${mode}`;
                     
                     let displayLabel = song.label;
-                    if (mode === 'artist') {
+                    if (mode === 'artist' || mode === 'composer' || mode === 'lyricist') {
                         const dashIndex = displayLabel.indexOf(' - ');
                         if (dashIndex !== -1) {
                             displayLabel = displayLabel.substring(0, dashIndex);

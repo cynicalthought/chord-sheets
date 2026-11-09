@@ -20,6 +20,7 @@
                 }
             } catch (e) {}
             if (theme !== 'plain') {
+                document.write('<link rel="stylesheet" href="Themes/' + theme + '.css">');
                 document.write('<script src="Themes/' + theme + '.js"><\/script>');
             }
             window.ACTIVE_THEME = theme;
@@ -59,15 +60,10 @@
     <div class="song-content" id="song-content"></div>
 </div>
 
+<script src="folder-overrides.js"></script>
 <script src="songs-db.js"></script>
 <script src="viewer-core.js"></script>
 <script>
-    const FOLDER_OVERRIDES = {
-        "Δημήτρης Μητροπάνος": "Dimitris Mitropanos",
-        "Άκης Πάνου": "Akis Panou",
-        "Ειρήνη Χρυσοβέργη": "Eirini Chrysovergi"
-    };
-
     const MODE_FOLDERS = {
         composer: 'Composers',
         artist: 'Artists',
@@ -87,13 +83,16 @@
             if (personName) {
                 const avatarContainer = document.getElementById("artist-avatar-container");
                 if (avatarContainer) {
-                    const subfolderName = FOLDER_OVERRIDES[personName] || personName;
+                    const subfolderName = window.getFolderOverride ? window.getFolderOverride(personName, mode) : personName;
                     const folderName = MODE_FOLDERS[mode] || 'Artists';
-                    const basePath = `${folderName}/${subfolderName}`;
+                    const basePath = `${folderName}/${encodeURIComponent(subfolderName)}`;
+                    
+                    const lifespan = (window.LIFESPANS && window.LIFESPANS[personName]) ? window.LIFESPANS[personName] : '';
                     
                     avatarContainer.innerHTML = `
                         <img src="${basePath}/Profile.webp" alt="${personName}" class="viewer-artist-avatar" 
                              onerror="if(this.src.endsWith('Profile.webp')){this.src='${basePath}/Profile.jpeg';}else if(this.src.endsWith('Profile.jpeg')){this.src='${basePath}/profile.jpeg';}else if(this.src.endsWith('profile.jpeg')){this.src='${basePath}/Profile.jpg';}else if(this.src.endsWith('Profile.jpg')){this.src='${basePath}/profile.jpg';}else{this.style.display='none';}">
+                        ${lifespan ? `<div class="avatar-lifespan">${lifespan}</div>` : ''}
                     `;
                 }
             }

@@ -140,12 +140,19 @@ body {
     padding-bottom: 10px;
 }
 
+.category-header-info {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Uniform Category Page Avatar (Curved Square) */
 .category-avatar {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
     object-fit: cover;
     border: 1px solid var(--brass);
+    flex-shrink: 0;
 }
 
 .category-title {
@@ -157,6 +164,48 @@ body {
     display: flex;
     align-items: center;
     gap: 8px;
+}
+
+/* Category Card Lifespan */
+.category-lifespan {
+    font-size: 0.82rem;
+    color: #b89f72;
+    margin-top: 2px;
+    letter-spacing: 0.5px;
+}
+
+/* Song Viewer Avatar Slot: Stacked vertically so lifespan sits strictly below the image */
+.header-avatar-slot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+    width: 120px;
+    flex-shrink: 0;
+}
+
+/* Uniform Song Viewer Avatar (Curved Square) */
+.viewer-artist-avatar {
+    width: 110px;
+    height: 110px;
+    border-radius: 16px;
+    object-fit: cover;
+    border: 2px solid var(--brass, #8f6f43);
+    box-shadow: 0 5px 14px rgba(0, 0, 0, 0.28);
+    background-color: #fff;
+}
+
+/* Lifespan strictly positioned below the viewer image, matching the song title color (--ink) */
+.avatar-lifespan {
+    font-size: 0.78rem;
+    font-family: 'EB Garamond', serif;
+    font-weight: 600;
+    color: var(--ink);
+    margin-top: 6px;
+    text-align: center;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
 }
 
 .badge {
@@ -214,31 +263,15 @@ body {
     box-sizing: border-box;
 }
 
-/* Header Wrapper using Grid spanning the full combined height of title + metadata */
+/* Header Wrapper Grid accommodating the 120px avatar slot on the left */
 .song-header-wrapper {
     position: relative;
     width: 100%;
     margin-bottom: 30px;
     display: grid;
-    grid-template-columns: 145px 1fr;
+    grid-template-columns: 135px 1fr;
     align-items: center;
-}
-
-.header-avatar-slot {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-}
-
-/* Larger, rounded square artist profile image perfectly balanced */
-.viewer-artist-avatar {
-    width: 125px;
-    height: 125px;
-    border-radius: 18px;
-    object-fit: cover;
-    border: 2px solid var(--brass, #8f6f43);
-    box-shadow: 0 5px 14px rgba(0, 0, 0, 0.28);
-    background-color: #fff;
+    gap: 15px;
 }
 
 .song-header { 
@@ -301,7 +334,7 @@ body {
     }
 }
 
-/* Theme Switcher & Transposition */
+/* Theme Switcher & Transposition Controls */
 .theme-switcher { position: fixed; right: 16px; bottom: 16px; z-index: 3000; }
 .theme-switcher-btn { width: 52px; height: 52px; border-radius: 50%; background: rgba(28, 21, 15, 0.94); color: #e8d6ae; border: 1px solid rgba(217, 189, 134, 0.6); cursor: pointer; display: flex; align-items: center; justify-content: center; }
 .theme-switcher-panel { position: absolute; right: 0; bottom: 62px; min-width: 280px; background: rgba(28, 21, 15, 0.98); border: 1px solid rgba(217, 189, 134, 0.55); border-radius: 12px; padding: 8px; display: none; }
